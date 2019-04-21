@@ -20,7 +20,7 @@ file_put_contents('/Ampps/www/r/tmp/foo.php', $file . "\n", FILE_APPEND);
 https://github.com/SugataRu/sugata.ru/wiki
 
 
-### Сайт проекте
+### Сайт проекта
 
 https://sugata.ru
 
