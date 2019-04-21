@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Апр 21 2019 г., 19:51
+-- Время создания: Апр 21 2019 г., 20:29
 -- Версия сервера: 5.6.37
 -- Версия PHP: 7.1.8
 
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `admin_logs` (
 CREATE TABLE IF NOT EXISTS `admin_posts` (
   `admin_post_id` int(11) unsigned NOT NULL,
   `admin_user_id` int(11) unsigned NOT NULL,
-  `admin_user_login` char(32) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `admin_user_login` char(32) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -57,9 +57,9 @@ CREATE TABLE IF NOT EXISTS `admin_posts` (
 
 CREATE TABLE IF NOT EXISTS `admin_sections` (
   `id` int(11) unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `admin_sections`
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `admin_id` int(11) NOT NULL,
   `section_id` int(11) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `admin_users`
@@ -169,13 +169,13 @@ CREATE TABLE IF NOT EXISTS `avatars` (
 
 CREATE TABLE IF NOT EXISTS `backups` (
   `id` int(11) unsigned NOT NULL,
-  `contents` text COLLATE utf8_spanish_ci,
-  `related_table` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `contents` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `related_table` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `related_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ip` char(42) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ip` char(42) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `backups`
@@ -208,17 +208,17 @@ CREATE TABLE IF NOT EXISTS `bans` (
 
 CREATE TABLE IF NOT EXISTS `blogs` (
   `blog_id` int(20) NOT NULL,
-  `blog_key` char(35) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `blog_key` char(35) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `blog_type` enum('normal','blog','noiframe','redirector','aggregator') CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'normal',
-  `blog_rss` varchar(64) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `blog_rss2` varchar(64) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `blog_atom` varchar(64) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `blog_url` varchar(64) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `blog_feed` char(128) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `blog_rss` varchar(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `blog_rss2` varchar(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `blog_atom` varchar(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `blog_url` varchar(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `blog_feed` char(128) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `blog_feed_checked` timestamp NULL DEFAULT NULL,
   `blog_feed_read` timestamp NULL DEFAULT NULL,
-  `blog_title` char(128) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `blog_title` char(128) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `blogs`
@@ -235,13 +235,13 @@ INSERT INTO `blogs` (`blog_id`, `blog_key`, `blog_type`, `blog_rss`, `blog_rss2`
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `category__auto_id` int(11) NOT NULL,
-  `category_lang` char(4) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'es',
+  `category_lang` char(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'es',
   `category_id` int(11) NOT NULL DEFAULT '0',
   `category_parent` int(11) NOT NULL DEFAULT '0',
-  `category_name` char(32) COLLATE utf8_spanish_ci NOT NULL,
-  `category_uri` char(32) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `category_name` char(32) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `category_uri` char(32) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `category_calculated_coef` float NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `categories`
@@ -327,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `clones` (
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(20) NOT NULL,
-  `comment_type` enum('normal','admin','private') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'normal',
+  `comment_type` enum('normal','admin','private') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'normal',
   `comment_randkey` int(11) NOT NULL DEFAULT '0',
   `comment_parent` int(20) DEFAULT '0',
   `comment_link_id` int(20) NOT NULL DEFAULT '0',
@@ -339,8 +339,8 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment_order` smallint(6) NOT NULL DEFAULT '0',
   `comment_votes` smallint(4) NOT NULL DEFAULT '0',
   `comment_karma` smallint(6) NOT NULL DEFAULT '0',
-  `comment_content` text COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `comment_content` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -396,12 +396,12 @@ CREATE TABLE IF NOT EXISTS `favorites` (
 --
 
 CREATE TABLE IF NOT EXISTS `friends` (
-  `friend_type` enum('affiliate','manual','hide','affinity') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'affiliate',
+  `friend_type` enum('affiliate','manual','hide','affinity') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'affiliate',
   `friend_from` int(10) NOT NULL DEFAULT '0',
   `friend_to` int(10) NOT NULL DEFAULT '0',
   `friend_value` smallint(3) NOT NULL DEFAULT '0',
   `friend_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -445,8 +445,8 @@ CREATE TABLE IF NOT EXISTS `html_images_seen` (
 
 CREATE TABLE IF NOT EXISTS `languages` (
   `language_id` int(11) NOT NULL,
-  `language_name` varchar(64) COLLATE utf8_spanish_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `language_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -526,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `links` (
   `link_id` int(20) NOT NULL,
   `link_author` int(20) NOT NULL DEFAULT '0',
   `link_blog` int(20) DEFAULT '0',
-  `link_status` char(20) CHARACTER SET utf8 NOT NULL DEFAULT 'discard',
+  `link_status` char(20) NOT NULL DEFAULT 'discard',
   `link_randkey` int(20) NOT NULL DEFAULT '0',
   `link_votes` int(20) NOT NULL DEFAULT '0',
   `link_negatives` int(11) NOT NULL DEFAULT '0',
@@ -539,22 +539,22 @@ CREATE TABLE IF NOT EXISTS `links` (
   `link_sent_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `link_published_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `link_category` int(11) NOT NULL DEFAULT '0',
-  `link_lang` char(2) CHARACTER SET utf8 NOT NULL DEFAULT 'es',
+  `link_lang` char(2) NOT NULL DEFAULT 'es',
   `link_ip_int` decimal(39,0) NOT NULL,
   `link_ip` varbinary(42) DEFAULT NULL,
-  `link_content_type` char(12) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `link_uri` char(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `link_url` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `link_thumb_status` enum('unknown','checked','error','local','remote','deleted') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'unknown',
+  `link_content_type` char(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `link_uri` char(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `link_url` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `link_thumb_status` enum('unknown','checked','error','local','remote','deleted') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'unknown',
   `link_thumb_x` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `link_thumb_y` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `link_thumb` tinytext COLLATE utf8_spanish_ci,
-  `link_url_title` text COLLATE utf8_spanish_ci,
-  `link_title` text COLLATE utf8_spanish_ci NOT NULL,
-  `link_content` text COLLATE utf8_spanish_ci NOT NULL,
-  `link_tags` text COLLATE utf8_spanish_ci,
+  `link_thumb` tinytext CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `link_url_title` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `link_title` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `link_content` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `link_tags` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `link_nsfw` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `links`
@@ -683,14 +683,14 @@ CREATE TABLE IF NOT EXISTS `pageloads` (
 
 CREATE TABLE IF NOT EXISTS `polls` (
   `id` int(11) unsigned NOT NULL,
-  `question` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `question` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `duration` smallint(3) NOT NULL DEFAULT '0',
   `votes` smallint(7) unsigned NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_at` datetime NOT NULL,
   `link_id` int(20) DEFAULT NULL,
   `post_id` int(11) unsigned DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -700,11 +700,11 @@ CREATE TABLE IF NOT EXISTS `polls` (
 
 CREATE TABLE IF NOT EXISTS `polls_options` (
   `id` int(11) unsigned NOT NULL,
-  `option` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `option` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `votes` smallint(7) unsigned NOT NULL DEFAULT '0',
   `karma` decimal(8,2) unsigned NOT NULL DEFAULT '0.00',
   `poll_id` int(20) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -715,16 +715,16 @@ CREATE TABLE IF NOT EXISTS `polls_options` (
 CREATE TABLE IF NOT EXISTS `posts` (
   `post_id` int(11) unsigned NOT NULL,
   `post_randkey` int(11) NOT NULL DEFAULT '0',
-  `post_src` enum('web','api','im','mobile','phone') CHARACTER SET utf8 NOT NULL DEFAULT 'web',
+  `post_src` enum('web','api','im','mobile','phone') NOT NULL DEFAULT 'web',
   `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_user_id` int(11) unsigned NOT NULL,
-  `post_visible` enum('all','friends') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'all',
+  `post_visible` enum('all','friends') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'all',
   `post_ip_int` decimal(39,0) DEFAULT NULL,
   `post_votes` smallint(4) NOT NULL DEFAULT '0',
   `post_karma` smallint(6) NOT NULL DEFAULT '0',
-  `post_content` text COLLATE utf8_spanish_ci NOT NULL,
+  `post_content` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `post_is_admin` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -753,15 +753,15 @@ INSERT INTO `prefs` (`pref_user_id`, `pref_key`, `pref_value`) VALUES
 
 CREATE TABLE IF NOT EXISTS `preguntame` (
   `id` int(11) NOT NULL,
-  `title` varchar(120) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `subtitle` varchar(120) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `link` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `title` varchar(120) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `subtitle` varchar(120) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `link` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `start_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
   `admin_id` int(11) NOT NULL,
   `sponsored` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -845,17 +845,17 @@ CREATE TABLE IF NOT EXISTS `sph_counter` (
 
 CREATE TABLE IF NOT EXISTS `sponsors` (
   `id` int(11) unsigned NOT NULL,
-  `external` varchar(255) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `banner` varchar(255) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `banner_mobile` varchar(255) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `css` text COLLATE utf8_spanish_ci,
+  `external` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `banner` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `banner_mobile` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `css` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `start_at` datetime NOT NULL,
   `end_at` datetime NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
   `link` int(20) DEFAULT NULL,
   `admin_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -866,8 +866,8 @@ CREATE TABLE IF NOT EXISTS `sponsors` (
 CREATE TABLE IF NOT EXISTS `strikes` (
   `strike_id` int(11) NOT NULL,
   `strike_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `strike_type` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `strike_reason` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `strike_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `strike_reason` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `strike_user_id` int(11) NOT NULL,
   `strike_report_id` int(11) DEFAULT '0',
   `strike_admin_id` int(11) NOT NULL,
@@ -876,10 +876,10 @@ CREATE TABLE IF NOT EXISTS `strikes` (
   `strike_karma_restore` decimal(4,2) unsigned NOT NULL,
   `strike_hours` tinyint(3) NOT NULL,
   `strike_expires_at` datetime NOT NULL,
-  `strike_comment` text COLLATE utf8_spanish_ci,
-  `strike_ip` char(42) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `strike_comment` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `strike_ip` char(42) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `strike_restored` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -972,10 +972,10 @@ INSERT INTO `sub_statuses` (`id`, `status`, `date`, `link`, `origen`, `karma`) V
 
 CREATE TABLE IF NOT EXISTS `tags` (
   `tag_link_id` int(11) NOT NULL DEFAULT '0',
-  `tag_lang` char(4) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'es',
+  `tag_lang` char(4) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'es',
   `tag_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tag_words` char(40) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `tag_words` char(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -999,15 +999,15 @@ CREATE TABLE IF NOT EXISTS `trackbacks` (
   `trackback_id` int(10) unsigned NOT NULL,
   `trackback_link_id` int(11) NOT NULL DEFAULT '0',
   `trackback_user_id` int(11) NOT NULL DEFAULT '0',
-  `trackback_type` enum('in','out') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'in',
-  `trackback_status` enum('ok','pendent','error') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'pendent',
+  `trackback_type` enum('in','out') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'in',
+  `trackback_status` enum('ok','pendent','error') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'pendent',
   `trackback_date` timestamp NULL DEFAULT NULL,
   `trackback_ip_int` int(10) unsigned NOT NULL DEFAULT '0',
-  `trackback_link` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `trackback_url` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `trackback_title` text COLLATE utf8_spanish_ci,
-  `trackback_content` text COLLATE utf8_spanish_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `trackback_link` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `trackback_url` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `trackback_title` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `trackback_content` text CHARACTER SET utf8 COLLATE utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1017,27 +1017,27 @@ CREATE TABLE IF NOT EXISTS `trackbacks` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(20) NOT NULL,
-  `user_login` char(32) COLLATE utf8_spanish_ci NOT NULL,
-  `user_level` enum('autodisabled','disabled','normal','special','blogger','admin','god') CHARACTER SET utf8 NOT NULL DEFAULT 'normal',
+  `user_login` char(32) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `user_level` enum('autodisabled','disabled','normal','special','blogger','admin','god') NOT NULL DEFAULT 'normal',
   `user_avatar` int(10) unsigned NOT NULL DEFAULT '0',
   `user_modification` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_validated_date` timestamp NULL DEFAULT NULL,
-  `user_ip` char(42) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_pass` char(128) COLLATE utf8_spanish_ci NOT NULL,
-  `user_email` char(64) COLLATE utf8_spanish_ci NOT NULL,
-  `user_names` char(60) COLLATE utf8_spanish_ci NOT NULL,
-  `user_login_register` char(32) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_email_register` char(64) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_ip` char(42) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_pass` char(128) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `user_email` char(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `user_names` char(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `user_login_register` char(32) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_email_register` char(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_lang` tinyint(2) unsigned NOT NULL DEFAULT '1',
   `user_comment_pref` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `user_karma` decimal(10,2) DEFAULT '6.00',
-  `user_public_info` char(64) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_url` char(128) COLLATE utf8_spanish_ci NOT NULL,
-  `user_adcode` char(24) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_adchannel` char(12) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_phone` char(16) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `user_public_info` char(64) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_url` char(128) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `user_adcode` char(24) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_adchannel` char(12) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_phone` char(16) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `users`
@@ -1067,13 +1067,13 @@ CREATE TABLE IF NOT EXISTS `users_similarities` (
 
 CREATE TABLE IF NOT EXISTS `votes` (
   `vote_id` int(20) NOT NULL,
-  `vote_type` enum('links','comments','posts','polls','users','sites','ads') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'links',
+  `vote_type` enum('links','comments','posts','polls','users','sites','ads') CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'links',
   `vote_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `vote_link_id` int(20) NOT NULL DEFAULT '0',
   `vote_user_id` int(20) NOT NULL DEFAULT '0',
   `vote_value` smallint(11) NOT NULL DEFAULT '1',
   `vote_ip_int` decimal(39,0) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci PACK_KEYS=0;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 PACK_KEYS=0;
 
 --
 -- Дамп данных таблицы `votes`
@@ -1716,7 +1716,3 @@ ALTER TABLE `subs_copy`
 --
 ALTER TABLE `sub_statuses`
   ADD CONSTRAINT `sub_statuses_ibfk_1` FOREIGN KEY (`link`) REFERENCES `links` (`link_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
