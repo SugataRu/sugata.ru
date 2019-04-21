@@ -15,5 +15,7 @@ $globals['jms_cache'] = '/Ampps/www/r/tmp';
 file_put_contents('/Ampps/www/r/tmp/foo.php', $file . "\n", FILE_APPEND);
 ```
 
+Читать далее: https://github.com/SugataRu/sugata.ru/wiki
+
 Клонирование Menéame
 https://github.com/Meneame/meneame.net
