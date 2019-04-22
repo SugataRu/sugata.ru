@@ -3938,7 +3938,9 @@ button.share-link span:hover {
 .container-qa a {background:#f16334;padding: 2px 5px;color:#fff;display: inline-block;}
 
 
-body.mobile #sidebar, body.mobile .header-menu-wrapper, body.mobile .section-story-submit-step1-separator, body.mobile .container-fluid.slider-wrapper{display: none;}
+body.mobile #sidebar, body.mobile .header-menu-wrapper, body.mobile .section-story-submit-step1-separator, 
+body.mobile .container-fluid.slider-wrapper, body.mobile .searchform{display: none !important;}
+
 body.mobile  #newswrap, body.mobile #newswrap.right.faq{margin: 0px 0px 0px 10px;padding: 0 0px 0px 0px;}
 body.mobile #header-top, body.mobile .mnm-center-in-wrap, body.mobile  #variable, body.mobile  #wrap {min-width: 100% !important;}
 body.mobile  #nav-menu {margin-top: 6px;}
