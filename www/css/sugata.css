@@ -3956,7 +3956,7 @@ body.mobile .section-story-submit-step1-layout {display: block;padding: 0 5px;}
 }
 
 @media (max-width: 840px) {
-   #sidebar {display: none;}
+   #sidebar, .searchform .searchbox {display: none;}
    #newswrap {margin: 0px;}
 }
 
