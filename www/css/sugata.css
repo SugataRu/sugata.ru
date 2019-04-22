@@ -307,7 +307,6 @@ opacity: 0.8;
 #header-center span, #header-center a.discover-subs {
     color: #B7B7B7;
     font-size: 12px;
-    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
 }
 
@@ -342,7 +341,6 @@ ul.official-subs li {
 ul.official-subs li a {
     color: #B7B7B7;
     font-size: 12px;
-    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     margin-left: 10px;
 }
@@ -410,7 +408,6 @@ div.dropdown.menu-more.open ul.dropdown-menu.menu-subheader a:hover {
 }
 
 ul.menu01-itemsr li a {
-    font-family: 'Open Sans', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
 }
@@ -1710,7 +1707,6 @@ div.tab-promoted-article {
     font-size: 85%;
     background-color: #FEFBEA;
     background-size: 16px 16px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .news-summary .warn a, .story-blog .warn a {
@@ -2015,7 +2011,6 @@ div.tab-promoted-article {
     text-align: center;
     background-clip: padding-box;
     border-radius: 3px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .news-shakeit .votes, .news-shakeit .clics {
@@ -2282,7 +2277,6 @@ div.tab-promoted-article {
 select.options-comments {
     width: auto;
     font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     color: #4A4A4A;
@@ -2624,9 +2618,6 @@ li .comment-header .comment-expand {
     padding: 0 7px;
 }
 
-.news-details, .news-details.main {
-    font-family: 'Open Sans', sans-serif;
-}
 
 .news-details span {
     padding-right: 5px;

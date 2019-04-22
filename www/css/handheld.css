@@ -54,7 +54,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 select.select-menu-more-options {
     width: auto;
     font-size: 10px;
-    font-family: 'Open Sans', sans-serif;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     color: #4A4A4A;

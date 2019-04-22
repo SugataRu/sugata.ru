@@ -472,7 +472,6 @@
 
 a.action-link, .action-text {
     display: inline-block;
-    font-family: 'Open Sans', sans-serif;
     border: 1px solid white;
     border-radius: 5px;
     padding: 1px 6px;
@@ -552,7 +551,6 @@ a.action-link span {
 .sidebox-extended {
     margin-bottom: 25px;
     background: url('https://sugata.ru/img/common/shadow.png') no-repeat 0px 34px;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .sidebox-extended .header {
@@ -716,9 +714,6 @@ color: #e35614;;
     padding: 0px;
 }
 
-.form input, .form select, .form textarea {
-    font-family: 'Open Sans', sans-serif;
-}
 
 .form.form-edit {
     margin-top: 25px;
@@ -853,7 +848,6 @@ color: #e35614;;
 
 .widget-official-subs-slider div.title {
     color: #FE6117;
-    font-family: "Open Sans";
     font-weight: 300;
     font-size: 38px;
     line-height: 0.9;
@@ -861,7 +855,6 @@ color: #e35614;;
 
 .widget-official-subs-slider div.subtitle {
     color: #FE6117;
-    font-family: "Open Sans";
     font-weight: 300;
     font-size: 13px;
 }
@@ -980,7 +973,6 @@ color: #e35614;;
 }
 
 .widget-popular-links-slider .title a {
-    font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     color: #1F1F1F;
     display: block;
@@ -1018,7 +1010,6 @@ color: #e35614;;
 
 .popular-link-widget-right div.title {
     color: #FE6117;
-    font-family: "Open Sans";
     font-weight: 700;
     font-size: 38px;
     line-height: 0.9;
@@ -1028,7 +1019,6 @@ color: #e35614;;
 
 .popular-link-widget-right div.subtitle {
     color: #FE6117;
-    font-family: "Open Sans";
     font-weight: 700;
     font-size: 13px;
 }
@@ -1186,7 +1176,6 @@ ul.slick-dots li button {
 .sub-info a.sub-name {
     color: #fff;
     font-size: 27px;
-    font-family:'Open Sans', sans-serif;
     font-weight: 500;
     background-color: transparent;
 }
@@ -1196,12 +1185,10 @@ ul.slick-dots li button {
 }
 
 .sub-info .followers {
-    font-family:'Open Sans', sans-serif;
     font-size: 11px;
 }
 
 .sub-info .followers span.follower-number {
-    font-family:'Open Sans', sans-serif;
     font-size: 13px;
     font-weight: bold;
 }
@@ -1243,7 +1230,6 @@ ul.slick-dots li button {
 }
 
 .sub-description .followers {
-    font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     font-weight: bold;
     display:inline;
@@ -1263,7 +1249,6 @@ ul.slick-dots li button {
 }
 
 .sub-description .footer {
-    font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     padding-top: 4px;
     background-color: #F8F8F8;
@@ -1444,7 +1429,6 @@ ul.slick-dots li button {
 .story-blog .main-content .text h2,
 .section.section-article-submit .input-editable h2 {
     font-size: 26px;
-    font-family: 'Open Sans', serif;
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
@@ -1454,7 +1438,6 @@ ul.slick-dots li button {
 .story-blog .main-content .text h3,
 .section.section-article-submit .input-editable h3 {
     font-size: 22px;
-    font-family: 'Open Sans', serif;
     margin-bottom: 20px;
     margin-top: 10px;
     color: #000;
