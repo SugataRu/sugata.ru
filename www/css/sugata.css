@@ -6,7 +6,7 @@ html * {
 body {
     font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Ubuntu,Cantarell,Oxygen,Roboto,Helvetica,Arial,sans-serif;
     color: #000;
-    background-color: #edeef0;// /*#fbfbfb;*/
+    background-color: #e6ecf0;  /*#edeef0; #fbfbfb;*/
     margin: 0px;
     padding: 0px;
 }
@@ -658,17 +658,18 @@ ul#userinfo li.search {
 }
 
 #searchform_button {
-    float: left;
-    cursor: pointer;
-    color: #fff;
-    margin-right: 10px;
+	float: right;
+	cursor: pointer;
+	color: #fff;
+	margin-left: 10px;
 	margin-top: 1px;
 }
 
 .searchform {
     height: auto;
     position: relative;
-    float: right;
+    float: left;
+	margin-right: 10px;
 }
 
 #nav-panel .searchform .searchbox {
@@ -683,6 +684,7 @@ ul#userinfo li.search {
     padding-left: 10px;
     background-size: 20px 300px;
     border: 1px solid #e7edf3;
+	color: #999;
 }
 
 .header-menu01 {
@@ -1427,7 +1429,7 @@ background-color: #fff;
 #side-bar a:hover {
     color: #e35614;
 }
-#footer {background: #fff;padding: 15px;color:#666;}
+#footer {background: #fff;padding: 15px;color:#666;clear: both;}
 #footer a {color:#333; }
 #footer a:hover {color:#e35614;}
 

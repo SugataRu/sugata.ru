@@ -1,0 +1,23 @@
+AddDefaultCharset UTF-8
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.rrr\.ru$ [NC]
+RewriteRule ^(.*)$ http://rrr.ru/$1 [R=301,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteCond %{REQUEST_FILENAME}\.php -f
+#RewriteRule ^(.*)$ $1.php
+
+
+
+#try_files $uri /dispatcher.php$uri?$args;
+#rewrite /v_\d+/(.+)$ /$1 last;
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /dispatcher.php/$1  [L]
+
+

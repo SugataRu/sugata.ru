@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://sys3.es/migue/blog/ -->
+<!-- Versión 2.5 Sugata 2 - 3 coluns-->
+<generator xmlns="http://www.mozilla.org/microsummaries/0.1" name="Sugata Last Post">
+  <template>
+    <transform xmlns="http://www.w3.org/1999/XSL/Transform" version="1.0">
+      <output method="text"/>
+	
+      <template match="/">
+            <text>Sugata: </text>
+			<value-of select="/html/body[@id='home']/div[@id='container']/div[@id='contents']/div[2]/div/h1/a"/>
+	  </template>
+	  
+	  
+	  
+	</transform>
+  </template>
+</generator>
