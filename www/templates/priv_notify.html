@@ -1,0 +1,11 @@
+<div style="text-align: right">
+<label for="notify">{% trans _('recibir avisos por email:') %}</label>
+<input name="notify" id="notify" type="checkbox" value="notify_priv" />
+</div>
+
+<script type="text/javascript">
+addPostCode(function () {
+    pref_input_check("notify");
+});
+</script>
+

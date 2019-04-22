@@ -1,0 +1,21 @@
+{% if user.user_id %}
+
+<a href="javascript:add_remove_sub('{{ id }}', 1)" class="action-link follow_b_{{ id }}" title="{% trans _('подписка') %}"/>
+    <i class="fa fa-check-circle-o"></i>
+    <span>{% trans _('Следовать') %}</span>
+</a>
+
+<script type="text/javascript">
+addPostCode(function () {
+    add_remove_sub('{{ id }}', 0);
+});
+</script>
+
+{% else %}
+
+<a href="{{ globals.base_url_sugata }}/login" class="action-link follow_b_{{ id }}" title="{% trans _('подписка') %}"/>
+    <i class="fa fa-check-circle-o"></i>
+    <span>{% trans _('Следовать') %}</span>
+</a>
+
+{% endif %}

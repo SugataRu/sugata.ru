@@ -1,0 +1,114 @@
+<table class="table table-condensed table-striped table-hover" style="font-size: 10pt">
+    <tr>
+        <th class="text-center" style="white-space: nowrap">
+            <a href="?{% exec URLQuery "order_by" "user_login" "order_mode" order_mode %}">
+                {% trans _('Ник') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_type" "order_mode" order_mode %}">
+                {% trans _('тип') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_reason" "order_mode" order_mode %}">
+                {% trans _('причина') %}
+            </a>
+        </th>
+        <th class="text-center">
+            {% trans _('комментарий') %}
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_report_id" "order_mode" order_mode %}">
+                {% trans _('reporte') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_karma_old" "order_mode" order_mode %}">
+                {% trans _('Предыдущая') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_karma_new" "order_mode" order_mode %}">
+                {% trans _('Удар') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_karma_restore" "order_mode" order_mode %}">
+                {% trans _('Финал') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_date" "order_mode" order_mode %}">
+                {% trans _('создание') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "strike_expires_at" "order_mode" order_mode %}">
+                {% trans _('окончание') %}
+            </a>
+        </th>
+        <th class="text-center">
+            <a href="?{% exec URLQuery "order_by" "admin_login" "order_mode" order_mode %}">
+                {% trans _('admin') %}
+            </a>
+        </th>
+        <th class="text-center">&nbsp;</th>
+    </tr>
+
+    {% for strike in strikes %}
+
+    <tr>
+        <td class="text-center">
+            <a target="_blank" href="{{ globals.base_url }}user/{{ strike.user_login }}" class="tooltip u:{{ strike.user_id }}" style="overflow: hidden;white-space: nowrap;">
+                {{ strike.user_login }}
+            </a>
+        </td>
+        <td class="text-center">{{ strike.type|Capfirst }}</td>
+        <td class="text-center">{{ strike.reason_message }}</td>
+        <td class="text-center" title="{{ strike.comment }}">{{ strike.comment|txt_shorter:50|clean_text }}</td>
+        <td class="text-center">
+            {% if strike.report_id %}
+            <a href="{{ globals.base_url }}admin/reports.php?s=id:{{ strike.report_id }}&amp;report_status=all">
+                {{ strike.report_id }}
+            </a>
+            {% else %}
+            N/A
+            {% endif %}
+        </td>
+        <td class="text-center">{{ strike.karma_old }}</td>
+        <td class="text-center">{{ strike.karma_new }}</td>
+        <td class="text-center">{{ strike.karma_restore }}</td>
+        <td class="text-center">{{ strike.date }}</td>
+        <td class="text-center">{{ strike.expires_at }}</td>
+        <td class="text-center">{{ strike.admin_login }}</td>
+
+        {% if user %}
+        <td class="text-center">
+            {% if strike.cancel %}
+            <a href="?tab=strikes&amp;op=cancel&amp;id={{ strike.id }}&amp;strike_user={{ strike.user_login }}" title="Borrar Strike" class="btn btn-default btn-xs" data-cancel="true">
+                <i class="fa fa-trash"></i>
+            </a>
+            {% endif %}
+        </td>
+        {% else %}
+        <td class="text-center">
+            <a href="?tab=strikes&amp;op=new&amp;strike_user={{ strike.user_login }}" title="Información" class="btn btn-default btn-xs">
+                <i class="fa fa-info"></i>
+            </a>
+        </td>
+        {% endif %}
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% if user %}
+<script>
+addPostCode(function() {
+    $('[data-cancel]').on('click', function(e) {
+        return confirm('Вы действительно хотите отменить этот удар? Если вы примете, карма восстановит свое прежнее состояние.');
+    })
+});
+</script>
+{% endif %}

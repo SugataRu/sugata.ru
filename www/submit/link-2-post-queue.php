@@ -1,0 +1,124 @@
+<?php
+
+defined('mnminclude') or die();
+
+// Store previous value for the log
+$link_old = $link->duplicate();
+
+$link->status = $link->sub_status;
+
+$link->read_content_type_buttons($_POST['type']);
+
+$link->sub_id = intval($_POST['sub_id']);
+
+if ($link->sub_id != $link_old->sub_id) {
+    $link->sub_changed = true; // To force to delete old statuses with another origin
+}
+
+if ($current_user->admin || $current_user->user_level === 'blogger' || SitesMgr::is_owner()) {
+    if (!empty($_POST['url'])) {
+        $link->url = clean_input_url($_POST['url']);
+    }
+
+    if ($_POST['thumb_delete']) {
+        $link->delete_thumb();
+    }
+
+    if ($_POST['uri_update']) {
+        $link->get_uri();
+    }
+
+    if ($_POST['thumb_get']) {
+        $link->get_thumb();
+    } elseif (!empty($_POST['thumb_url'])) {
+        $url = clean_input_url($_POST['thumb_url']);
+        $link->get_thumb(false, $url);
+    }
+}
+
+$link->title = $_POST['title'];
+$link->content = $_POST['bodytext'];
+$link->tags = tags_normalize_string($_POST['tags']);
+
+if ($error = $link->check_field_errors()) {
+    return addFormError($error);
+}
+
+try {
+    $validator->checkSiteSend();
+} catch (Exception $e) {
+    return;
+}
+
+// change the status
+if (
+    $_POST['status'] !== $link->status
+    && (($_POST['status'] === 'autodiscard') || $current_user->admin || SitesMgr::is_owner())
+    && preg_match('/^[a-z]{4,}$/', $_POST['status'])
+    && (!$link->is_discarded() || $current_user->admin || SitesMgr::is_owner())
+) {
+    if (preg_match('/discard|abuse|duplicated|autodiscard/', $_POST['status'])) {
+        // Insert a log entry if the link has been manually discarded
+        $insert_discard_log = true;
+    }
+
+    $link->status = $_POST['status'];
+}
+
+// change nsfw
+$nsfw = intval(!empty($_POST['nsfw']));
+
+if ($nsfw !== $link->nsfw) {
+    $link->nsfw = $nsfw;
+}
+
+if (empty($link->uri)) {
+    $link->get_uri();
+}
+
+// Check the blog_id
+$blog_id = Blog::find_blog($link->url, $link->id);
+
+if ($blog_id > 0 && $blog_id != $link->blog) {
+    $link->blog = $blog_id;
+}
+
+$link->title = $link->get_title_fixed();
+$link->content = $link->get_content_fixed();
+
+try {
+    require __DIR__.'/link-poll.php';
+} catch (Exception $e) {
+    return addFormError($e->getMessage());
+}
+
+Backup::store('links', $link->id, $link_old);
+
+$link->store();
+
+if ($insert_discard_log) {
+    // Insert always a link and discard event if the status has been changed to discard
+    Log::insert('link_discard', $link->id, $current_user->user_id);
+
+    // Don't save edit log if it's discarded by an admin
+    if ($link->author == $current_user->user_id) {
+        Log::insert('link_edit', $link->id, $current_user->user_id);
+    }
+} elseif ($link->votes > 0) {
+    $link_old = array_intersect_key((array)$link_old, array_flip(['title', 'tags', 'uri', 'content', 'status', 'url', 'sub_id']));
+
+    Log::conditional_insert('link_edit', $link->id, $current_user->user_id, 60, serialize($link_old));
+}
+
+$db->commit();
+
+if ($link->store_image_from_form('image')) {
+    $link->thumb_status = 'local';
+    $link->store_thumb_status();
+}
+
+if (empty($_POST['edit'])) {
+    die(header('Location: '.$link->get_permalink()));
+}
+
+Haanga::Load('story/submit/link-edit-success.html', compact('link'));

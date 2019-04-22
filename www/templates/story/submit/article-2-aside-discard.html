@@ -1,0 +1,130 @@
+<div class="story-blog-aside apply-sticky">
+    <br class="clearfix" />
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-gray" data-toggle="modal" data-target="#modal-save">
+            <i class="fa fa-cloud-upload"></i>
+            {% trans _('Публиковать') %}
+        </button>
+
+        <button type="button" class="btn btn-gray dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-ellipsis-h"></i>
+        </button>
+
+        <ul class="dropdown-menu">
+            <li>
+                <button type="submit" name="discard" value="1">
+                    {% trans _('Сохранить черновик') %}
+                </button>
+            </li>
+
+            {% if link.author == current_user.user_id %}
+            <li>
+                <button type="button" data-toggle="modal" data-target="#modal-delete">
+                    {% trans _('Удалить черновик') %}
+                </button>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <p class="clearfix"><br /></p>
+
+    <div class="alert alert-warning">
+        {% trans _('Вы редактируете черновик') %}
+    </div>
+
+   
+
+    <p class="clearfix"><br /></p>
+</div>
+
+<div class="modal modal-mnm fade" id="modal-save" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{% trans _('Публикация вашей статьи') %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <p><strong>{% trans _('Где вы хотите опубликовать это?') %}</strong></p>
+
+                <div class="form-group mt-20">
+                    <select id="sub_id" name="sub_id" class="form-control" required>
+                        <option value="">{% trans _('Выберите опцию') %}</option>
+
+                        <option value="-1">{% trans _('Не отправлять в очереди, видны только в моем профиле') %}</option>
+
+                        {% if site_properties.no_link %}
+                        <optgroup label="{% trans _('В текущем пространстве') %}">
+                            <option value="{{ site.id }}" {% if (site.id == link.sub_id) %} selected {% endif %}>{{ site.name }} - {{ site.name_long }}</option>
+                        </optgroup>
+                        {% endif %}
+
+                        {% if subs_main %}
+                        <optgroup label="{% trans _('Отправить в общую очередь') %}">
+                            {% for sub in subs_main %}
+                            <option value="{{ sub.id }}" {% if (sub.id == link.sub_id) %} selected {% endif %}>{{ sub.name }} - {{ sub.name_long }}</option>
+                            {% endfor %}
+                        </optgroup>
+                        {% endif %}
+
+                        {% if subs_subscriptions %}
+                        <optgroup label="{% trans _('Отправить в тематический раздел') %}">
+                            {% for sub in subs_subscriptions %}
+                            <option value="{{ sub.id }}" {% if (sub.id == link.sub_id) %} selected {% endif %}>{{ sub.name }} - {{ sub.name_long }}</option>
+                            {% endfor %}
+                        </optgroup>
+                        {% endif %}
+                    </select>
+                </div>
+
+                <div class="form-group mt-20">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="nsfw" value="1">
+                            {% trans _('Содержит сексуальное, насильственное или неприемлемое содержание...') %}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="publish" value="1">
+                    <i class="fa fa-cloud-upload"></i>
+                    {% trans _('Разместить') %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if link.author == current_user.user_id %}
+<div class="modal modal-mnm fade" id="modal-delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h4 class="modal-title">{% trans _('Удалить черновик') %}</h4>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>{% trans _('Вы уверены, что хотите удалить этот проект?') %}</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" name="delete" value="1">
+                    <i class="fa fa-trash"></i>
+                    {% trans _('Удалить') %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

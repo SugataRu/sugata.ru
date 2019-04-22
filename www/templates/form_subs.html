@@ -1,0 +1,36 @@
+{% if subs %}
+
+<fieldset style="clear: both;">
+    <legend>{% trans _('Выберите наиболее подходящее пространство') %}</legend>
+
+    {% for sub in subs %}
+    <label>
+        <input type="radio" name="sub_id" value="{{ sub.id }}" {% if selected == sub.id %} checked {% endif %} />
+        {{ sub.name }}
+        &nbsp;
+        <span class="note">({{ sub.name_long }})</span>
+    </label><br/>
+    {% endfor %}
+
+    {% if subscriptions %}
+    <fieldset>
+        <legend>{% trans _('Подписка') %}</legend>
+
+        {% for sub in subscriptions %}
+        <span style="white-space:nowrap;">
+            <label>
+                <input type="radio" name="sub_id" value="{{ sub.id }}" {% if selected == sub.id %} checked {% endif %} />
+                {{ sub.name }}
+            </label>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        {% endfor %}
+    </fieldset>
+    {% endif %}
+</fieldset>
+
+{% else %}
+<input name="sub_id" type="hidden" value="{{ selected }}" />
+{% endif %}
+
+<br/>

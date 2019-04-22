@@ -1,0 +1,37 @@
+<div class="poll-edit {% if !poll.id %}hidden{% endif %}">
+    {% if poll.id && poll.votes %}
+
+    <div class="alert alert-info text-center">{% trans _('Невозможно отредактировать уже проголосованное опрос') %}</div>
+
+    {% else %}
+
+    {% if !poll.id %}
+    <h3>{% trans _('Если вы хотите создать опрос...') %}</h3>
+    {% endif %}
+
+    <div class="form-group">
+        <input type="text" name="poll_question" value="{{ poll.question }}" class="form-control" placeholder="{% trans _('Напишите вопрос') %}" tabindex="3" />
+    </div>
+
+    {% for option in poll.getOptionsWithEmpty %}
+    <div class="form-group">
+        <input type="hidden" name="poll_options[{{ option.index }}][id]" value="{{ option.id }}" />
+        <input type="text" name="poll_options[{{ option.index }}][option]" value="{{ option.option }}" class="form-control" placeholder="{% trans _('Выбор %s') option.index %}" tabindex="4" />
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <select name="poll_duration" class="form-control" tabindex="5">
+            <option value="">{% trans _('Выберите продолжительность') %}</option>
+
+            {% for hour in poll.getDurationsValid %}
+            <option value="{{ hour }}" {% if poll.duration == hour %}selected{% endif %}>{% trans _('%s часов') hour %}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <p class="text-center">{% trans _('Проверьте информацию о опросе, так как после голосования она не может быть отредактирована или удалена') %}</p>
+
+    {% endif %}
+</div>
+

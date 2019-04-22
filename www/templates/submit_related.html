@@ -1,0 +1,4 @@
+<h3>{% trans _('Подожие истории') %}</h3>
+{% for l in related %}
+    <p><a href="{{ l.permalink|escape }}" target="_blank">{{ l.title }}</a></p>
+{% endfor %}

@@ -1,0 +1,26 @@
+<div class="poll-options">
+    {% for option in poll.getOptions %}
+    <div class="radio poll-option">
+        <label>
+            <input type="radio" name="option" />
+            {{ option.option }}
+        </label>
+    </div>
+    {% endfor %}
+</div>
+
+<footer>
+    <a href="{{ globals.base_url_sugata }}/login" class="btn btn-sg btn-sm">
+        {% trans _('Проголосовать') %}
+    </a>
+
+    <span class="votes">
+        {% if poll.votes == 1 %}
+        {% trans _('1 голос') %}
+        {% else %}
+            {% if poll.votes %} {% trans _('%s голосов') poll.votes %} {% else %} {% trans _('Без Голосов') %} {% endif %}
+        {% endif %}
+    </span>
+    <span class="separator">|</span>
+    <span class="finish">{% exec poll.getTimeToFinish %}</span>
+</footer>

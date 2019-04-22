@@ -1,0 +1,10 @@
+<FeedFlareUnit>
+	<Catalog>
+		<Title>sugata.ru</Title>
+		<Description>send this post to sugata.ru</Description>
+	</Catalog>
+	<FeedFlare>
+		<Text>send to meneame.net</Text>
+		<Link href="https://sugata.ru/submit?url=${link}"/>
+	</FeedFlare>
+</FeedFlareUnit>

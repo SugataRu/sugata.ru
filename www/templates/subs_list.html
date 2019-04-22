@@ -1,0 +1,40 @@
+<table class="subs-listing">
+    {% for s in subs %}
+    <tr>
+        <td class="color" {% if s.color2 %}style="background-color: {{ s.color2 }};"{% endif %}>&nbsp;</td>
+
+        <td class="followers">
+            <span><strong>{{ s.followers }} </strong> {% trans _('читают') %}</span>
+        </td>
+
+        <td class="logo">
+            {% if ! s.site_info.logo_url %}
+            <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}">
+                <img width="30" height="30" src="{{ globals.base_static }}img/h9_eli.png" alt="{{ s.site_info.name }}">
+            </a>
+            {% else %}
+            <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}">
+                <img src="{{ globals.base_url_sugata }}/img/g.gif"
+                     class="thumb ok lazy img-circle"
+                     data-src="{{ s.site_info.logo_url }}"
+                     width="{{ s.site_info.logo_width }}" height="{{ s.site_info.logo_height }}"
+                     alt="{{ s.site_info.name }}" style="margin-right:5px;"/></a>
+            {% endif %}
+        </td>
+
+        <td class="name">
+            <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}">{{ s.name_long }}</a>
+
+            <div class="description">
+                {% if s.nsfw %}<strong>[nsfw]</strong>{% endif %}
+              <b>s/{{ s.name }}</b>
+            </div>
+        </td>
+
+        <td class="actions">
+            <span class="followers"><strong>{{ s.followers }} </strong> {% trans _('читают') %}</span>
+            {% exec print_follow_sub s.id as dummy %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>

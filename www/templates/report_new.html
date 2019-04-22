@@ -1,0 +1,21 @@
+<div class="reportform">
+    <form action="{{ globals.base_url }}backend/report_comment.php?id={{ comment.id }}&link={{ link_id }}&user={{ current_user.user_id }}" class="report" method="post" id="r_new_form">
+        <input type="hidden" name="randkey" value="{{ randkey }}"/>
+        <input type="hidden" name="process" value="newreport"/>
+        <input type="hidden" name="key" value="{{ key }}"/>
+        <input type="hidden" name="id" value="{{ comment.id }}"/>
+        <input type="hidden" name="link_id" value="{{ link_id }}" />
+        <input type="hidden" name="user_id" value="{{ current_user.user_id }}"/>
+
+        <label><input type="radio" name="report_reason" value="insult" checked="checked"> Прямые оскорбления</label><br />
+        <label><input type="radio" name="report_reason" value="incites_hatred"> Разжигание ненависти</label><br />
+        <label><input type="radio" name="report_reason" value="advertising"> Коммерческое продвижение товаров или услуг</label><br />
+        <label><input type="radio" name="report_reason" value="violence_porn"> Порнография или сцены насилия</label><br />
+        <label><input type="radio" name="report_reason" value="private_data"> Содержит ваши личные данные или данные третьих лиц</label><br />
+        <label><input type="radio" name="report_reason" value="legality"> Несоблюдение действующего законодательства России</label><br />
+
+        <br /><label><input type="checkbox" name="ignore" value="1" checked /> Добавить этого пользователя в игнорр</label>
+
+        <br /><br /><input type="submit" value="Отправить отчет" style="width: 100%;">
+    </form>
+</div>

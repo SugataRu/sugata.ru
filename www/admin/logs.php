@@ -1,0 +1,74 @@
+<?php
+
+$globals['skip_check_ip_noaccess'] = true;
+
+require_once __DIR__.'/../config.php';
+require_once mnminclude.'html1.php';
+require_once __DIR__.'/libs/admin.php';
+
+$selected_tab = 'admin_logs';
+
+adminAllowed($selected_tab);
+
+do_header(_('Admin logs'));
+
+$page_size = 40;
+$offset = (get_current_page() - 1) * $page_size;
+
+$operation = $_REQUEST['op'] ?: 'list';
+$search = $_REQUEST['s'];
+$orderby = $_REQUEST['order_by'];
+$log_type = false;
+
+if (!empty($_REQUEST['log_type'])) {
+    $log_type = clean_input_string($_REQUEST['log_type']);
+}
+
+do_admin_tabs($selected_tab);
+
+$key = get_security_key();
+
+if ($operation === 'list') {
+    do_log_list($selected_tab, $search, $log_type, $orderby, $key);
+}
+
+do_footer();
+
+function do_log_list($selected_tab, $search, $log_type, $orderby, $key)
+{
+    global $db, $offset, $page_size;
+
+    if (empty($orderby)) {
+        $orderby = 'log_date';
+        $order = 'DESC';
+    } else {
+        $orderby = preg_replace('/[^a-z_]/i', '', $orderby);
+        if ($orderby == 'log_date') {
+            $order = 'DESC';
+        } else {
+            $order = 'ASC';
+        }
+    }
+
+    $where = 'WHERE 1=1';
+
+    if ($log_type) {
+        $where .= " AND log_type='" . $log_type. "'";
+    }
+
+    if ($search) {
+        $search_text = $db->escape($search); //evg ошибка нет первой колонки
+        $where .= " AND (admin.user_login LIKE '%$search_text%' OR u.user_login LIKE '%$search_text%')";
+    }
+
+    $rows = $db->get_var("SELECT count(*) FROM admin_logs " . $where);
+    $sql = "SELECT admin.user_login as admin_user_login, admin_logs.*, u.user_id as user_id, u.user_login as user_login, u.user_karma as user_karma, u.user_level as user_level FROM admin_logs
+			LEFT JOIN users as admin on (admin_logs.log_user_id=admin.user_id)
+			LEFT JOIN users as u on (admin_logs.log_ref_id=u.user_id) " . $where . " ORDER BY $orderby $order LIMIT $offset,$page_size";
+
+    $logs = $db->get_results($sql);
+
+    Haanga::Load('admin/logs/list.html', compact('logs', 'selected_tab', 'key', 'search', 'log_type'));
+
+    do_pages($rows, $page_size, false);
+}

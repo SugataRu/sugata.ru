@@ -1,0 +1,55 @@
+<ul id="userinfo">
+    {% if not globals.mobile %}
+    <li class="search">
+        <div>
+            
+            <div id="searchform" class="searchform" {% if not globals.q %}style="display:block;"{% endif %}>
+                <form action="{{ globals.base_url }}search" method="get" name="top_search">
+                    {% if globals.search_options %}
+                    {% for name, value in globals.search_options %}
+                    <input type="hidden" name="{{ name }}" value="{{ value }}" />
+                    {% endfor %}
+                    {% endif %}
+                    <input class="searchbox" name="q" type="search" placeholder="Поиск..." {% if globals.q %}value="{{ globals.q|escape }}"{% endif %}/>
+                </form>
+            </div>
+			<!--a id="searchform_button"><i class="fa fa-search"></i></a-->
+        </div>
+    </li>
+    {% endif %}
+
+    {% if current_user.user_id > 0 %}
+    <li class="usertext wideonly">  
+        <a href="{{ current_user.user_login|useruri }}" class="tooltip u:{{ current_user.user_id }}">{{ current_user.user_login }}</a>
+    </li>
+
+    {% if current_user.admin %}
+    <li class="usertext wideonly"><a href="{{ globals.base_url_general }}admin/logs.php">adm</a></li>
+    {% endif %}
+
+    <li>
+        <a href="{{ current_user.user_login|useruri }}">
+            <img id="avatar" src="{{ globals.base_static }}img/g.gif" data-2x="s:-40.:-80." data-src="{% exec get_avatar_url current_user.user_id, current_user.user_avatar, 40 %}" class="lazy img-circle" alt="{{ current_user.user_login }}" />
+        </a>
+    </li>
+
+    <li>
+        <a href="#" class="notifications" id="notifier">
+            <i class="fa fa-bell"></i>
+            <span class="badge" style="{% if this_site.color2 %}border-color:{{ this_site.color2 }}{% endif %}"></span>
+        </a>
+    </li>
+
+    <li class="userlogin hide" onclick="location.href='{{ globals.base_url_general }}login?op=logout&amp;return={{ globals.uri|urlencode }}'" title="{% trans _('cerrar sesión') %}"></li>
+
+    {# Following link could be deleted
+    <a href="{{ globals.base_url_general }}login?op=logout&amp;return={{ globals.uri|urlencode }}" title="{% trans _('cerrar sesión') %}">&nbsp;</a>
+    #}
+
+    {% else %}
+
+    <li class="usertext"><a href="{{ globals.base_url_sugata }}/login">{% trans _('войти') %}</a></li>
+    <li class="usertext"><a href="{{ globals.base_url_sugata }}/register">{% trans _('регистрация') %}</a></li>
+
+    {% endif %}
+  </ul>

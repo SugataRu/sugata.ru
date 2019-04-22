@@ -1,0 +1,106 @@
+<div class="sidebox-sub">
+    <div class="box"> 
+        <div class="logo text-center">
+            <a href="{{ globals.base_url_sugata }}/s/{{ site.name }}" title="{{ site.name_long|escape }}">
+                {% if ! site.logo_url %}
+                <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{{ site.name }}">
+                {% else %}
+                <img src="{{ globals.base_url_sugata }}/img/g.gif"
+                    class="thumb ok lazy img-circle"
+                    data-src="{{ site.logo_url }}"
+                    width="{{ site.logo_width }}" height="{{ site.logo_height }}"
+                    alt="{{ site.name }}" style="margin-right:5px;"
+                />
+                {% endif %}
+            </a>
+        </div>
+ 
+        <div class="name text-center"> 
+		
+		{% if globals.url_str == 'home' %}
+            <a href="{{ globals.base_url_sugata }}/s/{{ site.name }}"><h1 class="s_title">{{ site.name_long }}</h1></a>
+		{% else %}
+				<a href="{{ globals.base_url_sugata }}/s/{{ site.name }}"><h4 class="s_title">{{ site.name_long }}</h4></a>
+		{% endif %}
+		
+          
+        </div>
+
+		
+<span class="followers"><span>{{ site.followers }}</span> читают</span>
+		
+        {% if properties.message %}
+        <div class="description">
+            {{ properties.message_html }}
+        </div>
+        {% endif %}
+
+		
+		
+		
+        <div class="follow">
+		<a href="{{ globals.base_url_sugata }}/s/{{ site.name }}"><span class="url">{{ site.url }}</span></a>
+		
+{% if site.owner > 0 && current_user.user_id > 0 && (current_user.admin OR site.owner == current_user.user_id) %}
+	<a href="{{ globals.base_url_sugata }}/s/{{ site.name }}/subedit" class="red" title="{% trans _('Редактировать') %}"><span>{% trans _('редактировать') %}</span></a>
+{% endif %}
+		
+		
+ 
+
+	   
+
+	    <div class="followers-sub text-center">
+            {% if user.user_id %}
+
+            <a href="javascript:add_remove_sub('{{ site.id }}', 1)" class="btn btn-sg follow_b_{{ site.id }}" title="{% trans _('подписка') %}">
+                <span>{% trans _('Следовать') %}</span>
+            </a>
+
+            <script type="text/javascript">
+            addPostCode(function () {
+                add_remove_sub('{{ site.id }}', 0);
+            });
+            </script>
+
+            {% else %}
+
+            <a href="{{ globals.base_url_sugata }}/login" class="btn btn-sg" title="{% trans _('подписка') %}">
+                <span>{% trans _('Следовать') %}</span>
+            </a>
+
+            {% endif %}  </div>
+
+            <div class="clearfix"></div>
+        </div>
+		
+		
+		
+		
+		
+    </div>
+
+    {% if site.show_admin %}
+    <div class="footer">
+       &nbsp; &nbsp; Администрация | <a href="{{ owner.username | useruri }}" class="tooltip u:{{ owner.id }}">{{ owner.username }}</a>
+    </div>
+    {% endif %}
+</div>
+
+
+{% if globals.post_html %}
+
+
+	{% if globals.url_str == 'home' %}
+
+<div class="sidebox-sub col"> 
+{{ globals.post_html }}
+</div>
+	
+	{% else %}{% endif %}
+
+
+
+{% endif %}
+
+

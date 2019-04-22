@@ -1,0 +1,33 @@
+{% if not globals.mobile %}
+<div id="side-bar"> 
+  <div class="header"> <h4>Разное</h4> </div>
+ 
+<div class="side-bar-l"> 
+ 
+            {% if current_user.user_id %}
+            <a href="{{ globals.base_url_general }}top_users">{% trans _('Участники') %}</a><br> 
+            {% endif %}
+            <a href="{{ globals.base_url_sugata }}/top_commented">{% trans _('Обсуждаемые') %}</a><br>
+            <a href="{{ globals.base_url_sugata }}/top_comments">{% trans _('Комментарии') %}</a> <br>
+			 <a href="{{ globals.base_url_sugata }}/promote">{% trans _('Очередь') %}</a>
+</div>
+<div class="side-bar-r"> 
+  <a href="{{ globals.base_url_sugata }}/help">{% trans _('Помощь') %}</a><br> 
+             <a href="{{ globals.base_url_sugata }}/cloud">{% trans _('Теги') %}</a><br> 
+			 <a href="{{ globals.base_url_sugata }}/sites_cloud">{% trans _('Ссылки') %}</a><br>
+         
+</div>
+
+
+ 
+</div> 
+ 
+
+{% if current_user.user_id %} {% if current_user.subs_default %}{% else %}
+<br><div id="side-bar"><div class="side-bar-p"><a href="/user/{{current_user.user_login}}"><font color=red>В</font>ключить просмотр только того, на что подписан (в ред. профиль).</a></div></div> 
+ {% endif %}{% endif %} 
+
+{% endif %}
+
+ 
+ 

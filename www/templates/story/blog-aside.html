@@ -1,0 +1,115 @@
+{% if !globals.mobile && self.show_shakebox %}
+<div class="shake-container">
+    <div class="news-shakeit {{ self.box_class }}">
+        <div class="votes">
+            <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
+            {% trans _('голосов') %}
+        </div>
+
+        {% if not globals.bot %}
+        <div class="sugata" id="a-va-{{ self.id }}">
+            {% if not self.votes_enabled %}
+
+            <span class="closed">{% trans _('закрыто') %}</span>
+
+            {% else %} {% if not self.voted %}
+
+            <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">{% trans _('Нравится') %}</a>
+
+            {% else %} {% if self.voted > 0 %}
+
+            <span id="a-shake-{{ self.id }}">{% trans _('Готово!') %}</span>
+
+            {% else %}
+
+            <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
+
+            {% endif %} {% endif %} {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="clics">
+            {% if self.id >= globals.click_counter AND self.clicks > 0 %}
+                {{ self.clicks }} {{  rus('clic',self.clicks) }}
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="details {% if globals.mobile OR !self.show_shakebox %}details-center{% endif %}">
+    {% if ! globals.bot %}
+
+    <a href="{{ self.username | useruri }}" class="tooltip u:{{ self.author }}">
+        <img src="{{ globals.base_static }}img/g.gif" data-src="{% exec get_avatar_url self.author, self.avatar, 80, false %}" data-2x="s:-40.:-80." alt="{{ self.username }}" class="avatar lazy img-responsive center-block" />
+    </a>
+
+    <a href="{% exec get_user_uri self.username, 'history' %}" class="author">{{ self.username }}</a>
+
+    {% endif %}
+
+    {% if self.status != 'published' %}
+    <p class="format-tag">
+        {% trans _('проект') %}<br />
+        <span data-ts="{{ self.sent_date }}" class="видимая темнота" title="{% trans _('проект') %}: ">____</span>
+    </p>
+
+    {% else %}
+
+    <p class="format-tag">
+        {% trans _('опубликованный') %}<br />
+        <span data-ts="{{ self.sub_date }}" class="видимая темнота" title="{% trans _('опубликованный') %}: ">____</span>
+    </p>
+    {% endif %}
+
+    <div class="comments">
+        <a href="#comments-top" title="{% trans _('комментарии от') %}: «{{ self.title }}»" class="format-tag">
+            {% if self.comments > 0 %}
+
+            <span class="badge badge-sg">
+                <i class="fa fa-comments"></i> {{ self.comments }}    {{  rus('comm',self.comments) }} 
+            </span>
+
+            {% else %}
+
+            <i class="fa fa-comments"></i> {% trans _("нет комментариев") %}
+
+            {% endif %}
+        </a>
+    </div>
+
+    <ul class="share-icons" data-url="{{ self.permalink }}" data-title="{{ self.title }}">
+        <li><a rel="nofollow"  class="share-facebook" href="#" onclick="share_fb(this)"><i class="fa fa-facebook-square"></i></a></li>
+        <li><a rel="nofollow"  class="share-twitter" href="#" onclick="share_tw(this)"><i class="fa fa-twitter-square"></i></a></li>
+        <li><a rel="nofollow"  class="share-mail" href="mailto:?subject={{ self.title }}&amp;body={{ link }}" title="Поделиться по почте"><i class="fa fa-envelope"></i></a></li>
+		<li><button class="share-link" data-clipboard-text="{{ self.permalink }}"><i class="fa fa-link"></i> </button></li>
+		
+    </ul>
+
+    {% if self.can_vote_negative %}
+    <form method="post" class="m-20">
+        <select name="ratings" onchange="report_problem(this.form, {{ current_user.user_id }}, {{ self.id }})">
+            <option value="0" selected="selected">{% trans _('Вопрос') %}</option>
+            {% for pkey, pvalue in globals.negative_votes_values %}
+            <option value="{{ pkey }}">{{ pvalue }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    {% endif %}
+
+    {% if self.is_editable %}
+    <a href="{% get_url 'submit?step=2&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('Редактировать статью') %} #{{ self.id }}" class="btn btn-sg btn-sm btn-block">
+        <i class="fa fa-edit"></i> {% trans _('Редактировать статью') %}
+    </a>
+    {% endif %}
+
+    {% if current_user.admin %}
+    <hr />
+
+    <a href="{% get_url 'submit?step=4&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('Дополнительно') %} #{{ self.id }}" class="btn btn-sg btn-sm btn-block">
+        <i class="fa fa-edit"></i> {% trans _('Дополнительно') %}
+    </a>
+    {% endif %}
+</div>

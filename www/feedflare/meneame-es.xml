@@ -1,0 +1,10 @@
+<FeedFlareUnit>
+	<Catalog>
+		<Title>sugata.ru</Title>
+		<Description>enviar la historia a sugata.ru</Description>
+	</Catalog>
+	<FeedFlare>
+		<Text>enviar a sugata.ru</Text>
+		<Link href="https://sugata.ru/submit?url=${link}"/>
+	</FeedFlare>
+</FeedFlareUnit>

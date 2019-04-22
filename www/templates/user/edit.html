@@ -1,0 +1,270 @@
+<section class="section section-medium">
+    <div class="container">
+        <h1>
+            {% trans _('Редактирования') %} &laquo;<a href="{{ user.get_uri }}">{{ user.username }}</a>&raquo;
+        </h1>
+
+        <form class="form form-edit" method="post" autocomplete="off" enctype="multipart/form-data">
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% else %} {% if success %}
+            <div class="alert alert-success">{% trans _('Профиль успешно отредактирован') %}</div>
+            {% endif %} {% endif %}
+
+            <input type="hidden" name="process" value="1" />
+            <input type="hidden" name="user_id" value="{{ user.id }}" />
+            <input type="hidden" name="form_hash" value="{{ form.hash }}" />
+            <input type="hidden" name="save_profile" value="1" />
+
+            {% exec get_form_auth_ip as dummy %}
+
+            {% if form.admin_mode %}
+            <input type="hidden" name="login" value="{{ user.username }}" />
+            {% endif %}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="username" class="title">{% trans _('Пользователь') %}</label>
+                        <input type="text" id="username" name="username" value="{{ user.username }}" class="form-control" required />
+
+                        <button type="button" id="check-username" class="btn btn-default btn-inline">
+                            {% trans _('Проверить') %}
+                        </button>
+
+                        <script>
+                        addPostCode(function() {
+                            checkInput($('#username'));
+                        });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="names" class="title">{% trans _('Имя') %}</label>
+                        <input type="text" id="names" name="names" value="{{ user.names }}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="email" class="title">{% trans _('Почта') %}</label>
+                        <input type="text" name="email" id="email" value="{{ user.email }}" class="form-control" required />
+
+                        <button type="button" id="check-email" class="btn btn-default btn-inline">
+                            {% trans _('Проверить') %}
+                        </button>
+
+                        <script>
+                        addPostCode(function() {
+                            checkInput($('#email'));
+                        });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="url" class="title">{% trans _('Веб-страница') %}</label>
+                        <input type="text" id="url" name="url" value="{{ user.url }}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bio" class="title">{% trans _('О себе') %}</label>
+
+                <textarea maxlength="{{ form.bio_max }}" name="bio" id="bio" class="form-control block">{{ user.bio }}</textarea>
+                <span class="note">{% trans _('Лимит %s символов') form.bio_max %}</span>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {% if form.avatars_enabled %}
+                    <input type="hidden" name="MAX_FILE_SIZE" value="400000" />
+
+                    <div class="form-group">
+                        <label for="image" class="title">{% trans _('Avatar') %}</label>
+                        <p class="note">{% trans _('квадратное изображение не более 400 КБ') %}</p>
+                        <input type="file" id="image" name="image" value="{{ user.adchannel }}" class="form-control" />
+
+                        {% if user.avatar > 0 %}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="avatar_delete" value="1" />
+                                {% trans _('Удалить аватар') %}
+                            </label>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="public_info" class="title">{% trans _('Мгновенный посланник, невидимый для других') %}</label>
+                        <p class="note">{% trans _('Требуется, если вы подключитесь через Jabber / Google Talk') %}</p>
+                        <input type="text" id="public_info" name="public_info" value="{{ user.public_info }}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            {# {% if globals.external_user_ads %} #}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="adcode" class="title">{% trans _('Код AdSense') %}</label>
+                        <p class="note">{% trans _('Ваш код пользователя AdSense, типа ca-pub-123456789') %}</p>
+                        <input type="text" id="adcode" name="adcode" value="{{ user.adcode }}" maxlength="24" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="adchannel" class="title">{% trans _('ID объявления') %}</label>
+                        <p class="note">{% trans _('Данные вида 1234567890, размер 468x60') %}</p>
+                        <input type="text" id="adchannel" name="adchannel" value="{{ user.adchannel }}" maxlength="12" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            {# {% endif %} #}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="password" class="title">{% trans _('Пароль') %}</label>
+                        <p class="note">{% trans _('Это не изменится, если вы оставите это поле пустым') %}</p>
+                        <input type="password" autocomplete="off" id="password" name="password" size="25" onkeyup="return securePasswordCheck(this.form.password);" />
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="verify" class="title">{% trans _('Повторите пароль') %}</label>
+                        <p class="note">{% trans _('Это не изменится, если вы оставите это поле пустым') %}</p>
+                        <input type="password" autocomplete="off" id="verify" name="password2" size="25" onkeyup="checkEqualFields(this.form.password2, this.form.password)" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-20">
+                <label class="title">{% trans _('Варианты отображения') %}</label>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="prefs[]" id="subs_default" value="subs_default" {% if prefs.subs_default %} checked {% endif %} /></td>
+                       <b>Показывать на главной</b> только то, на что подписан
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="prefs[]" id="com_order" value="com_order" {% if prefs.com_order %} checked {% endif %} /></td>
+                        {% trans _('Комментарии всегда в хронологическом порядке') %}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="prefs[]" id="last_com_first" value="last_com_first" {% if prefs.last_com_first %} checked {% endif %} /></td>
+                        {% trans _('Показывать по умолчанию последнюю страницу комментариев') %}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="prefs[]" id="use_bar" value="use_bar" {% if prefs.use_bar %} checked {% endif %} /></td>
+                        {% trans _('Открытые ссылки с верхней панели') %}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="comment_pref" value="1" {% if (user.comment_pref) %} checked {% endif %} />
+                        {% trans _('Показать все комментарии') %}
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="prefs[]" id="notify_priv" value="notify_priv" {% if prefs.notify_priv %} checked {% endif %} /></td>
+                        {% trans _('Получать частные уведомления по электронной почте') %}
+                    </label>
+                </div>
+            </div>
+
+            {% if form.admin_mode %}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="user_level" class="title">{% trans _('Состояние') %}</label>
+
+                        <select id="user_level" name="user_level" class="form-control">
+                            {% for level in form.user_levels %}
+                            <option value="{{ level }}" {% if user.level == level %} selected {% endif %}>{{ level }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="karma" class="title">{% trans _('Карма') %}</label>
+                        <input type="number" id="karma" name="karma" value="{{ user.karma }}" class="form-control" step="any" />
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <footer class="clearfix footer">
+                <button type="submit" class="btn btn-sg">{% trans _('Обновить профиль') %}</button>
+                <a href="{{ user.get_uri }}" class="btn btn-sg btn-inverted pull-right">{% trans _('Отменить издание') %}</a>
+            </footer>
+        </form>
+
+        {% if user.id == current_user.user_id %}
+        <form class="form form-edit mt-20" method="post" autocomplete="off">
+            <input type="hidden" name="user_id" value="{{ user.id }}" />
+            <input type="hidden" name="form_hash" value="{{ form.hash }}" />
+            <input type="hidden" name="disabledme" value="1" />
+
+            <div class="alert alert-danger mt-20">
+                <div class="form-group mb-20">
+                    <label class="title">{% trans _('Отключить аккаунт') %}</label>
+                </div>
+
+                <p>{% trans _('Внимание! Если учетная запись отключена, личные данные будут автоматически удалены.') %}</p>
+                <p>{% trans _('Заметки будут удалены, материалы и комментарии НЕ будут удалены.') %}</p>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="confirm" value="1" required />
+                            {% trans _('Да, я хочу отключить') %}
+                        </label>
+                    </div>
+                </div>
+
+                <p>
+                    <input type="submit" value="{% trans _('Отключить аккаунт') %}" class="button" />
+                </p>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</section>

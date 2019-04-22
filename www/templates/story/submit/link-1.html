@@ -1,0 +1,60 @@
+ <section class="section section-medium section-story-submit">
+    <div class="section-story-submit-step1-layout">
+        <div class="section-story-submit-step1-link">
+            <form name="new" method="post" class="form">
+                <input type="hidden" name="key" value="{{ link.key }}" />
+                <input type="hidden" name="randkey" value="{{ link.randkey }}" />
+                <input type="hidden" name="step" value="1" />
+                <input type="hidden" name="type" value="link" />
+
+              
+  {% if site_properties.no_link %}
+
+			  <h1>{% trans _('Поделитесь ссылкой или постом ') %}</h1>
+                <p class="info">Пошлите нам ваш пост или ссылку на интересную историю...</p>
+{% else %}
+
+			  <h1>{% trans _('Поделитесь ссылкой') %}</h1>
+                <p class="info">Пошлите ту ссылку, которую, по вашему мнению, мы должны знать...</p>
+
+{% endif %}
+				
+                {% include 'story/submit/error.html' %}
+
+                <div class="form-group form-group-highlight mt-20">
+                    <input type="url" name="url" value="{{ link.url }}" class="form-control" placeholder="{% trans _('Вставьте ссылку, которой вы хотите поделиться здесь') %}" {% if !site_properties.no_link %} required {% endif %} />
+                </div>
+
+                <div class="form-group mt-20">
+				
+  {% if site_properties.no_link %}
+                    <button type="submit" class="btn btn-sg btn-lg">{% trans _('Отправить ссылку или начать писать пост') %}</button>
+{% else %}
+ <button type="submit" class="btn btn-sg btn-lg">{% trans _('Отправить ссылку') %}</button>
+
+{% endif %}
+				</div>
+            </form>
+        </div>
+
+        {% if site_properties.no_link %}
+        <div class="section-story-submit-step1-separator"><span>0</span></div>
+
+        <div class="section-story-submit-step1-article">
+            <form method="post" class="form">
+                <input type="hidden" name="key" value="{{ link.key }}" />
+                <input type="hidden" name="randkey" value="{{ link.randkey }}" />
+                <input type="hidden" name="step" value="1" />
+                <input type="hidden" name="type" value="article" />
+
+                <h1>{% trans _('Напиши статью') %}</h1>
+                <p class="info">Тебе есть что рассказать! Напишите здесь свою статью оригинального содержания и не забудьте процитировать источники, которые вы используете.</p>
+
+                <button type="submit" name="type" value="article" class="btn btn-sg btn-inverted btn-lg mt-20">
+                    {% trans _('Начать писать') %}
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</section>

@@ -1,0 +1,47 @@
+<div id="singlewrap">
+    <section class="section section-large text-center">
+        <h1>{% trans _('Вход') %}</h1>
+        <p class="intro">{% trans _('Это часть крупнейшего контент-сообщества на русском языке...') %}</p>
+
+        <div class="container container-small">
+            {% exec print_oauth_icons_large _REQUEST.return %}
+
+            <div class="separator"><b></b><span>O</span><b></b></div>
+
+            <form method="post" class="form">
+                <div class="legend">{% trans _('Введите логин или e-mail') %}</div>
+
+                {% if error %}
+                <div class="response response-error">{{ error }} <span>({{ failed }})</span></div>
+                {% else %}{% if info %}
+                <div class="response response-info">{{ info }}</div>
+                {% endif %}{% endif %}
+
+                <div class="form-group">
+                    <input type="text" name="username" tabindex="1" id="name" value="{% exec htmlspecialchars _POST.username %}" class="form-control" placeholder="{% trans _('Пользователь или e-mail') %}" required />
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="{% trans _('Пароль') %}" required />
+                </div>
+
+                {% if captcha_form %}
+                    {{ captcha_form }}
+                {% endif %}
+
+                <div class="form-group">
+                    <div class="checkbox"><label><input type="checkbox" name="persistent" id="remember" tabindex="3" /> {% trans _('Запомнить меня') %}</label></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" name="login" class="btn btn-sg btn-lg btn-block" tabindex="4">{% trans _('Войти') %}</button>
+                </div>
+
+                <input type="hidden" name="processlogin" value="1" />
+                <input type="hidden" name="return" value="{% exec htmlspecialchars _REQUEST.return %}" />
+            </form>
+
+            <div class="bottomline"><a href="{{ globals.base_url_general }}login?op=recover">{% trans _('Вы забыли свой пароль?') %}</a></div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,59 @@
+</div>
+
+<div id="footer">
+ 
+ 
+{% if globals.mobile %}
+     © 2019 sugata.ru &nbsp; &nbsp; 
+     &nbsp; <a href="{{ globals.base_url_sugata }}/help">помощь</a>  
+ {% else %}
+ 
+    © 2019 sugata.ru — делитесь историями &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    <a href="{{ globals.base_url_sugata }}/help">помощь</a> &nbsp;&#47;&nbsp;
+	<a href="{{ globals.base_url_sugata }}/legal">конфидициальность</a> &nbsp;&#47;&nbsp;
+	<a href="{{ globals.base_url_sugata }}/rss">rss</a>
+	 
+
+	
+{% endif %}
+ 
+</div>
+
+</div>
+
+</div> {# #variable #}
+
+<div id='backTop'><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+
+{% include 'footer_js.html' %}
+{% try_include 'private/footer.html' %}
+
+{% meneame_endtime %}
+
+{% if ! globals.partial %}
+
+{# warn warn warn dont do stats of password recovering pages #}
+
+
+
+
+</body>
+{% endif %} {# PARTIAL #}
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(53052004, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/53052004" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</html>

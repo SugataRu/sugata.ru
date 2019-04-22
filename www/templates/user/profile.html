@@ -1,0 +1,219 @@
+<table class="table table-condensed">
+    {% if user.username %}
+
+    <tr>
+        <th>{% trans _('Пользователь') %}</th>
+        <td>{{ user.username }}  {% if current_user.admin AND nclones %}
+            (<a class="fancybox" href="{{ globals.base_url }}backend/ip_clones.php?id={{ user.id }}" title="{% trans _('clones') %}">{% trans _('clones') %}</a><sup>{{ nclones }}</sup>)
+            {% endif %}</td>
+    </tr>
+
+    {% if friend_icon %}
+    <tr>
+        <th>{% trans _('Отношения') %}</th>
+        <td>
+            <select onchange="user_relation({{ current_user.user_id }}, {{ user.id }}, this);">
+                <option value="0">{% trans _('Никаких') %}</option>
+                <option value="1" {% if user.friendship == 1 %}selected{% endif %}>{% trans _('Подписаться') %}</option>
+                <option value="-1" {% if user.friendship == -1 %}selected{% endif %}>{% trans _('Игнорировать') %}</option>
+            </select>
+
+            {{ friend_icon }}
+        </td>
+    </tr>
+    {% endif %}
+
+    {% if url %}
+    <tr>
+        <th>{% trans _('Сайт') %}</th>
+        <td><a href="{{ url }}" rel="nofollow">{{ url }}</a></td>
+    </tr>
+    {% endif %}
+
+    {% if current_user.admin %}
+
+    <tr>
+        <th>{% trans _('Регистрация') %}</th>
+        <td>{{ user.username_register }}</td>
+    </tr>
+
+    {% endif %}
+
+    {% if user.id == current_user.user_id OR current_user.admin %}
+
+    <tr>
+        <th>{% trans _('ID и Уровень') %}</th>
+        <td>{{ user.id }} / {{ user.level }}</td>
+    </tr>
+
+    {% endif %}
+
+    {% if user.names %}
+    <tr>
+        <th>{% trans _('Имя') %}</th>
+        <td>{{ user.names }}</td>
+    </tr>
+    {% endif %}
+
+    {% endif %}
+
+    {% if show_email %}
+    <tr>
+        <th>{% trans _('IM/E-mail') %}</th>
+        <td> {{ user.public_info }}</td>
+    </tr>
+    {% endif %}
+
+    <tr>
+        <th>{% trans _('От') %}</th>
+        <td>{% exec get_date_time user.date %}</td>
+    </tr>
+
+    {% if user.total_images %}
+    <tr>
+        <th>{% trans _('Фото') %}</th>
+        <td><a href="#" onclick="fancybox_gallery('all', {{ user.id }})">{{ user.total_images }}</a></td>
+    </tr>
+    {% endif %}
+
+    {% if current_user.user_id == user.id OR current_user.user_level == 'god' %}
+    <tr>
+        <th>{% trans _('E-mail') %}</th>
+        <td>
+            {{ user.email }}
+
+            {% if current_user.user_level == 'god' %}
+            (<em>{{ user->email_register }}</em>)
+            {% endif %}
+        </td>
+    </tr>
+    {% endif %}
+
+    {% if user.id == current_user.user_id OR current_user.user_level == 'god' %}
+    <tr>
+        <th>{% trans _('Ключ API') %}</th>
+        <td>
+            <a class="fancybox" href="{{ globals.base_url }}backend/get_user_api_key.php?id={{ user.id }}">{% trans _('Смотрите ключ API') %}</a>
+            ({% trans _('не разглашайте это') %})
+        </td>
+    </tr>
+
+    {% if user.adcode %}
+    <tr>
+        <th>{% trans _('Код AdSense') %}</th>
+        <td>{{ user.adcode }}</td>
+    </tr>
+
+    <tr>
+        <th>{% trans _('Канал AdSense') %}</th>
+        <td>{{ user.adchannel }}</td>
+    </tr>
+    {% endif %}
+
+    {% endif %}
+
+    <tr>
+        <th>{% trans _('Карма') %}</th>
+        <td>
+            {{ user.karma }}
+
+            {% if (user.id == current_user.user_id OR current_user.user_level == 'god' OR current_user.user_level == 'admin') && user.karma_log %}
+            (<a class="fancybox" href="{{ globals.base_url }}backend/get_karma_numbers.php?id={{ user.id }}">{% trans _('детали расчета') %}</a>)
+            {% endif %}
+        </td>
+    </tr>
+
+    <tr>
+        <th>{% trans _('Ранжирование') %}</th>
+        <td>#{% exec user.ranking %}</td>
+    </tr>
+
+    {% if user.stats %}
+
+    <tr>
+        <th>{% trans _('Отправлено') %}</th>
+        <td>{{ user.total_links }}</td>
+    </tr>
+
+    {% if entropy %}
+    <tr>
+        <th>{% trans _('Энтропия') %}</th>
+        <td>{{ entropy }}%</td>
+    </tr>
+    {% endif %}
+
+    <tr>
+        <th>{% trans _('Опубликовано') %}</th>
+        <td>{{ user.published_links }} ({{ percent }}%)</td>
+    </tr>
+
+    <tr>
+        <th>{% trans _('Комментарии') %}</th>
+        <td>{{ user.total_comments }}</td>
+    </tr>
+
+    <tr>
+        <th>{% trans _('Примечания') %}</th>
+        <td>{{ user.total_posts }}</td>
+    </tr>
+
+    <tr>
+        <th>{% trans _('Количество голосов') %}</th>
+        <td>{{ user.total_votes }}</td>
+    </tr>
+
+    {% endif %}
+
+    {% if user.id == current_user.user_id %}
+    <tr>
+        <th>{% trans _('IP') %}</th>
+        <td><span class="label label-default">{{ globals.user_ip }}</span></td>
+    </tr>
+    {% endif %}
+
+    {% if addresses %}
+    <tr>
+        <th>{% trans _('Последний IP') %}</th>
+
+        <td>
+            {% for address in addresses %}
+            <span class="label label-default">{{ address }}</span>&nbsp;
+            {% endfor %}
+        </td>
+    </tr>
+    {% endif %}
+
+    {% if user.id == current_user.user_id %}
+    <tr>
+        <th>{% trans _('Сгенерированные данные') %}</th>
+        <td>
+            <a href="{{ globals.base_url }}backend/get_user_data.php">{% trans _('Скачать') %}</a>
+        </td>
+    </tr>
+    {% endif %}
+</table>
+
+{% if user.id == current_user.user_id %}
+<div class="text-center">
+    {% exec print_oauth_icons _REQUEST.return as foo %}
+</div>
+{% endif %}
+
+{% if (strikes && (user.id == current_user.user_id OR (current_user.user_level === 'god') OR (current_user.user_level === 'admin'))) %}
+
+<h3>{% trans _('Накопленные штрафы') %}</h3>
+
+{% for strike in strikes %}
+<div class="alert alert-danger">
+    <p><strong>{% trans _('Штраф / Причина') %}:</strong> {{ strike.type }} / {{ strike.reason_message }}</p>
+    <p><strong>{% trans _('Предыдущая Карма / Во время штрафа / Финал') %}:</strong> {{ strike.karma_old }} / {{ strike.karma_new }} / {{ strike.karma_restore }}</p>
+    <p><strong>{% trans _('Начало / Конец') %}:</strong> {{ strike.date }} &raquo; {{ strike.expires_at }}</p>
+    {% if strike.report_ref_id %}
+    <p><a href="{{ globals.base_url }}c/{{ strike.report_ref_id }}" target="_blank">{% trans _('Комментарий, связанный с этим') %}</a></p>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% trans _('Если вы хотите получить больше информации о штрафах, вы можете написать <a href="mailto:admin@sugata.ru">admin@sugata.ru</a>') %}
+
+{% endif %}

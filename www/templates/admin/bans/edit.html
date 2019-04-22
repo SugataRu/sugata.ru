@@ -1,0 +1,89 @@
+<div id="singlewrap">
+    <div class="genericform" style="margin:0">
+        <div style="float:right;">
+            <form method="get" action="{{ globals.base_url }}admin/bans.php">
+                <input type="hidden" name="tab" value="{{ selected_tab }}"/>
+                <input type="hidden" name="key" value="{{ key }}"/>
+                <input type="text" name="s" value="{{ search }}" placeholder="{% trans _('поиск') %}..." />&nbsp;
+                <input style="padding:2px;" type="image" align="top" value="поиск" alt="поиск" src="{{ globals.base_static }}img/common/search-03.png">
+            </form>
+        </div>
+
+        {% if current_user.user_level == "god" %}
+        &nbsp; [ <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}&op=new">{% trans _('Новый бан') %}</a> ]
+        &nbsp; [ <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}&op=news">{% trans _('Несколько банов') %}</a> ]
+        {% endif %}
+
+        <form method="post" name="newban" action="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}">
+            <input type="hidden" name="key" value="{{ key }}"/>
+
+            <table class="decorated" style="font-size: 10pt">
+                <tr>
+                    <th width="25%">
+                        <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}{% if search %}&s={{ search }}{% endif %}&order_by=ban_text">
+                            {{ selected_tab }}
+                        </a>
+                    </th>
+
+                    <th width="30%">
+                        <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}{% if search %}&s={{ search }}{% endif %}&order_by=ban_comment">
+                            {% trans _('комментарий') %}
+                        </a>
+                    </th>
+
+                    <th>
+                        <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}{% if search %}&s={{ search }}{% endif %}&order_by=ban_date">
+                            {% trans _('дата создания') %}
+                        </a>
+                    </th>
+
+                    <th>
+                        <a href="{{ globals.base_url }}admin/bans.php?tab={{ selected_tab }}{% if search %}&s={{ search }}{% endif %}&order_by=ban_expire">
+                            {% trans _('срок годности') %}
+                        </a>
+                    </th>
+
+                    <th>
+                        {% trans _('Редактировать / Удалить') %}
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ban_text" id="ban_text" size="30" maxlength="64" value="{{ ban.ban_text }}"/>
+                    </td>
+                    <td>
+                        <input type="text" class="form-full" name="ban_comment" id="ban_comment" value="{{ ban.ban_comment }}"/>
+                    </td>
+                    <td>
+                        {{ ban.ban_date }}
+                    </td>
+                    <td>
+                        <select name="ban_expire" id="ban_expire">
+                            {% set two_hours = globals.now + 7200 %}
+                            {% set one_day = globals.now + 86400 %}
+                            {% set one_week = globals.now + 86400*7 %}
+                            {% set one_month = globals.now + 86400*30 %}
+                            {% set two_months = globals.now + 86400*60 %}
+                            {% set six_months = globals.now + 86400*180 %}
+                            {% set one_year = globals.now + 86400*365 %}
+                            <option value="{{ ban.ban_expire }}">{{ ban.ban_expire }}</option>
+                            <option value="UNDEFINED">{% trans _('Без истечения срока') %}</option>
+                            <option value="{{ globals.now }}">{% trans _('Сейчас') %}</option>
+                            <option value="{{ two_hours }}">{% trans _('Сейчас + два часа') %}</option>
+                            <option value="{{ one_day }}">{% trans _('Сейчас + один день') %}</option>
+                            <option value="{{ one_week }}">{% trans _('Сейчас + неделя') %}</option>
+                            <option value="{{ one_month }}">{% trans _('Сейчас + месяц') %}</option>
+                            <option value="{{ two_months }}">{% trans _('Сейчас + два месяца') %}</option>
+                            <option value="{{ six_months }}">{% trans _('Сейчас + 6 месяцев') %}</option>
+                            <option value="{{ one_year }}">{% trans _('Сейчас + один год') %}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="hidden" name="ban_id" value="{{ ban.id }}"/>
+                        <input type="submit" name="edit_ban" value="{% trans _('Редактировать бан') %}"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

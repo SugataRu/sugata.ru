@@ -1,0 +1,108 @@
+<style type="text/css">
+table.decorated {
+    margin-top: 5px;
+}
+table.decorated .header {
+    font-size: 110%;
+}
+
+table.decorated th {
+    text-transform: capitalize;
+    padding: 3px 4px;
+}
+table.decorated td {
+    padding: 2px 4px;
+}
+</style>
+<div style="text-align: left;min-width: 400px">
+<strong>{% trans _('теги') %}:</strong> «{{ results.str }}»<br/>
+<strong>{% trans _('резюме') %}:</strong> <br/>
+{% if results.phrases > 0 OR results.min_freq < 0.19 AND results.tags > 1 %}
+    {% if results.in_title > 0 AND results.phrases > 0 %}
+        - {% trans _('Отличные теги') %}<br/>
+    {% else %}
+        - {% trans _('Соответствующие теги') %}<br/>
+    {% endif %}
+{% else %}
+    {% if results.min_freq > 1 %}
+    - {% trans _('Все теги слишком общие') %}<br/>
+    {% endif %}
+
+    {% if results.tags < 3 %}
+    - {% trans _('Очень мало тегов') %}<br/>
+    {% endif %}
+
+{% endif %}
+
+{% if results.in_title == 0 %}
+    - {% trans _('Было бы лучше, если бы какое-либо слово заголовка совпадало с тегом') %}<br/>
+{% endif %}
+
+
+{% if results.tags > 6 %}
+    - {% trans _('Слишком много тегов') %}<br/>
+{% endif %}
+
+{% if results.highs > results.tags * 0.51 %}
+    - {% trans _('Слишком много общих тегов') %}<br/>
+{% endif %}
+
+{% if results.phrases == 0 AND (results.in_title == 0 OR results.max_freq > 1 OR results.tags > 4 OR results.in_title == 0) %}
+    - {% trans _('Не содержит ни одной фразы вида «word1 word2, other»') %}<br/>
+{% endif %}
+
+<table class="decorated" style="width: 400px">
+<tr class="header">
+<th>{% trans _('тег') %}</th>
+<th><em>hits</em></th>
+<th>{% trans _('частота') %}</th>
+<th>{% trans _('состояние') %}</th>
+</tr>
+
+{% for w in words %}
+    <tr>
+    <th>{{ w.w }}</th>
+    <td>{{ w.hits }}</td>
+    <td>{{ w.freq }}%</td>
+    <td>
+        {% if w.freq <= 2 %}
+            {% if w.freq < 0.3 OR w.phrase %}
+                {% if w.in_title %}
+                    {% if w.phrase %}
+                        {% trans _('Отлично, с главным призом!') %}
+                    {% else %}
+                        {% trans _('Отлично!') %}
+                    {% endif %}
+                {% else %}
+                    {% trans _('muy buena') %}
+                    {% if w.hits < 2 %}
+                        {% trans _('Но хорошо ли это написано?') %}
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if w.freq < 1 %}
+                    {% trans _('OK') %}
+                {% else %}
+                    {% if w.in_title %}
+                        {% trans _('OK') %} ({% trans _('в заголовке') %})
+                    {% else %}
+                        {% trans _('regular') %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if w.freq > 4 %}{% trans _('слишком общий') %}
+            {% else %}
+                {% if w.in_title %}
+                    {% trans _('OK') %} ({% trans _('в заголовке') %})
+                {% else %}
+                    {% trans _('общий') %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </td>
+
+    </tr>
+{% endfor %}
+</table>
+</div>

@@ -1,0 +1,226 @@
+<div id="singlewrap">
+    <div class="genericform" style="margin:0">
+
+        <form method="get">
+            <div style="float: right;">
+                <input type="hidden" name="tab" value="{{ selected_tab }}"/>
+                <input type="hidden" name="key" value="{{ key }}"/>
+                <input type="hidden" name="report_status" value="all"/>
+
+                <input type="text" name="s" value="{{ search }}" placeholder="{% trans _('buscar') %}..." />&nbsp;
+                <input style="padding:2px;" type="image" align="top" value="buscar" alt="buscar" src="{{ globals.base_static }}img/common/search-03.png">
+            </div>
+        </form>
+
+        <form method="get" style="display:inline;">
+            Диапазон дат:
+
+            <select name="report_date" id="report_date" onchange="this.form.submit()">
+                <option value="all"{% if report_date==false %} selected="selected"{% endif %}>{% trans _('Любая дата') %}</option>
+                <option value="two_hours"{% if report_date=='two_hours' %} selected="selected"{% endif %}>{% trans _('последние 2 часа') %}</option>
+                <option value="six_hours"{% if report_date=='six_hours' %} selected="selected"{% endif %}>{% trans _('последние 6 часов') %}</option>
+                <option value="twelve_hours"{% if report_date=='twelve_hours' %} selected="selected"{% endif %}>{% trans _('последние 12 часов') %}</option>
+                <option value="one_day"{% if report_date=='one_day' %} selected="selected"{% endif %}>{% trans _('последний день') %}</option>
+                <option value="one_week"{% if report_date=='one_week' %} selected="selected"{% endif %}>{% trans _('на прошлой неделе') %}</option>
+            </select>
+
+            &nbsp; [ <input type="checkbox" name="report_status[]" value="pending" onclick="this.form.submit()"{% if 'pending' in report_status %} checked="checked"{% endif %}> В ожидании ({{ statistics.pending }}) ]
+            &nbsp; [ <input type="checkbox" name="report_status[]" value="debate" onclick="this.form.submit()"{% if 'debate' in report_status %} checked="checked"{% endif %}> В дискуссии ({{ statistics.debate }}) ]
+            &nbsp; [ <input type="checkbox" name="report_status[]" value="penalized" onclick="this.form.submit()"{% if 'penalized' in report_status %} checked="checked"{% endif %}> Нарушает ({{ statistics.penalized }}) ]
+            &nbsp; [ <input type="checkbox" name="report_status[]" value="dismissed" onclick="this.form.submit()"{% if 'dismissed' in report_status %} checked="checked"{% endif %}> Отбрасываются ({{ statistics.dismissed }}) ]
+        </form>
+
+        <table class="table table-condensed table-striped table-hover" style="font-size: 12px;">
+            <tr>
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "report_id" "order_mode" order_mode %}">
+                        {% trans _('id') %}
+                    </a>
+                </th>
+
+                <th class="text-center">
+                    {% trans _('комментарий') %}
+                </th>
+
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "report_num" "order_mode" order_mode %}">
+                        {% trans _('#отчеты') %}
+                    </a>
+                </th>
+
+                <th class="text-center" style="white-space: nowrap">
+                    {% trans _('причина') %}
+                </th>
+
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "author_user_login" "order_mode" order_mode %}">
+                        {% trans _('автор') %}
+                    </a>
+                </th>
+
+                <th class="text-center">
+                    {% trans _('сообщил') %}
+                </th>
+
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "report_date" "order_mode" order_mode %}">
+                        {% trans _('дата') %}
+                    </a>
+                </th>
+
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "report_status" "order_mode" order_mode %}">
+                        {% trans _('состояние') %}
+                    </a>
+                </th>
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "revisor_user_login" "order_mode" order_mode %}">
+                        {% trans _('рассмотрено') %}
+                    </a>
+                </th>
+                <th class="text-center">
+                    <a href="{{ globals.base_url }}admin/reports.php?{% exec URLQuery "order_by" "report_modified" "order_mode" order_mode %}">
+                        {% trans _('последняя модификация') %}
+                    </a>
+                </th>
+                <th class="text-center">{% trans _('забастовка') %}</th>
+            </tr>
+
+            {% for row in reports %}
+            {% for i, report in row.lines %}
+            <tr>
+                {% if i==0 %}
+
+                    <td class="text-center" rowspan="{{ row.num_lines }}">
+                        {{ report.id }}
+                    </td>
+
+                    <td class="text-center" rowspan="{{ row.num_lines }}">
+                        {% if report.author_user_login %}
+                        <a class="tooltip c:{{ report.comment_link_id }}-{{ report.comment_order }}" href="/story/{{ report.comment_link_uri }}/c0{{ report.comment_order }}#c-{{ report.comment_order }}" target="blank">
+                            {% trans _('перейти к комментарию') %}
+                        </a>
+                        {% endif %}
+                    </td>
+
+                    <td class="text-center">
+                        {{ report.report_num }}
+                    </td>
+
+                    <td class="normal text-center">
+                        {% exec report.getReasonTitle %}
+                    </td>
+                    {#
+                    <td class="text-center">
+                        <a target="_blank" href="{{ globals.base_url }}user/{{ report.author_user_login }}" class="tooltip u:{{ report.author_id }}" style="overflow: hidden;white-space: nowrap;">
+                            {{ report.author_user_login }}
+                        </a>
+                    </td>
+                    #}
+                    <td class="text-center" rowspan="{{ row.num_lines }}">
+                        <a target="_blank" href="{{ globals.base_url }}user/{{ report.author_user_login }}" class="tooltip u:{{ report.author_id }}" style="overflow: hidden;white-space: nowrap;">
+                            {{ report.author_user_login }}
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <a class="fancybox admin-button" href="{{ globals.base_url }}admin/report_ajax.php?id={{ report.ref_id }}&reason={{ report.reason }}&process=get_reporters" title="Información de reportes">Ver</a>
+                    </td>
+                    <td class="text-center">{{ report.date }}</td>
+                    <td class="text-center">
+                        <form method="post" action="{{ _SERVER.REQUEST_URI|escape }}">
+
+                            <input type="hidden" name="op" value="change_status">
+                            <input type="hidden" name="report_id" value="{{ report.id }}">
+                            <input type="hidden" name="key" value="{{ key }}">
+                            <select name="new_report_status" onchange="this.form.submit()">
+                                <option value="pending" {% if report.status=="pending" %} selected="selected" {% endif %}>
+                                   в ожидании
+                                </option>
+                                <option value="debate" {% if report.status=="debate" %} selected="selected" {% endif %}>
+                                    в дискуссии
+                                </option>
+                                <option value="penalized" {% if report.status=="penalized" %} selected="selected" {% endif %}>
+                                    нарушает
+                                </option>
+                                <option value="dismissed" {% if report.status=="dismissed" %} selected="selected" {% endif %}>
+                                   отбрасываются
+                                </option>
+                            </select>
+                        </form>
+                    </td>
+                    <td class="text-center">
+                        {% if report.revisor_user_login %}
+                        {{ report.revisor_user_login }}
+                        {% else %}
+                        --
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if report.modified %}
+                        {{ report.modified }}
+                        {% else %}
+                        --
+                        {% endif %}
+                    </td>
+
+                    <td class="text-center" rowspan="{{ row.num_lines }}">
+                        <a href="{{ globals.base_url }}admin/strikes.php?op=new&amp;report_id={{ report.id }}&amp;strike_user={{ report.author_user_login }}" class="btn btn-default btn-xs">
+                            <i class="fa fa-plus fa-sm"></i>
+                        </a>
+                    </td>
+                {% else %}
+
+                    <td class="text-center">
+                        {{ report.report_num }}
+                    </td>
+
+                    <td class="normal text-center">
+                        {% exec report.getReasonTitle %}
+                    </td>
+                    <td class="text-center">
+                        <a class="fancybox admin-button" href="{{ globals.base_url }}admin/report_ajax.php?id={{ report.ref_id }}&reason={{ report.reason }}&process=get_reporters" title="Información de reportes">Ver</a>
+                    </td>
+                    <td class="text-center">{{ report.date }}</td>
+                    <td class="text-center">
+                        <form method="post" action="{{ _SERVER.REQUEST_URI|escape }}">
+                            <input type="hidden" name="op" value="change_status">
+                            <input type="hidden" name="report_id" value="{{ report.id }}">
+                            <input type="hidden" name="key" value="{{ key }}">
+
+                            <select name="new_report_status" onchange="this.form.submit()">
+                                <option value="pending" {% if report.status=="pending" %} selected="selected" {% endif %}>
+                                    в ожидании
+                                </option>
+                                <option value="debate" {% if report.status=="debate" %} selected="selected" {% endif %}>
+                                   в дискуссии
+                                </option>
+                                <option value="penalized" {% if report.status=="penalized" %} selected="selected" {% endif %}>
+                                    нарушает
+                                </option>
+                                <option value="dismissed" {% if report.status=="dismissed" %} selected="selected" {% endif %}>
+                                    отбрасываются
+                                </option>
+                            </select>
+                        </form>
+                    </td>
+                    <td class="text-center">
+                        {% if report.revisor_user_login %}
+                        {{ report.revisor_user_login }}
+                        {% else %}
+                        --
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if report.modified %}
+                        {{ report.modified }}
+                        {% else %}
+                        --
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+</div>

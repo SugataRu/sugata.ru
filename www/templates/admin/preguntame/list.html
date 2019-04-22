@@ -1,0 +1,33 @@
+<div id="singlewrap">
+    <div class="genericform">
+        [ <a href="{{ globals.base_url }}admin/preguntame.php?op=new">{% trans _('Новый Спроси меня') %}</a> ]
+
+        <table class="table table-condensed table-striped table-hover" style="font-size: 10pt">
+            <thead>
+                <tr>
+                    <th class="text-center">{% trans _('картина') %}</th>
+                    <th>{% trans _('Название') %}</th>
+                    <th class="text-center">{% trans _('Начало') %}</th>
+                    <th class="text-center">{% trans _('Конец') %}</th>
+                    <th class="text-center">{% trans _('Спонсируемый') %}</th>
+                    <th class="text-center">{% trans _('Активынй') %}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in list %}
+                <tr>
+                    <td class="text-center"><img src="{{ row.getMediaImage }}" width="50" height="50" /></td>
+                    <td>
+                        <a href="{{ globals.base_url }}admin/preguntame.php?op=new&amp;id={{ row.id }}">{{ row.title }}</a>
+                    </td>
+                    <td class="text-center">{{ row.start_at }}</td>
+                    <td class="text-center">{{ row.end_at }}</td>
+                    <td class="text-center">{{ row.sponsored ? _('Да') : _('Нет') }}</td>
+                    <td class="text-center">{{ row.enabled ? _('Да') : _('Нет') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

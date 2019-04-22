@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="{{ globals.lang }}">
+    {% if ! globals.partial %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="sugata" />
+        <meta name="referrer" content="always">
+<meta name="yandex-verification" content="77018d7bf8d00587" />
+        <meta name="viewport" content="width=device-width, initial-scale=1{% if globals.mobile %}, user-scalable=no{% endif %}" />
+
+        {% if globals.css_webfonts %}
+        <link href="{{ globals.css_webfonts }}" rel="stylesheet" type="text/css">
+        {% endif %}
+
+        {# Save bandwidth for mobiles #}
+        {% if not globals.mobile %}
+
+        {% if globals.noindex %}
+        <meta name="robots" content="noindex,nofollow" />
+        {% endif %}
+
+
+        {% if globals.permalink AND title %}
+
+
+		
+        {# Twitter Card #}
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="{{ title }}">
+
+        {% if globals.twitter_user %}
+        <meta name="twitter:site" content="@{{ globals.twitter_user }}">
+        {% endif %}
+
+        {% if globals.thumbnail %}
+        <meta property="og:image" content="{{ globals.thumbnail }}" />
+        <meta name="twitter:image" content="{{ globals.thumbnail }}" />
+        {% endif %}
+
+        {% if globals.meta_type %}
+        <meta property="og:type" content="{{ globals.meta_type }}">
+        {% endif %}
+
+        <meta property="og:url" content="{{ globals.permalink }}">
+        <meta property="og:title" content="{{ title }}">
+        <meta property="og:description" content="{{ globals.description }}">
+
+        {% endif %}
+		
+		
+{% if globals.uri == '/'%}
+<meta property="og:url" content="{{ globals.base_url_sugata }}">
+<meta property="og:title" content="Sugata - лучшее в сети">
+<meta property="og:description" content="Присоединяйтесь к сообществу Sugata: поделиться интересными ссылками, историей, новостями. Ведите блоги, пишите комментарии, зарабатывайте карму.">
+<meta property="og:image" content="{{ globals.base_url_sugata }}/img/sugata.png" />
+{% endif %}
+
+   
+        <link rel="search" type="application/opensearchdescription+xml" title="{% trans _('поиск') %}" href="{{ globals.scheme }}//{{ globals.server_name }}{{ globals.base_url_general }}opensearch" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('publicadas') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('pendientes') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss?status=queued" />
+
+        {% endif %}
+		
+        {# Save bandwidth for mobiles #}
+
+        <title>{{ title }} | поделись историей</title>
+
+		<meta name="description" content="{{ globals.description }}" />
+		
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		
+ 
+		
+		
+        {% if globals.use_fontawesome_cdn %}
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        {% else %}
+        <link href="{{ globals.base_static }}css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+        {% endif %}
+
+        {% for css in globals.extra_css %}
+
+        {% if css|substr:"0, 4" == 'http' OR css|substr:"0, 2" == '//' %}
+        <link href="{{ css }}" rel="stylesheet" type="text/css" media="all" />
+        {% else %}
+        <link href="{{ globals.base_static }}css/{{ css }}" rel="stylesheet" type="text/css" media="all" />
+        {% endif %}
+
+        {% endfor %}
+
+        {% for css in globals.extra_vendor_css %}
+        <link href="{{ globals.base_static }}vendor/{{ css }}" rel="stylesheet" type="text/css" media="all" />
+        {% endfor %}
+
+        {% if globals.css_main %}
+        <link href="{{ globals.base_url_general }}css/{{ globals.css_main }}" rel="stylesheet" type="text/css" media="all" />
+        {% endif %}
+
+        {% for css in globals.extra_css_after %}
+        <link href="/css/{{ css }}" rel="stylesheet" type="text/css" media="all" />
+        {% endfor %}
+
+	 
+		
+		
+        {# <meta name="mobile-web-app-capable" content="yes"> #}
+
+        {% if globals.favicon %}
+        <link rel="shortcut icon" href="{{ globals.base_url_sugata }}/{{ globals.favicon }}" type="image/x-icon" />
+        {% else %}
+		
+        <link rel="icon" type="image/x-icon" href="{{ globals.base_url_sugata }}/favicon.ico">
+        <link rel="icon" type="image/png" href="{{ globals.base_url_sugata }}/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ globals.base_url_sugata }}/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="{{ globals.base_url_sugata }}/manifest.json">
+
+        <meta name="theme-color" content="#ffffff">
+
+        {% endif %}
+
+ 
+
+
+        {# <script src="{{ globals.base_url_general }}js/{{ globals.js_basic }}" type="text/javascript" charset="utf-8"></script> #}
+
+		
+		
+
+		
+		
+		
+		
+        {% if globals.extra_head %}
+            {{ globals.extra_head }}
+        {% endif %}
+
+        {% try_include 'private/stats.html' %}
+        {% try_include 'private/header.html' %}
+    </head>
+
+    <body {% if globals.mobile %}class="mobile"{% endif %}>  
+        <div class="header-top-wrapper pinned">
+            <div id="header-top" class="mnm-center-in-wrap">
+                <a href="{{ globals.base_url_sugata }}" title="{% trans _('sugata - сообщество') %}" id="header-logo" class="logo-mnm">
+                    <img src="{{ globals.base_url_general }}img/logo-sugata.png" alt="{% trans _('sugata - сообщество') %}" height="30" onerror="this.onerror = null; this.src = '{{ globals.base_url_general }}img/logo-sugata.png'" />
+                </a>
+
+                {% if not globals.mobile %}
+                <a href="{{ globals.base_url_sugata }}/s/{{ this_site.name }}" class="sub-name wideonly">{% if this_site.name_long %}{{ this_site.name_long|upper }}{% else %}{% trans _('meta') %}{% endif %}</a>
+                {% else %}
+                               <div id="nav-menu"></div>
+                {% endif %}
+
+                {% include "header_userinfo.html" %}
+            </div>
+        </div>
+
+        {% else %} {# PARTIAL partial #}
+        <span id="ajaxinfo"
+            data-partial="1"
+            data-uri="{{ globals.uri|escape }}"
+            data-uid="{{ current_user.user_id }}"
+            data-title="{{ title }}">
+        </span>
+        {% endif %} {# PARTIAL partial #}
+
+        <script type="text/javascript">
+            {% include '../js/basic.js' %}
+        </script>
+
+        <div id="header">
+            <div class="header-menu-wrapper"  style="{% if this_site.color1 %}color:{{ this_site.color1 }};{% endif %}{% if this_site.color2 %}background-color:{{ this_site.color2 }};{% endif %}">
+                <div id="header-menu" class="mnm-center-in-wrap">
+                    <div class="header-menu01"{% if globals.mobile %} style="display:none;"{% endif %}>
+                        <ul class="menu01-itemsl">
+                            {% for o in left_options %}
+                            <li {% if o.selected %}class="selected"{% endif %} title="{{ o.title }}">
+                                <a href="{{ o.url }}"{% if o.class %} class="{{ o.class }}"{% endif %}>{{ o.text }}</a>
+                                {% if o.class=="button-new" %}<span class="button-new">{% trans _('new!') %}</span>{% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        {% if tabs %}
+                        <div class="dropdown menu-more">
+                            <a href="#" class="dropdown-toggle menu-more-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">ДАЛЕЕ
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            {{ tabs }}
+                        </div>
+                        {% endif %}
+
+                        <ul class="menu01-itemsr">
+                            {% for o in right_options %}
+                            <li {% if o.selected %}class="selected"{% endif %} title="{{ o.title }}"><a href="{{ o.url }}"{% if o.class %} class="{{ o.class }}"{% endif %}>{{ o.text }}</a></li>
+                            {% endfor %}
+
+                            {% if globals.help_url %}
+                            <li><a href="{{ globals.help_url }}" title="{% trans _('помощь для начинающих') %}">Помощь</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div> 
+            </div> 
+
+            {% if globals.mobile AND this_site.sub %}
+            <div class="header-sub-wrapper">
+                <div class="header-sub"><a href="{{ globals.base_url_sugata }}/{{ this_site.url }}">{{ this_site.name_long }}</a></div>
+            </div>
+            {% endif %} 
+
+            {% if globals.mobile %}
+            <div class="subs-main-menu" style="display:none;">
+                <ul>
+                    <li>
+                        <a href="#">Смотреть только свои пространства
+                            <div class="checkbox checkbox-slider--b-flat checkbox-slider-md checkbox-slider-warning" style="display:inline-block">
+                                <label>
+                                    <input id="subs_default_header" name="subs_default" value="subs_default" type="checkbox" {% if current_user && current_user.subs_default %}checked{% endif %}><span>&nbsp;</span>
+                                </label>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ globals.base_url_general }}subs" class="chevron-right">Откройте для себя пространства</a>
+                    </li>
+                    <li>
+                        <a href="#" class="follow-subs chevron-right">Пространства <span>{{ followed_subs|count }}</span></a>
+
+                        <div class="subs-listing-wrapper">
+                            <table class="subs-listing" style="display:none;">
+                                {% for s in followed_subs %}
+                                <tr>
+                                    <td>
+                                        {% if ! s.site_info.logo_url %}
+                                        <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
+                                            <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{% trans _('Eli') %}">
+                                        </a>
+                                        {% else %}
+                                        <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
+                                            <img src="{{ globals.base_url_sugata }}/img/g.gif"
+                                                class="thumb ok lazy img-circle"
+                                                data-src="{{ s.site_info.logo_url }}"
+                                                width="{{ s.site_info.logo_width }}" height="{{ s.site_info.logo_height }}"
+                                                alt="{{ s.site_info.name }}" style="margin-right:5px;"/>
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a class="sub-name" href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}">{{ s.name }}</a>
+                                        <div class="description">
+                                            {% if s.nsfw %}<strong>[nsfw]</strong>{% endif %}
+                                            {{ s.name_long }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if globals.header_banner %}
+        <div id="header-banner">{{ globals.header_banner }}</div>
+        {% endif %}
+
+	 
+{% if current_user.user_id > 0 %} {% else %} 
+{% if globals.uri == '/'%}
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-share-alt"></i></div><div class="col-lg-7"> 
+	<h1>Sugata — лучшее в сети. Поделись историей!</h1>
+	Присоединяйтесь к сообществу: делитесь ссылками, комментируйте, ведите блоги, зарабатывайте карму...
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+{% endif %}
+
+{% if globals.uri == '/articles' %}
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-newspaper-o"></i></div><div class="col-lg-7"> 
+	<h1>Sugata — статьи</h1>
+	Вы можете размещать статьи в веренных вам пространствах. И публиковать интересные материалы...
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+{% endif %} 
+
+{% if globals.uri == '/queue' %}
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-line-chart"></i></div><div class="col-lg-7"> 
+	<h1>Sugata — новости в очереди (проекты)</h1>
+	Истории, статьи, новости находящие в очереди для поднятия на центральную страницу...
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+{% endif %}  
+
+
+{% if globals.uri == '/popular' %}
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-heart-o"></i></div><div class="col-lg-7"> 
+	<h1>Sugata — популярное</h1>
+	Истории, статьи, новости, которые стали популярными на сайте...
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+{% endif %}
+
+{% endif %}
+
+		
+        <div id="variable">
+            <div id="wrap"> 
+                {% exec do_banner_top as foo %}
+
+                <div id="container">
+                    {% if globals.mobile %}
+
+                    <div id="searchform" class="searchform" style="display:block;">
+                        <form action="{{ globals.base_url_sugata }}/search" method="get" name="top_search">
+                            {% if globals.search_options %}
+                            {% for name, value in globals.search_options %}
+                            <input type="hidden" name="{{ name }}" value="{{ value }}" />
+                            {% endfor %}
+                            {% endif %}
+
+                            <input class="searchbox" name="q" type="search" {% if globals.q %}value="{{ globals.q|escape }}"{% endif %}/>
+                        </form>
+                    </div>
+
+                    {% endif %}
