@@ -1169,20 +1169,12 @@ line-height: 12px;
 background-color: #fff;
 }
 
-.sidebox.red .header {
+.sidebox  .header {
     background-color: #fff;
 }
 
-.sidebox.red .header a {
+.sidebox .header a {
     color: #667d99;
-}
-
-.sidebox.brown .header {
-    background: #e35614;
-}
-
-.sidebox.brown .header a {
-    color: #FFF;
 }
 
 .sidebox .body {
