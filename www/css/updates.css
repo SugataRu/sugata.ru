@@ -867,7 +867,7 @@ color: #e35614;;
     margin-top: 10px;
 }
 
-.widget-official-subs-slider a.meneame-button {
+.widget-official-subs-slider a.sugata-button {
     margin-top: 20px;
     color: #fff;
     padding: 5px 20px;
@@ -881,7 +881,7 @@ color: #e35614;;
     border-radius: 3px;
 }
 
-.widget-official-subs-slider a.meneame-button:hover {
+.widget-official-subs-slider a.sugata-button:hover {
     text-decoration: none;
 }
 
@@ -1031,7 +1031,7 @@ color: #e35614;;
     margin-top: 10px;
 }
 
-.popular-link-widget-right a.meneame-button {
+.popular-link-widget-right a.sugata-button {
     margin-top: 20px;
     color: #fff;
     padding: 5px 20px;
@@ -1045,7 +1045,7 @@ color: #e35614;;
     border-radius: 3px;
 }
 
-.popular-link-widget-right a.meneame-button:hover {
+.popular-link-widget-right a.sugata-button:hover {
     text-decoration: none;
 }
 

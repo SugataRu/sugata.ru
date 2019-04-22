@@ -2949,7 +2949,7 @@ button.link.favorite {
 .genericform {
     border: 0;
     margin: 0 60px 10px 60px;
-    padding: 0 0 20px 0;
+    padding: 10px;
     font-weight: bold;
     background: #FFF;
     color: #e35614;
