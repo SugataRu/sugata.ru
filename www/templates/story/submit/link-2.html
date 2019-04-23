@@ -149,7 +149,10 @@
             <label>{% trans _('Пометить как 18+ (небезопасно)') %}: <input type="checkbox" name="nsfw"{% if link.nsfw == 1 %} checked="checked"{% endif %}/></label>
             <span class="note">({% trans _('предотвращение штрафов в рекламе') %})</span>
             <br/>
-
+ 
+			<label>{% trans _('Выделить пост от админ-а') %}: <input type="checkbox" name="top"{% if link.top == 1 %} checked="checked"{% endif %}/></label>
+			 <br/>
+			
             {% if link.thumb_url OR link.media_size > 0 %}
 
             <label>{% trans _('Удалить изображение') %}: <input type="checkbox" name="thumb_delete" value="1"/></label><br/>

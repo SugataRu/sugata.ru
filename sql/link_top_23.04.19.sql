@@ -1,0 +1,1 @@
+ALTER TABLE `links` ADD `link_top` TINYINT(1) NOT NULL DEFAULT '0' AFTER `link_nsfw`;

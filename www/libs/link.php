@@ -61,7 +61,7 @@ class Link extends LCPBase
 
     // sql fields to build an object from mysql
     const SQL = '
-        link_id AS id, link_nsfw AS nsfw, link_author AS author, link_blog AS blog, link_status AS status,
+        link_id AS id, link_nsfw AS nsfw, link_top AS top, link_author AS author, link_blog AS blog, link_status AS status,
         sub_statuses.status AS sub_status, sub_statuses.id AS sub_status_id, UNIX_TIMESTAMP(sub_statuses.date) AS sub_date,
         link_votes AS votes, link_negatives AS negatives, link_anonymous AS anonymous, link_votes_avg AS votes_avg,
         link_votes + link_anonymous AS total_votes, link_comments AS comments, link_karma AS karma,
@@ -90,7 +90,7 @@ class Link extends LCPBase
     ';
 
     const SQL_BASIC = '
-        link_id AS id, link_nsfw AS nsfw, link_author AS author, link_blog AS blog, link_status AS status,
+        link_id AS id, link_nsfw AS nsfw, link_top AS top, link_author AS author, link_blog AS blog, link_status AS status,
         sub_statuses.status AS sub_status, sub_statuses.id AS sub_status_id, link_votes AS votes,
         link_negatives AS negatives, link_anonymous AS anonymous, link_votes_avg AS votes_avg,
         link_votes + link_anonymous AS total_votes, link_comments AS comments, link_karma AS karma,
@@ -1043,6 +1043,8 @@ class Link extends LCPBase
         $link_content = $db->escape($this->content);
         $link_thumb_status = $db->escape($this->thumb_status);
         $link_nsfw = $this->nsfw ? 1 : 0;
+		
+		$link_top = $this->top ? 1 : 0;
 
         $r = $db->query('
             UPDATE `links`
@@ -1054,7 +1056,8 @@ class Link extends LCPBase
                 `link_content` = "'.$link_content.'",
                 `link_tags` = "'.$link_tags.'",
                 `link_thumb_status` = "'.$link_thumb_status.'",
-                `link_nsfw` = "'.$link_nsfw.'"
+                `link_nsfw` = "'.$link_nsfw.'",
+				`link_top` = "'.$link_top.'"
             WHERE `link_id` = "'.$this->id.'"
             LIMIT 1;
         ');

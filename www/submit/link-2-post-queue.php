@@ -72,6 +72,15 @@ if ($nsfw !== $link->nsfw) {
     $link->nsfw = $nsfw;
 }
 
+
+// change top
+$top = intval(!empty($_POST['top']));
+
+if ($top !== $link->top) {
+    $link->top = $top;
+}
+
+
 if (empty($link->uri)) {
     $link->get_uri();
 }
