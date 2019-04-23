@@ -3,7 +3,7 @@ body {
     font-size: 15px;
 }
 
-.mnm-center-in-wrap {
+.s-center-in-wrap {
     min-width: 0px;
     max-width: 100%;
 }
@@ -130,11 +130,11 @@ select.select-menu-more-options {
     float: right;
 }
 
-#header-top .logo-mnm {
+#header-top .logo-s {
     margin-top: 10px;
 }
 
-#header-top .logo-mnm img {
+#header-top .logo-s img {
     height: 25px;
     width: 114px;
 }
@@ -455,7 +455,7 @@ div.tab-promoted-article {
     padding: 7px 10px;
 }
 
-.mnm-tooltip.share {
+.s-tooltip.share {
     margin-left: -70px;
 }
 

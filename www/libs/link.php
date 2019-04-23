@@ -1443,17 +1443,17 @@ class Link extends LCPBase
     {
         switch ($this->status) {
             case 'queued': // another color box for not-published
-                $this->box_class = 'mnm-queued';
+                $this->box_class = 's-queued';
                 break;
 
             case 'abuse': // another color box for discarded
             case 'autodiscard': // another color box for discarded
             case 'discard': // another color box for discarded
-                $this->box_class = 'mnm-discarded';
+                $this->box_class = 's-discarded';
                 break;
 
             default: // default for published
-                $this->box_class = 'mnm-published';
+                $this->box_class = 's-published';
                 break;
         }
     }

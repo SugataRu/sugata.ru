@@ -24,14 +24,19 @@ body {
     display: none;
 }
 
-.bar .mnm-queued,
-.bar .mnm-published,
-.bar .mnm-discarded {
+#bar{
+    display: inline-block;
+	padding-top: 12px;
+}
+.bar .s-queued,
+.bar .s-published,
+.bar .s-discarded {
     float: left;
     font-size: 15px;
     padding: 0 10px;
     margin: 0 10px;
-    line-height: 47px;
+    line-height: 40px;
+	margin-top: -13px;
 }
 
 .tool {
