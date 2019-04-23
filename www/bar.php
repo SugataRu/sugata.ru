@@ -16,7 +16,7 @@ $url_args = $globals['path'];
 $id = intval($globals['path'][1]);
 
 if (! $id > 0 || ! ($link = Link::from_db($id))) {
-    do_error(_('enlace no encontrado'), 404);
+    do_error(_('ссылка не найдена'), 404);
 }
 
 // Mark as read, add click if necessary
