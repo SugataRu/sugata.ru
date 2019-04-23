@@ -717,6 +717,56 @@ function do_vertical_tags($what = false)
     memcache_madd($cache_key, $output, 900);
 }
 
+
+
+
+/*
+function do_categories_cloud($what=false, $hours = 488) {
+	global $db, $globals, $dblang;
+	if ($globals['mobile']) return;
+	$cache_key = 'categories_cloud_'.$globals['css_main'].$what;
+	if(memcache_mprint($cache_key)) return;
+	if (!empty($what)) {
+		$status = '= "'.$what. '"';
+	} else {
+		$status = "!= 'discarded'";
+	}
+	$min_pts = 8;
+	$max_pts = 22;
+	$min_date = date("Y-m-d H:i:00", $globals['now'] - $hours*3600);
+	$from_where = "from categories, links where link_status $status and link_date > '$min_date' and link_category = category_id group by category_name";
+	$max = 0;
+	$res = $db->get_results("select count(*) as count, lower(category_name) as category_name, category_id $from_where order by count desc limit 10");
+	if ($res) {
+		if ($what == 'queued') $page = $globals['base_url'].'shakeit.php?category=';
+		else  $page = $globals['base_url'].'?category=';
+		$title = _('categorías populares');
+		$counts = array();
+		$names = array();
+		foreach ($res as $item) {
+			if ($item->count > 1) {
+				if ($item->count > $max) $max = $item->count;
+				$counts[$item->category_id] = $item->count;
+				$names[$item->category_name] = $item->category_id;
+			}
+		}
+		ksort($names);
+		$coef = (($max - 1) > 0)?(($max_pts - $min_pts)/($max-1)):0;
+		foreach ($names as $name => $id) {
+			$count = $counts[$id];
+			$size = round($min_pts + ($count-1)*$coef, 1);
+			$op = round(0.3 + 0.7*$count/$max, 2);
+			$content .= '<a style="font-size: '.$size.'pt;opacity:'.$op.'" href="'.$page.$id.'">'.$name.'</a> ';
+		}
+		$vars = compact('content', 'title', 'url');
+		$output = Haanga::Load('tags_sidebox.html', $vars, true);
+		echo $output;
+		memcache_madd($cache_key, $output, 600);
+	}
+}
+
+*/
+
 function do_best_sites()
 {
     global $db, $globals, $dblang;

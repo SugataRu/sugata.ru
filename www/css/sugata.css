@@ -965,6 +965,7 @@ border-bottom: 1px solid #fff;
 
 #comments-top {
 	margin: 0 15px;
+	padding: 1px;
 }
 
 
@@ -1413,14 +1414,12 @@ background-color: #fff;
 
 #side-bar a {
     font-size: 13px;
-    color: #666;
+    color: #919191;
 }
-#side-bar a:hover {
-    color: #e35614;
-}
-#footer {background: #fff;padding: 15px;color:#666;clear: both;}
-#footer a {color:#333; }
-#footer a:hover {color:#e35614;}
+
+#footer {background: #fff;padding: 15px;color:#919191;clear: both;}
+#footer a {color:#919191; }
+#footer a:hover, #side-bar a:hover  {color:#e35614;}
 
 #stdcompliance {
     padding: 4px 0 0 0;
