@@ -287,7 +287,7 @@
                     {% for id, tag in tags_array %}
 
                     {% if id > 0 %}, {% endif %}
-                    <a href='{{ globals.base_url }}search?p=tags&amp;q={{ tag|urlencode }}'>{{ tag }}</a>
+                    <a class="tag" href='{{ globals.base_url }}search?p=tags&amp;q={{ tag|urlencode }}'>{{ tag }}</a>
 
                     {% endfor %}
 
