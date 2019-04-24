@@ -22,7 +22,15 @@ function print_comment_list($comments, $user)
         if ($last_link != $dbcomment->link_id) {
             $link = Link::from_db($dbcomment->link_id, null, false); // Read basic
 
-            echo '<h4>';
+			if ($link->top == '1') {
+				$top = 'class="top"';
+			}
+			else
+			{ 
+				$top = '';
+			}
+			
+            echo '<h4 '.$top.'>';
             echo '<a href="' . $link->get_permalink() . '">' . $link->title . '</a>';
             echo ' [' . $link->comments . ']';
             echo '</h4>';

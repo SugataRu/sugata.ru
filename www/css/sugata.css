@@ -2155,8 +2155,8 @@ div.tab-promoted-article {
     color: #919191;
 }
 
-.news-body h1.top a, .news-body h3.top a, .news-body h1.top, .news-body h2.top a {
-    color: #339900;
+.news-body h1.top a, .news-body h3.top a, .contents-body h4.top a, h4.top, .news-body h1.top, .news-body h2.top a {
+    color: #339900 !important;
 }
 
 
