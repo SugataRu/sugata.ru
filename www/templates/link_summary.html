@@ -107,7 +107,7 @@
 				 
 				 
 				{% if self.max_len == '200' OR self.max_len == '600' %}
-                <h3>
+                <h3{% if self.top %} class="top"{% endif %}>
                    <a href="{{ self.relative_permalink }}"> 
                         {{ self.title }}
                     </a>
@@ -123,7 +123,7 @@
 				{% else %} 
 				 
 				
-				  <h1>
+				  <h1{% if self.top %} class="top"{% endif %}>
                  
                         {{ self.title }}
                 
@@ -149,7 +149,7 @@
 			
 		 
 				{% if self.max_len == '200' OR self.max_len == '600' %}
-                <h3> 
+                <h3{% if self.top %} class="top"{% endif %}> 
                    <a href="{{ self.permalink }}" class="l:{{ self.id }}">{{ self.title }}</a>  
 
                     {% if self.poll && self.poll.id %}
@@ -168,7 +168,7 @@
 				
 				 {% else %} 
 				 
-				  <h1>  {{ self.title }} 
+				  <h1{% if self.top %} class="top"{% endif %}>  {{ self.title }} 
 
                     {% if self.poll && self.poll.id %}
                     <span class="wideonly">&nbsp;<i class="fa fa-bar-chart" title="{% trans _('опрос') %}"></i></span>

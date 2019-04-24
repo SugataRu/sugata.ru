@@ -77,7 +77,7 @@
 
         {% exec htmlspecialchars self.url as url %}
 
-        <h2>
+        <h2{% if self.top %} class="top"{% endif %}>
              <a href="{{ self.relative_permalink }}">{{ self.title }}
             </a>
 
@@ -92,7 +92,7 @@
 
         {% else %}
 
-        <h2>
+        <h2{% if self.top %} class="top"{% endif %}>
             <a href="{{ self.permalink }}" class="l:{{ self.id }}">{{ self.title }}</a>
 
             {% if self.poll && self.poll.id %}

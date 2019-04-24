@@ -239,7 +239,7 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
     display: inline-block;
     height: 40px;
     padding-left: 10px;
-    margin-top: 4px;
+    margin-top: 2px;
     padding-top: 12px;
     margin-left: 10px;
     float: left;
@@ -2150,9 +2150,16 @@ div.tab-promoted-article {
 .news-body h1 a, .news-body h2 a, .news-body h3 a {
     color: #1F1F1F;
 }
+
 .news-body h3 a:visited, .section-profile .contents-layout .contents-body h4 a:visited {
     color: #919191;
 }
+
+.news-body h1.top a, .news-body h2.top a, .news-body h3.top a {
+    color: #339900;
+}
+
+
 /* Thumbnails for links */
 
 .news-body .thumbnail-wrapper {
