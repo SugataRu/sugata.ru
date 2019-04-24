@@ -336,11 +336,11 @@ function set_options_from_string(string) {
 
 function set_options_cookie() {
     var options = get_options_string();
-    writeStorage('mnm-sneak-options_'+user_id, options);
+    writeStorage('s-sneak-options_'+user_id, options);
 }
 
 function get_options_cookie() {
-    var options = readStorage('mnm-sneak-options_'+user_id);
+    var options = readStorage('s-sneak-options_'+user_id);
     if (options != null) {
         set_options_from_string(options);
         return true;

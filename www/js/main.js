@@ -2916,7 +2916,7 @@ $(document).ready(function() {
     });
 
     $('[data-toggle="tooltip"]').tooltip({
-        template: '<div class="mnm-tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+        template: '<div class="s-tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
     });
 
     $(document).on('click', function(e) {
@@ -2936,7 +2936,7 @@ $(document).ready(function() {
             placement: 'right',
             trigger: 'manual',
             title: 'Скопирован',
-            template: '<div class="mnm-tooltip share" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+            template: '<div class="s-tooltip share" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
         }).tooltip('show');
     });
 
