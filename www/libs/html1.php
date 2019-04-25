@@ -294,11 +294,11 @@ function do_js_from_array($array)
 
     foreach ($array as $js) {
         if (preg_match('/^http|^\//', $js)) {
-            echo '<script src="' . $js . '" type="text/javascript"></script>' . "\n";
+            echo '<script src="' . $js . '"></script>' . "\n";
         } elseif (preg_match('/\.js$/', $js)) {
-            echo '<script src="' . $globals['base_static'] . 'js/' . $js . '" type="text/javascript"></script>' . "\n";
+            echo '<script src="' . $globals['base_static'] . 'js/' . $js . '"></script>' . "\n";
         } else {
-            echo '<script src="' . $globals['base_url'] . 'js/' . $js . '" type="text/javascript"></script>' . "\n";
+            echo '<script src="' . $globals['base_url'] . 'js/' . $js . '"></script>' . "\n";
         }
     }
 }

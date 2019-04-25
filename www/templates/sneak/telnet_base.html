@@ -1,5 +1,5 @@
 {% spacefull %}
-<script type="text/javascript">
+<script>
 //<![CDATA[
 var my_version = '{{ globals.sneak_version }}';
 var ts={{ globals.now }} - 3600; // just due a freaking IE cache problem
@@ -104,5 +104,5 @@ function to_html(data) {
 
 //]]>
 </script>
-<script type="text/javascript" src="{{ globals.base_url_general }}js/sneak.js.php?{{ globals['sneak_version'] }}"></script>
+<script src="{{ globals.base_url_general }}js/sneak.js.php?{{ globals['sneak_version'] }}"></script>
 {% endspacefull %}

@@ -1446,6 +1446,17 @@ function share_fb(e) {
     return false;
 }
 
+function share_vk(e) {
+	 var $parent = $(e).parent().parent(), 
+      url = 'http://vkontakte.ru/share.php?url=' + encodeURIComponent($parent.data('url')) + '&title=' + encodeURIComponent($parent.data('title'));
+
+    window.open(url, 'vkontakte-share-dialog', 'width=626,height=436');
+
+    return false;
+}
+
+
+
 function share_tw(e) {
     var $parent = $(e).parent().parent(),
         url = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent($parent.data('url')) + '&text=' + encodeURIComponent($parent.data('title'));
@@ -2960,9 +2971,9 @@ $(document).ready(function() {
         }
     });
 
-    var $subsSlider = $('.official-subs-slider');
+ /*    var $subsSlider = $('.official-subs-slider');
 
-    $subsSlider.slick({
+   $subsSlider.slick({
         dots: true,
         infinite: false,
         speed: 300,
@@ -3175,7 +3186,7 @@ $(document).ready(function() {
         var slickTrackHeight = $(slickTrack).height();
         $(this).find('.slick-slide').css('height', slickTrackHeight + 'px');
     });
-
+*/
     if (current_user > 0) {
         addPostCode(function() {
             pref_input_check('subs_default_header');

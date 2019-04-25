@@ -1830,7 +1830,7 @@ function close_connection()
 
 function add_javascript($code)
 {
-    echo '<script type="text/javascript">addPostCode(\''.$code.'\');</script>';
+    echo '<script>addPostCode(\''.$code.'\');</script>';
 }
 
 function push_to_globals($key, $value)

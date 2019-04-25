@@ -44,7 +44,7 @@ echo '<div class="topheading"><h2>активность геолокирован�
 echo '<div id="map" style="width: 95%; height: 500px;margin:0 0 0 20px"></div></div>'
 ?>
 
-<script type="text/javascript">
+<script>
 //<![CDATA[
 var timestamp = 0;
 var period = 10000;

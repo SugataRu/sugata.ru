@@ -74,7 +74,7 @@ table.decorated td {
                         {% trans _('Отлично!') %}
                     {% endif %}
                 {% else %}
-                    {% trans _('muy buena') %}
+                    {% trans _('очень хорошо') %}
                     {% if w.hits < 2 %}
                         {% trans _('Но хорошо ли это написано?') %}
                     {% endif %}
@@ -86,7 +86,7 @@ table.decorated td {
                     {% if w.in_title %}
                         {% trans _('OK') %} ({% trans _('в заголовке') %})
                     {% else %}
-                        {% trans _('regular') %}
+                        {% trans _('регулярный') %}
                     {% endif %}
                 {% endif %}
             {% endif %}

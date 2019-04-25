@@ -118,7 +118,7 @@
                     required>{{ link.content }}</textarea>
             <br>
 
-            <script type="text/javascript">
+            <script>
             addPostCode( function () {
                 $('textarea').autosize();
             });
@@ -175,7 +175,7 @@
 
             <div class="droparea_info" style></div>
 
-            <script type="text/javascript">
+            <script>
             addPostCode( function () {
                 $('#thisform').droparea({maxsize: {{ globals.media_max_size }} });
                 $("#fileInput").nicefileinput({ title: 'Добавить изображение' });

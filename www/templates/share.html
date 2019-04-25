@@ -20,7 +20,7 @@
         </li>
         {% endif %}
         <li>
-         <a rel="nofollow" class="share-mail" href="mailto:?subject={{ title }}&body={{ link_url }}" title="{% trans _('Поделились %s') "Почта" %}"><i class="fa fa-envelope"></i>{% trans _('Поделиться - %s') "E-mail" %}</a>
+         <a rel="nofollow"  class="share-vk" href="#" onClick="share_vk(this)"><i class="fa fa-vk"></i>{% trans _('Поделиться - %s') "VK" %}</a>
         </li>
         <li>
             <button class="share-link" data-clipboard-text="{{ short_link }}"><i class="fa fa-link"></i><span>{% trans _('Скопировать ссылку') %}</span></button>
@@ -33,7 +33,7 @@
 
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ link_url }}" target="_blank"><img src="{{ globals.base_static }}img/external/fb-24.png" alt="fb" title="{% trans _('поделиться %s') "facebook" %}"/></a>
 
-<a href="https://twitter.com/intent/tweet?url={{ link_url }}&amp;text={{ title |urlencode }}" target="_blank"><img src="{{ globals.base_static }}img/external/tw-24.png" alt="tw" title="{% trans _('compartir en %s') "twitter" %}"/></a>
+<a href="https://twitter.com/intent/tweet?url={{ link_url }}&amp;text={{ title |urlencode }}" target="_blank"><img src="{{ globals.base_static }}img/external/tw-24.png" alt="tw" title="{% trans _('поделиться %s') "twitter" %}"/></a>
 #}
 
 {#
@@ -41,7 +41,7 @@
 
 &nbsp;<div class="g-plusone" style="display:inline" data-size="small" data-count="false"></div>
 
-<script type="text/javascript">
+<script>
     window.___gcfg = {lang: 'es'};
     $(function () {
         $.getScript("https://apis.google.com/js/plusone.js");

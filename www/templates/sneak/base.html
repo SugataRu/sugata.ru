@@ -1,5 +1,5 @@
 {% spacefull %}
-<script type="text/javascript">
+<script>
 //<![CDATA[
 var my_version = '{{ globals.sneak_version }}';
 var ts={{ globals.now }} - 3600; // just due a freaking IE cache problem
@@ -365,8 +365,8 @@ function flipChar(c) {
 
 //]]>
 </script>
-<script type="text/javascript" src="{{ globals.base_url_general }}js/sneak.js.php?storage_{{ globals['sneak_version'] }}" charset="utf-8"></script>
-<script type="text/javascript">
+<script src="{{ globals.base_url_general }}js/sneak.js.php?storage_{{ globals['sneak_version'] }}" charset="utf-8"></script>
+<script>
 {% if current_user.user_id > 0 %}
     {% if _REQUEST['friends'] %}
         global_options.show_friends = true;
