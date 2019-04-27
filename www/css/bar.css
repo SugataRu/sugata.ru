@@ -24,6 +24,7 @@ body {
     display: none;
 }
 
+.sugata {display: inline-block;}
 #bar{
     display: inline-block;
 	padding-top: 12px;

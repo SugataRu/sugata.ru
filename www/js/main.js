@@ -38,9 +38,9 @@ function to_date(index) {
 
     if (diff < 3600 && diff > 0) {
         if (diff < 60) {
-            str = "{% trans _('назад') %} " + diff + " {% trans _('сек') %}";
+            str = diff + " {% trans _('сек назад') %}";
         } else {
-            str = "{% trans _('назад') %} " + Math.floor(diff / 60) + " {% trans _('мин') %}";
+            str = Math.floor(diff / 60) + " {% trans _('мин назад') %}";
         }
     } else {
         str = "";

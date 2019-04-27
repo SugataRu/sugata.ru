@@ -6,7 +6,7 @@
                 <div class="news-shakeit {{ self.box_class }}">
                     <div class="votes">
                         <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
-                        {% trans _('голосов') %}
+                        {% trans _('в') %}
                     </div>
 
                     {% if not globals.bot %}

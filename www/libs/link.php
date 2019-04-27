@@ -1895,6 +1895,7 @@ class Link extends LCPBase
         switch ($this->content_type) {
             case 'image':
             case 'video':
+            case 'original':
             case 'text':
                 $type[$this->content_type] = 'checked="checked"';
                 break;
@@ -1914,6 +1915,7 @@ class Link extends LCPBase
         ).'" title="'._('Это изображение?').'" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
         echo '<input type="radio" '.$type['video'].' name="type" value="video"/>';
+        echo '<input type="radio" '.$type['original'].' name="type" value="original"/>';
         echo '&nbsp;<img src="'.$globals['base_static'].'img/common/is-video02.png" class="media-icon" width="18" height="15" alt="'._(
             '¿es un vídeo?'
         ).'" title="'._('Это видео?').'" />';
@@ -1930,6 +1932,10 @@ class Link extends LCPBase
                 $this->content_type = 'video';
                 break;
 
+            case 'original':
+                $this->content_type = 'original';
+                break;
+				
             default:
                 $this->content_type = 'text';
                 break;

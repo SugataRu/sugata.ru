@@ -7,11 +7,17 @@
 
 <input type="radio" name="type" value="image"
     {% if link.content_type == 'image' %} checked="checked" {% endif %}
-    />&nbsp;<i class="fa fa-camera" alt="{% trans _('¿es una imagen?') %}" title="{% trans _('Это изображение?') %}"></i>
+    />&nbsp;<i class="fa fa-camera" alt="{% trans _('Это изображение?') %}" title="{% trans _('Это изображение?') %}"></i>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <input type="radio" name="type" value="video"
     {% if link.content_type == 'video' %} checked="checked" {% endif %}
-    />&nbsp;<i class="fa fa-video-camera" alt="{% trans _('¿es un vídeo?') %}" title="{% trans _('Это видео?') %}"></i>
+    />&nbsp;<i class="fa fa-video-camera" alt="{% trans _('Это видео?') %}" title="{% trans _('Это видео?') %}"></i> 
 
+	
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<input type="radio" name="type" value="original"
+    {% if link.content_type == 'original' %} checked="checked" {% endif %}
+    />&nbsp; Уникальный

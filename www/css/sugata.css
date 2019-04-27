@@ -1443,7 +1443,9 @@ background-color: #fff;
 	height: 85px;
 }
 
- 
+.right{
+    float: right;
+}
 
 dl.categorylist {
     float: left;
@@ -1483,8 +1485,8 @@ dl.categorylist input {
 }
 
 .news-submitted img {
-    width: 25px;
-    height: 25px;
+    width: 21px;
+    height: 21px;
     margin-right: 3px;
     vertical-align: middle;
 }
@@ -1701,7 +1703,6 @@ a.fancybox{
 }
 
 .news-summary .center-content {
-    padding-right: 160px;
     padding-bottom: 10px;
 	min-height: 100px;
 }
@@ -1851,7 +1852,7 @@ a.fancybox{
 }
 
 .news-body {
-    padding-left: 95px;
+    padding-left: 75px;
     padding-right: 5px;
     margin-bottom: 20px;
 	position: relative;
@@ -1911,7 +1912,7 @@ a.fancybox{
     height: auto;
 }
 
-.news-details button.social-share {
+.news-details button.favorite {
     border-right: 1px solid #FEE7DB;
 }
 
@@ -1955,8 +1956,9 @@ a.fancybox{
 .news-details ul.share-icons a {
     text-align: left;
     width: 100%;
-    padding: 7px 40px 7px 15px;
+    padding: 7px 10px 7px 10px;
     display: block;
+	    font-size: 13px;
 }
 
 .news-details ul.share-icons a i {
@@ -2019,49 +2021,41 @@ a.fancybox{
     position: absolute;
     top: 10px;
     left: 8px;
-    width: 67px;
     font-size: 12px;
-    color: #e35614;
+    color: #919191;
     text-align: center;
-    background-clip: padding-box;
-    border-radius: 3px;
+	width:50px;
 }
+.votes  {
 
-.news-shakeit .votes, .news-shakeit .clics {
-    background-color: #FFE8D8;
 }
-
 
 .story-blog .news-shakeit .clics {
     background-color: #fff;
 }
 
-.news-shakeit .votes {
-    padding: 6px 0 6px;
-    border: 1px solid #FFF;
-    border-bottom: 0;
-    line-height: 1.2em;
-    background-repeat: repeat-x;
-    background-position: 0 -2px;
-    background-clip: padding-box;
-    border-radius: 3px 3px 0 0;
-    font-weight: bold;
-}
+ 
 
 .news-shakeit .votes a {
     display: block;
-    color: #e35614;
-    font-size: 18px;
+    color: #919191;
+    font-size: 23px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+	margin-top: -8px;
 }
 
-.sugata {
-    position: relative;
-    left: -6px;
-    display: inline-block;
-    width: 78px;
+.i-caret-top.plus {
+    fill: currentColor;
+	color: #f16334;
 }
+
+svg.i-caret-top:hover{
+    fill: currentColor;
+	color: #f16334;
+}
+
+
 .story-blog  .sugata { 
     width: 98px;
 	left: 0px;
@@ -2069,43 +2063,30 @@ a.fancybox{
 .sugata:hover {}
 
 .sugata a, .sugata span {
-    padding-top: 3px;
     display: block;
-    height: 25px;
     color: #FFF;
     text-decoration: none;
-    font-weight: bold;
     border-radius: 3px;
 }
 
-.sugata a {
-    background-color: #f16334;
+.sugata span.closed {
+	padding: 1px 7px 2px 7px;
 }
 
+.sugata span {
+ margin-bottom: 7px;
+ padding-bottom: 2px;
+}
 .sugata span {
     background-color: #f16334;
 }
 
 .sugata span.negative {
-    color: #ccc;
+    color: #fff;
     font-size: 11px;
 }
 
-.news-shakeit .clics {
-    padding: 1px 0 2px 0;
-    border: 1px solid #FFF;
-    border-top: 0;
-    font-size: 10px;
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-clip: padding-box;
-    border-radius: 0 0 3px 3px;
-    font-weight: bold;
-}
-
-.news-shakeit.s-queued {
-    border: none;
-}
+ 
 
 .news-shakeit.s-subpublished .clics {
     background-image: none;
@@ -2183,12 +2164,13 @@ a.fancybox{
     height: 93px;
     overflow: hidden;
     display: block;
-    float: right;
+    float: left;
     margin: 0;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-	margin-left: 30px;
+	margin-right: 30px;
+	box-shadow: 0 0 5px 2px rgb(221, 221, 221);
 }
 
 .news-body img.thumbnail {
@@ -2204,7 +2186,7 @@ a.fancybox{
 
 .news-submitted {
     font-size: 11px;
-    margin: 3px 0 2px 0;
+    margin: 6px 0 2px 0;
     white-space: nowrap;
     min-height: 25px;
 }
@@ -3856,7 +3838,7 @@ button.share-link {
 }
 
 button.share-link i {
-    font-size: 25px;
+    font-size: 21px;
 }
 
 button.share-link span {
@@ -3901,14 +3883,9 @@ button.share-link span:hover {
     font-style: normal;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 970px) {
     .news-details {
         border: none;
-    }
-
-    .news-details-data-up {
-        display: block;
-        text-align: center;
     }
 
     .news-details-data-down {
@@ -3920,7 +3897,10 @@ button.share-link span:hover {
         border-bottom: 1px solid #FEE7DB;
         width: 100%;
     }
-
+    .news-details-data-up {
+        display: block;
+        text-align: center;
+    }
     .news-details a.comments {
         width: 40%;
         text-align: center;
@@ -3935,6 +3915,7 @@ button.share-link span:hover {
     }
 }
 
+
 .side-bar-p {
     padding: 15px;
 }
@@ -3948,7 +3929,6 @@ body.mobile .container-fluid.slider-wrapper, body.mobile .searchform{display: no
 body.mobile  #newswrap, body.mobile #newswrap.right.faq{margin: 0px 0px 0px 10px;padding: 0 0px 0px 0px;}
 body.mobile #header-top, body.mobile .s-center-in-wrap, body.mobile  #variable, body.mobile  #wrap {min-width: 100% !important;}
 body.mobile  #nav-menu {margin-top: 6px;}
-body.mobile .news-body img.thumbnail {width:70%;}
 body.mobile .news-details a i, body.mobile .news-details button i {font-size: 16px;}
 body.mobile button.link.favorite {border-right: transparent;width: 16%;}
 body.mobile .section-story-submit-step1-layout {display: block;padding: 0 5px;}
@@ -3988,3 +3968,5 @@ body.mobile .section-story-submit-step1-layout {display: block;padding: 0 5px;}
         margin: 0 4px;
     }
 }
+
+

@@ -4,41 +4,60 @@
     {%endif%}
     <div class="news-body mobile{% if tag=='promoted_article' %} promoted-article{% endif %}">
         {% if self.show_shakebox %}
-        <div class="news-shakeit {{ self.box_class }}">
-            <div class="votes">
-                <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
-                 {{  rus('vots',self.total_votes) }} 
+            <div class="news-shakeit {{ self.box_class }}">
+                <div class="votes">
+				
+
+                {% if not globals.bot %}
+                <div class="sugata" id="a-va-{{ self.id }}">
+				
+                    {% if not self.votes_enabled %}
+                    <span class="closed">{% trans _('закрыто') %}</span>
+                    {% else %} 
+					
+					{% if not self.voted %}
+                    <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
+<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+					</a>
+                    {% else %} 
+					
+					{% if self.voted > 0 %}
+<svg class="i-caret-top plus" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+                    {% else %}
+
+                    <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
+
+                    {% endif %} {% endif %} {% endif %}
+					
+                </div>
+                {% endif %}
+
+
+
+
+                    <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
+ 
+                </div>
+
+
+
+                <div class="clics">  
+                    {% if self.id >= globals.click_counter AND self.clicks > 0 %}
+
+                    {{ self.clicks }} {{  rus('clic',self.clicks) }}
+
+                    {% else %}
+                    &nbsp;
+                    {% endif %}
+                </div>
             </div>
-
-            {% if not globals.bot %}
-
-            <div class="sugata" id="a-va-{{ self.id }}">
-                {% if not self.votes_enabled %}
-                <span class="closed">{% trans _('закрыто') %}</span>
-                {% else %} {% if not self.voted %}
-                <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">{% trans _('Нравится') %}</a>
-                {% else %} {% if self.voted > 0 %}
-                <span id="a-shake-{{ self.id }}">{% trans _('Готово!') %}</span>
-                {% else %}
-                <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
-                {% endif %}
-                {% endif %}
-                {% endif %}
-            </div>
-
-            {% endif %}
-
-            <div class="clics">
-                {% if self.id >= globals.click_counter AND self.clicks > 0 %}
-                {{ self.clicks }} {{  rus('clic',self.clicks) }}
-                {% else %}
-                &nbsp;
-                {% endif %}
-            </div>
-        </div>
         {% endif %}
 
-		
+<div class="title-t">
 		{% if self.nsfw == '1' %}  <div class="warn tooltip"> 18 + или спорное содержание...  </div>  {%endif%}
 		
         {% if self.status == 'abuse' OR self.has_warning %}
@@ -137,10 +156,10 @@
             {% trans _('проект: ') %}
             {% endif %}
 
-            <span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____</span>
+            <!--span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____</span-->
 
             {% if self.status == 'published' %}
-            {% trans _('опубл.: ') %}
+            {% trans _(' ') %}
             <span data-ts="{{ self.sub_date }}" class="ts visible" title="{% trans _('опубликованно') %}: ">____</span>
             {% endif %}
 
@@ -154,7 +173,7 @@
         </div>
 
         {% endif %}
-
+ </div>
         {% if type == 'full' OR type == 'preview' %}
 
         {% if self.thumb_uri %}

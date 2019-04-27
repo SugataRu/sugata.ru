@@ -10,35 +10,46 @@
             {% if self.show_shakebox %}
             <div class="news-shakeit {{ self.box_class }}">
                 <div class="votes">
-                    <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
-					
-					 {{  rus('vots',self.total_votes) }} 
-
-                </div>
+				
 
                 {% if not globals.bot %}
                 <div class="sugata" id="a-va-{{ self.id }}">
+				
                     {% if not self.votes_enabled %}
-
                     <span class="closed">{% trans _('закрыто') %}</span>
-
-                    {% else %} {% if not self.voted %}
-
-                    <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">{% trans _('Нравится') %}</a>
-
-                    {% else %} {% if self.voted > 0 %}
-
-                    <span id="a-shake-{{ self.id }}">{% trans _('Готово!') %}</span>
-
+                    {% else %} 
+					
+					{% if not self.voted %}
+                    <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
+<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+					</a>
+                    {% else %} 
+					
+					{% if self.voted > 0 %}
+<svg class="i-caret-top plus" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
                     {% else %}
 
                     <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
 
                     {% endif %} {% endif %} {% endif %}
+					
                 </div>
                 {% endif %}
 
-                <div class="clics">
+
+
+
+                    <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
+ 
+                </div>
+
+
+
+                <div class="clics"> 
                     {% if self.id >= globals.click_counter AND self.clicks > 0 %}
 
                     {{ self.clicks }} {{  rus('clic',self.clicks) }}
@@ -185,6 +196,26 @@
                 {% if ! globals.bot %}
 
                 <div class="news-submitted">
+				
+				  {% if globals.submnm|subid != self.sub_id %}
+                    <span class="tool sub-name">
+                        <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
+                           class="subname"
+                           {% if self.sub_owner > 0 %}
+                            style="
+                                {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
+                                {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
+                            "
+                        {% endif %}
+                        >{{ self.sub_name }}</a>
+                    </span>
+                    {% endif %}
+				
+				
+				
+				
+				
+				
                     {% if type != 'short' %}
                         <a href="{{ self.username | useruri }}" class="tooltip u:{{ self.author }}"><img src="{{ globals.base_static }}img/g.gif" data-src="{% exec get_avatar_url self.author, self.avatar, 25, false %}" data-2x="s:-25.:-40." alt="{{ self.username }}" class="lazy"/></a>
                     {% endif %}
@@ -279,8 +310,8 @@
                 {% endif %}
 
                 {% if self.show_tags AND self.tags %}
-                | <span class="news-tags">
-                    <strong>{% trans _('теги') %}</strong>:
+                  <span class="news-tags">
+                 
 
                     {% exec explode "," self.tags as tags_array %}
 
@@ -294,7 +325,7 @@
                     {# Show link to analyze the tags #}
 
                     {% if globals.fancybox_enabled AND globals.sphinx_server AND self.is_editable OR self.author == current_user.user_id %}
-                    &nbsp;[<a class="fancybox" href="{{ globals.base_url_general }}backend/tags_analysis?id={{ self.id }}" title="{% trans _('диагностика тега') %}"><strong>{% trans _('диагностика') %}</strong></a>]
+                    &nbsp;<a class="fancybox" href="{{ globals.base_url_general }}backend/tags_analysis?id={{ self.id }}" title="{% trans _('диагностика тега') %}">{% trans _('- диагностика') %}</a>
                     {% endif %}
                 </span>
                 {% endif %}
@@ -378,28 +409,7 @@
 						{% endif %}
                     </a>
 
-                    {% if ! self.is_discarded %}
 
-                    {% set link = self.permalink %}
-                    {% set title = self.title %}
-
-                    {% exec self.get_short_permalink as short_link %}
-
-                    <button class="social-share"><i class="fa fa-share-alt"></i>{% trans _('поделиться') %}</button>
-
-                    {% include "share.html" %}
-
-                    {% endif %}
-
-                    {% if current_user.user_id > 0 %}
-
-                    {% if not globals.mobile %}
-                    <button data-toggle="tooltip" data-placement="top" title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite on" {% else %} class="save link favorite" {% endif %}></button>
-                    {% else %}
-                    <button title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite on" {% else %} class="save link favorite" {% endif %}></button>
-                    {% endif %}
-
-                    {% endif %}
                 </div>
 
                 {% if type != 'short' %}
@@ -420,19 +430,7 @@
                         </span>
                     </span>
 
-                    {% if globals.submnm|subid != self.sub_id %}
-                    <span class="tool sub-name">
-                        <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
-                           class="subname"
-                           {% if self.sub_owner > 0 %}
-                            style="
-                                {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
-                                {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
-                            "
-                        {% endif %}
-                        >{{ self.sub_name }}</a>
-                    </span>
-                    {% endif %}
+              
 
                     {% if self.can_vote_negative %}
                     <form action="" id="problem-{{ self.id }}">
@@ -444,6 +442,35 @@
                         </select>
                     </form>
                     {% endif %}
+					
+					<span class="right">
+					
+					                    {% if current_user.user_id > 0 %}
+
+                    {% if not globals.mobile %}
+                    <button data-toggle="tooltip" data-placement="top" title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite on" {% else %} class="save link favorite" {% endif %}></button>
+                    {% else %}
+                    <button title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite on" {% else %} class="save link favorite" {% endif %}></button>
+                    {% endif %}
+
+                    {% endif %}
+					
+                    {% if ! self.is_discarded %}
+
+                    {% set link = self.permalink %}
+                    {% set title = self.title %}
+
+                    {% exec self.get_short_permalink as short_link %}
+
+                    <button class="social-share"><i class="fa fa-share-alt"></i>{% trans _('поделиться') %}</button>
+
+                    {% include "share.html" %}
+
+                    {% endif %}
+
+
+					</span>
+					
                 </div> {# div.news-details-data #}
 
                 {% endif %} {# END if type != 'short' #}
