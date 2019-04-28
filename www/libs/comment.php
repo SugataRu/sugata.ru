@@ -10,6 +10,7 @@ class Comment extends LCPBase
 {
     public $id = 0;
     public $prefix_id = '';
+	public $mobile = 0;
     public $randkey = 0;
     public $author = 0;
     public $link = 0;
@@ -23,7 +24,7 @@ class Comment extends LCPBase
     public $ip = '';
     public $link_object = null;
     public $strike = null;
-    const SQL = " SQL_NO_CACHE comment_id as id, comment_type as type, comment_user_id as author, user_login as username, user_email as email, user_karma as user_karma, user_level as user_level, comment_randkey as randkey, comment_link_id as link, comment_order as `order`, comment_votes as votes, comment_karma as karma, comment_ip_int as ip_int, comment_ip as ip, user_avatar as avatar, comment_content as content, UNIX_TIMESTAMP(comment_date) as date, UNIX_TIMESTAMP(comment_modified) as modified, favorite_link_id as favorite, vote_value as voted, media.size as media_size, media.mime as media_mime, media.extension as media_extension, media.access as media_access, UNIX_TIMESTAMP(media.date) as media_date, 1 as `read` FROM comments
+    const SQL = " SQL_NO_CACHE comment_id as id, comment_type as type, comment_user_id as author, user_login as username, user_email as email, user_karma as user_karma, user_level as user_level, comment_randkey as randkey, comment_link_id as link, mobile, comment_order as `order`, comment_votes as votes, comment_karma as karma, comment_ip_int as ip_int, comment_ip as ip, user_avatar as avatar, comment_content as content, UNIX_TIMESTAMP(comment_date) as date, UNIX_TIMESTAMP(comment_modified) as modified, favorite_link_id as favorite, vote_value as voted, media.size as media_size, media.mime as media_mime, media.extension as media_extension, media.access as media_access, UNIX_TIMESTAMP(media.date) as media_date, 1 as `read` FROM comments
     INNER JOIN users on (user_id = comment_user_id)
     LEFT JOIN favorites ON (@user_id > 0 and favorite_user_id =  @user_id and favorite_type = 'comment' and favorite_link_id = comment_id)
     LEFT JOIN votes ON (comment_date > @enabled_votes and @user_id > 0 and vote_type='comments' and vote_link_id = comment_id and vote_user_id = @user_id)
@@ -156,7 +157,14 @@ class Comment extends LCPBase
             } else {
                 $this->order = intval($previous) + 1;
             }
-            $r = $db->query("INSERT INTO comments (comment_user_id, comment_link_id, comment_type, comment_karma, comment_ip_int, comment_ip, comment_date, comment_randkey, comment_content, comment_order) VALUES ($this->author, $this->link, '$comment_type', $this->karma, $this->ip_int, '$this->ip', FROM_UNIXTIME($this->date), $this->randkey, '$comment_content', $this->order)");
+			
+			
+			$mobile = intval($globals['mobile']);  
+			
+            $r = $db->query("INSERT INTO comments (comment_user_id, comment_link_id, comment_type, comment_karma, comment_ip_int, comment_ip, comment_date, comment_randkey, comment_content, comment_order,mobile) VALUES ($this->author, $this->link, '$comment_type', $this->karma, $this->ip_int, '$this->ip', FROM_UNIXTIME($this->date), $this->randkey, '$comment_content', $this->order, $mobile)");
+			
+			
+        //    $r = $db->query("INSERT INTO comments (comment_user_id, comment_link_id, comment_type, comment_karma, comment_ip_int, comment_ip, comment_date, comment_randkey, comment_content, comment_order) VALUES ($this->author, $this->link, '$comment_type', $this->karma, $this->ip_int, '$this->ip', FROM_UNIXTIME($this->date), $this->randkey, '$comment_content', $this->order)");
             $new_id = $db->insert_id;
             if ($r) {
                 $this->id = $new_id;
