@@ -349,7 +349,7 @@ final class Tabs
             }
         }
 
-        $html .= '<li class="icon wideonly"><a href="' . $globals['base_url'] . $rss . '" title="' . $rss_title . '"><i class="fa fa-rss-square"></i> RSS</a></li>';
+        $html .= '<li class="icon wideonly"><a href="' . $globals['base_url'] . $rss . '" title="' . $rss_title . '"><i class="lnr lnr-frame-contract"></i> RSS</a></li>';
         $html .= '</ul>' . "\n";
 
         return $html;
@@ -559,7 +559,7 @@ final class Tabs
                 'link' => $user->get_uri('shaken'),
             ),
             'favorites' => array(
-                'title' => _('Друзья'),
+                'title' => _('Закладки'),
                 'link' => $user->get_uri('favorites'),
             ),
             'friends_shaken' => array(
