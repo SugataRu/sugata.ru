@@ -95,7 +95,7 @@ echo '<div id="sidebar">';
 echo '</div>';
 /*** END SIDEBAR ***/
 
-echo '<div id="newswrap">';
+echo '<div id="newswrap" style="padding: 10px;">';
     echo '<h3><a href="'.$link->get_permalink().'">'. $link->title. '</a></h3>';
 
     $tree = new CommentTree();
