@@ -2057,7 +2057,7 @@ var fancyBox = new function() {
             if (myTitle && myTitle.length > 0 && myTitle.length < 30) {
                 title = myTitle;
             } else {
-                title = '{% trans _('оригинальная ссылка') %}';
+                title = '{% trans _('ссылка') %}';
             }
 
             title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>' + title + '</a>';
