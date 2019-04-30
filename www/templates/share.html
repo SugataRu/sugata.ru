@@ -9,21 +9,21 @@
 <div class="wrapper-share-icons hide">
     <ul class="share-icons" data-url="{{ link }}" data-title="{{ title }}">
         <li>
-            <a rel="nofollow"  class="share-facebook" href="#" onClick="share_fb(this)"><i class="fa fa-facebook-square"></i>{% trans _('Поделиться - %s') "Facebook" %}</a>
+            <a rel="nofollow"  class="share-facebook" href="#" onClick="share_fb(this)">Facebook</a>
         </li>
         <li>
-            <a rel="nofollow"  class="share-twitter" href="#" onClick="share_tw(this)"><i class="fa fa-twitter-square"></i>{% trans _('Поделиться - %s') "Twitter" %}</a>
+            <a rel="nofollow"  class="share-twitter" href="#" onClick="share_tw(this)">Twitter</a>
         </li>
         {% if globals.mobile %}
         <li>
-            <a rel="nofollow"  class="share-whatsapp" href="whatsapp://send?text={{ title }} - {{ link_url }}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp"></i>{% trans _('Поделиться %s') "Whatsapp" %}</a>
+            <a rel="nofollow"  class="share-whatsapp" href="whatsapp://send?text={{ title }} - {{ link_url }}" data-action="share/whatsapp/share">Whatsapp</a>
         </li>
         {% endif %}
         <li>
-         <a rel="nofollow"  class="share-vk" href="#" onClick="share_vk(this)"><i class="fa fa-vk"></i>{% trans _('Поделиться - %s') "VK" %}</a>
+         <a rel="nofollow"  class="share-vk" href="#" onClick="share_vk(this)">ВКонтакте</a>
         </li>
         <li>
-            <button class="share-link" data-clipboard-text="{{ short_link }}"><i class="fa fa-link"></i><span>{% trans _('Скопировать URL') %}</span></button>
+            <button class="share-link" data-clipboard-text="{{ short_link }}">Скопировать URL</span></button>
         </li>
     </ul>
 </div>

@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <meta name="generator" content="sugata" />
         <meta name="referrer" content="always">
+<meta name="yandex-verification" content="77018d7bf8d00587" />
         <meta name="viewport" content="width=device-width, initial-scale=1{% if globals.mobile %}, user-scalable=no{% endif %}" />
 
         {% if globals.css_webfonts %}
@@ -57,8 +58,8 @@
 
    
         <link rel="search" type="application/opensearchdescription+xml" title="{% trans _('поиск') %}" href="{{ globals.scheme }}//{{ globals.server_name }}{{ globals.base_url_general }}opensearch" />
-        <link rel="alternate" type="application/rss+xml" title="{% trans _('publicadas') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss" />
-        <link rel="alternate" type="application/rss+xml" title="{% trans _('pendientes') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss?status=queued" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('опубликованный') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('в ожидании') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss?status=queued" />
 
         {% endif %}
 		
@@ -69,16 +70,6 @@
 		<meta name="description" content="{{ globals.description }}" />
 		
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-		
- 
-		
-		
-        {% if globals.use_fontawesome_cdn %}
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        {% else %}
-        <link href="{{ globals.base_static }}css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-        {% endif %}
 
         {% for css in globals.extra_css %}
 
@@ -126,12 +117,6 @@
         {# <script src="{{ globals.base_url_general }}js/{{ globals.js_basic }}" charset="utf-8"></script> #}
 
 		
-		
-
-		
-		
-		
-		
         {% if globals.extra_head %}
             {{ globals.extra_head }}
         {% endif %}
@@ -150,7 +135,7 @@
                 {% if not globals.mobile %}
                 <a href="{{ globals.base_url_sugata }}/s/{{ this_site.name }}" class="sub-name wideonly">{% if this_site.name_long %}{{ this_site.name_long|upper }}{% else %}{% trans _('meta') %}{% endif %}</a>
                 {% else %}
-                               <div id="nav-menu"></div>
+                               <div id="nav-menu"><i class="lnr lnr-menu"></i></div>
                 {% endif %}
 
                 {% include "header_userinfo.html" %}
@@ -186,7 +171,7 @@
                         {% if tabs %}
                         <div class="dropdown menu-more">
                             <a href="#" class="dropdown-toggle menu-more-button" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">ДАЛЕЕ
-                                <i class="fa fa-angle-down"></i>
+                                <i class="lnr lnr-chevron-down"></i>
                             </a>
                             {{ tabs }}
                         </div>
@@ -236,7 +221,7 @@
                                     <td>
                                         {% if ! s.site_info.logo_url %}
                                         <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
-                                            <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{% trans _('Eli') %}">
+                                            <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{% trans _('или') %}">
                                         </a>
                                         {% else %}
                                         <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
@@ -272,21 +257,21 @@
 	 
 {% if current_user.user_id > 0 %} {% else %} 
 {% if globals.uri == '/'%}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-share-alt"></i></div><div class="col-lg-7"> 
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr  lnr-earth"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — лучшее в сети. Поделись историей!</h1>
 	Присоединяйтесь к сообществу: делитесь ссылками, комментируйте, ведите блоги, зарабатывайте карму...
 	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
 {% endif %}
 
 {% if globals.uri == '/articles' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-newspaper-o"></i></div><div class="col-lg-7"> 
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-book"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — статьи</h1>
 	Вы можете размещать статьи в веренных вам пространствах. И публиковать интересные материалы...
 	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
 {% endif %} 
 
 {% if globals.uri == '/queue' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-line-chart"></i></div><div class="col-lg-7"> 
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-history"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — новости в очереди (проекты)</h1>
 	Истории, статьи, новости находящие в очереди для поднятия на центральную страницу...
 	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
@@ -294,7 +279,7 @@
 
 
 {% if globals.uri == '/popular' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="fa fa-heart-o"></i></div><div class="col-lg-7"> 
+	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-sun"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — популярное</h1>
 	Истории, статьи, новости, которые стали популярными на сайте...
 	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
@@ -323,3 +308,6 @@
                     </div>
 
                     {% endif %}
+
+					
+

@@ -2,7 +2,7 @@
     <div class="{{ self.css_class_body }}">
         <div class="{{ self.css_class_header }}">
             <a href="javascript:void(0);" class="comment-expand" data-id="{{ self.id }}">
-                <i class="fa fa-chevron-up"></i>
+                <i class="lnr lnr-chevron-up"></i>
             </a>
 
             {% if self.avatar AND self.type != 'admin' AND self.user_level != 'disabled' %}
@@ -31,6 +31,8 @@
             {% endif %}
 			
 			
+			
+			
 			{% if self.url %}
             <a href="{{ self.url }}" class="comment-order">#{{ self.order }}</a>&nbsp;&nbsp;
             {% else %} 
@@ -40,8 +42,8 @@
             <span class="comment-order">#{{ self.order }}</span>
             {% endif %} {% endif %}
 			
-			{% if self.mobile > 0 %} <i class="fa fa-mobile" aria-hidden="true"></i>{% endif %} 
-			
+			{% if self.mobile > 0 %} <i class="lnr lnr-tablet"></i>{% endif %} 
+			 
 			
         </div>
 
@@ -55,8 +57,8 @@
             {% if self.can_vote %}
                 {% if self.user_can_vote %}
 
-                <a href="javascript:void(0);" id="vc-p-{{ self.id }}" class="vote up" onclick="vote('comment', {{ current_user.user_id }}, {{ self.id }}, 1)" title="{% trans _('информативное, аргументированное мнение...') %}">
-                    <i class="fa fa-arrow-circle-up"></i>
+                <a href="javascript:void(0);" id="vc-p-{{ self.id }}" class="vote up" onclick="vote('comment', {{ current_user.user_id }}, {{ self.id }}, 1)" title="{% trans _('информативное, аргументированное мнение...') %}"> &nbsp; 
+                    <i class="lnr lnr-arrow-up-circle"></i>
                 </a>
 
                 <span class="separator-vertical"></span>
@@ -66,17 +68,17 @@
                 <span class="separator-vertical"></span>
 
                 <a href="javascript:void(0);" id="vc-n-{{ self.id }}" class="vote down" onclick="vote('comment', {{ current_user.user_id }}, {{ self.id }}, -1)" title="{% trans _('оскорбление, спам...') %}">
-                    <i class="fa fa-arrow-circle-down"></i>
+                    <i class="lnr lnr-arrow-down-circle"></i>
                 </a>
 
                 {% else %}
                     {% if self.voted > 0 %}
                     <span id="vc-p-{{ self.id }}" class="vote up voted" title="{% trans _('проголосовал за позитив') %}">
-                        <i class="fa fa-arrow-circle-up"></i>
+                        <i class="lnr lnr-arrow-up-circle"></i>
                     </span>
                     {% else %}{% if self.voted < 0 %}
                     <span id="vc-n-{{ self.id }}" class="vote down voted" title="{% trans _('проголосовал негативно') %}">
-                        <i class="fa fa-arrow-circle-down"></i>
+                        <i class="lnr lnr-arrow-down-circle"></i>
                     </span>
                     {% endif %}{% endif %}
 
@@ -92,24 +94,23 @@
         {% endif %}
 
         <a href="{% exec self.get_relative_individual_permalink %}" title="{% trans _('Permalink') %}">
-            <i class="fa fa-link"></i>
+            <i class="lnr lnr-link"></i>
         </a>
 
         {% if self.can_report %}
         <a href="javascript:void(0)" onclick="report_comment({{ self.id }})" title="{% trans _('Пожаловаться на комментарий') %}">
-            <i class="fa fa-exclamation-triangle"></i>
+            <i class="lnr lnr-warning"></i>
         </a>
         {% endif %}
 
         {% if self.thread_level < 1 AND current_user.user_id > 0 %}
         <a href="javascript:void(0)" id="favc-{{ self.prefix_id }}{{ self.id }}" onclick="add_remove_fav('favc-{{ self.prefix_id }}{{ self.id }}', 'comment', {{ self.id }})" title="{% trans _('Любимый') %}" class="favorite{% if self.favorite %} on{% endif %}">
-            <i class="fa fa-star"></i>
+            <i class="lnr lnr-star"></i>
         </a>
         {% endif %}
 
         {% if self.can_reply %}
-        <a href="javascript:void(0)" onclick="comment_reply({{ self.id }}, '{{ self.prefix_id }}')" title="{% trans _('Ответ') %}">
-            <i class="fa fa-reply"></i>
+        <a class="reply" href="javascript:void(0)" onclick="comment_reply({{ self.id }}, '{{ self.prefix_id }}')" title="{% trans _('Ответ') %}">Ответить
         </a>
         {% endif %}
     </div>

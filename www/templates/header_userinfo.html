@@ -1,4 +1,12 @@
 <ul id="userinfo">
+ 
+{% if current_user.user_id > 0 %}
+<li class="diz-img"><button title="Управление фото в посте" id="dez-{{ current_user.user_id }}" onclick="add_design_img('dez-{{ current_user.user_id }}', 'user', {{ current_user.user_id }})" {% if current_user.user_img_feed %} class="save link lnr lnr-frame-expand on" {% else %} class="save link lnr lnr-frame-expand" {% endif %}></button>
+</li>
+{% endif %}
+{% if current_user.user_img_feed > 0 %}
+<style>.news-body .thumbnail-wrapper {display: none;}</style>
+{% endif %}
     {% if not globals.mobile %}
     <li class="search">
         <div>
@@ -13,11 +21,12 @@
                     <input class="searchbox" name="q" type="search" placeholder="Поиск..." {% if globals.q %}value="{{ globals.q|escape }}"{% endif %}/>
                 </form>
             </div>
-			<!--a id="searchform_button"><i class="fa fa-search"></i></a-->
+		 
         </div>
     </li>
     {% endif %}
 
+ 
     {% if current_user.user_id > 0 %}
     <li class="usertext wideonly">  
         <a href="{{ current_user.user_login|useruri }}" class="tooltip u:{{ current_user.user_id }}">{{ current_user.user_login }}</a>
@@ -31,11 +40,10 @@
         <a href="{{ current_user.user_login|useruri }}">
             <img id="avatar" src="{{ globals.base_static }}img/g.gif" data-2x="s:-40.:-80." data-src="{% exec get_avatar_url current_user.user_id, current_user.user_avatar, 40 %}" class="lazy img-circle" alt="{{ current_user.user_login }}" />
         </a>
-    </li>
-
+    </li> 
     <li>
         <a href="#" class="notifications" id="notifier">
-            <i class="fa fa-bell"></i>
+          <i class="lnr lnr-alarm"></i>
             <span class="badge" style="{% if this_site.color2 %}border-color:{{ this_site.color2 }}{% endif %}"></span>
         </a>
     </li>

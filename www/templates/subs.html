@@ -1,7 +1,7 @@
 <section class="section section-medium section-with-sidebar">
     {% if can_edit %}
     <a href="{{ globals.base_url }}subedit" class="action-link action-link-large pull-right">
-        <i class="fa fa-plus"></i>
+        <i class="lnr lnr-plus-circle"></i> 
         <span>{% trans _('создать пространство') %}</span>
     </a>
     {% endif %}
@@ -79,7 +79,7 @@
 
     <form id="form-subs-search" class="form form-search" method="get">
         <div class="form-group form-group-search">
-            <i class="fa fa-search"></i>
+            <i class="lnr lnr-magnifierh"></i>
             <input type="search" name="q" class="form-control input-search" value="{{ q|escape }}" placeholder="{% trans _('Найдите пространство...') %}" autocomplete="off"/>
         </div>
 

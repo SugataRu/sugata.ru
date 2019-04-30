@@ -328,25 +328,53 @@ function add_remove_sub(id, change) {
         }
 
         var $button = $('.follow_b_' + id),
-            $icon = $('.fa', $button),
+            $icon = $('.lnr', $button),
             $text = $('span', $button);
 
         $button.removeClass('following-yes following-no');
-        $icon.removeClass('fa-check-circle-o fa-times-circle-o');
+        $icon.removeClass('lnr-checkmark-circle lnr-cross-circle');
 
         if (data.value) {
             $button.addClass('following-yes');
-            $icon.addClass('fa-times-circle-o');
+            $icon.addClass('lnr-cross-circle');
             $text.html("{% trans _('Отписаться') %}");
         } else {
             $button.addClass('following-no');
-            $icon.addClass('fa-check-circle-o');
+            $icon.addClass('lnr-checkmark-circle');
             $text.html("{% trans _('Следовать') %}");
         }
     }, 'json');
 
     reportAjaxStats('html', "sub_follow");
 }
+
+
+function add_design_img(element, type, id) {
+    var url = base_url + 'backend/get_design';
+
+    $.post(url, {
+        id: id,
+        user: user_id,
+        key: base_key,
+        type: type
+    }, function(data) {
+        if (data.error) {
+            mDialog.notify("{% trans _('Ошибка:') %} " + data.error, 5);
+            return;
+        }
+
+        if (data.value) {
+            $('#' + element).addClass("on");
+			window.location.reload();
+        } else {
+            $('#' + element).removeClass("on");
+			window.location.reload();
+        }
+    }, "json");
+    reportAjaxStats('html', "get_design");
+
+}
+
 
 function add_remove_fav(element, type, id) {
     var url = base_url + 'backend/get_favorite';
@@ -1400,8 +1428,8 @@ function show_total_answers(type, id, answers) {
     }
 
     $(dom_id).closest('.comment').find('.comment-footer').append(
-        '<a href="javascript:void(0);" onclick="javascript:show_answers(\'' + type + '\',' + id + ')" title="' + answers + ' {% trans _('respuestas') %}" class="comment-answers">'
-        + '<i class="fa fa-comments"></i>&nbsp;' + answers
+        '<a href="javascript:void(0);" onclick="javascript:show_answers(\'' + type + '\',' + id + ')" title="' + answers + ' {% trans _('ответы') %}" class="comment-answers">'
+        + '<i class="lnr lnr-bubble"></i>&nbsp;' + answers
         + '</a>'
     );
 }
@@ -2149,11 +2177,11 @@ var fancyBox = new function() {
         for (var i = 0; i < a.length; i++) {
             field = a[i];
             var counter = (data && data[field]) ? data[field] : 0;
-            $e.append("<div class='" + field + "'><a href='" + base_url_sub + "go?id=" + user_id + "&what=" + field + "'>" + counter + " " + field_text(field) + "</a></div>");
+            $e.append("<div class='" + field + "'><a href='" + base_url_sub + "go?id=" + user_id + "&what=" + field + "'><i class=\"lnr lnr-frame-contract\"></i> " + counter + " " + field_text(field) + "</a></div>");
         }
 
         if (current_user_admin) {
-            $e.append('<div class="admin"><a href=' + base_url + 'admin/logs.php>Administración</a></div>');
+            $e.append('<div class="admin"> <a href=' + base_url + 'admin/logs.php><i class="lnr lnr-text-format"></i> Администратор</a></div>');
         }
 
         $e.show().css({
@@ -2846,13 +2874,13 @@ $(document).ready(function() {
         if ($subsMainMenu.is(':visible')) {
             $subsMainMenu.slideUp('fast');
 
-            $(this).find('i.fa').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            $(this).find('i.lnr').removeClass('lnr-chevron-up').addClass('lnr-chevron-down');
 
             $('.header-sub').show();
         } else {
             $subsMainMenu.css({ 'top': top + 'px' }).slideDown('fast');
 
-            $(this).find('i.fa').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            $(this).find('i.lnr').removeClass('lnr-chevron-down').addClass('lnr-chevron-up');
 
             $('.header-sub').hide();
         }
@@ -3197,3 +3225,5 @@ $(document).ready(function() {
         });
     }
 });
+
+

@@ -87,14 +87,14 @@
         <td class="text-center">
             {% if strike.cancel %}
             <a href="?tab=strikes&amp;op=cancel&amp;id={{ strike.id }}&amp;strike_user={{ strike.user_login }}" title="Borrar Strike" class="btn btn-default btn-xs" data-cancel="true">
-                <i class="fa fa-trash"></i>
+                <i class="lnr lnr-trash"></i>
             </a>
             {% endif %}
         </td>
         {% else %}
         <td class="text-center">
             <a href="?tab=strikes&amp;op=new&amp;strike_user={{ strike.user_login }}" title="Información" class="btn btn-default btn-xs">
-                <i class="fa fa-info"></i>
+                <i class="lnr lnr-code"></i>
             </a>
         </td>
         {% endif %}

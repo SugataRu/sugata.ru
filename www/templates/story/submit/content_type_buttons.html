@@ -1,23 +1,23 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="radio" name="type" value="text"
     {% if link.content_type == 'text' %} checked="checked" {% endif %}
-    />&nbsp;{% trans _('текст') %}
+    />&nbsp;{% trans _('Текст') %}
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <input type="radio" name="type" value="image"
     {% if link.content_type == 'image' %} checked="checked" {% endif %}
-    />&nbsp;<i class="fa fa-camera" alt="{% trans _('Это изображение?') %}" title="{% trans _('Это изображение?') %}"></i>
+    />&nbsp; {% trans _('Изображение') %}
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <input type="radio" name="type" value="video"
     {% if link.content_type == 'video' %} checked="checked" {% endif %}
-    />&nbsp;<i class="fa fa-video-camera" alt="{% trans _('Это видео?') %}" title="{% trans _('Это видео?') %}"></i> 
+    />&nbsp;{% trans _('Видео') %}
 
 	
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <input type="radio" name="type" value="original"
     {% if link.content_type == 'original' %} checked="checked" {% endif %}
-    />&nbsp; Уникальный
+    />&nbsp; Уникальный контент

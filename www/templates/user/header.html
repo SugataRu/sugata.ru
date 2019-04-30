@@ -73,27 +73,27 @@
         <a name="menu"></a>
         <nav class="contents-menu">
             <a href="{% exec user.get_uri "articles" %}" {% if menu == 'articles' %} class="selected" {% endif %}>
-                <i class="fa fa-file-text-o"></i> <span>{% trans _('Статьи') %}</span>
+                <i class="lnr lnr-text-size"></i> <span>{% trans _('Статьи') %}</span>
             </a>
 
             <a href="{% exec user.get_uri "history" %}" {% if menu == 'history' %} class="selected" {% endif %}>
-                <i class="fa fa-newspaper-o"></i> <span>{% trans _('История') %}</span>
+                <i class="lnr lnr-book"></i> <span>{% trans _('История') %}</span>
             </a>
 
             <a href="{% exec user.get_uri 'subs' %}" {% if menu == 'subs' %} class="selected" {% endif %}>
-                <i class="fa fa-asterisk"></i> <span>{% trans _('Пространства') %}</span>
+                <i class="lnr lnr-sun"></i> <span>{% trans _('Пространства') %}</span>
             </a>
 
             <a href="{% exec user.get_uri 'commented' %}" {% if menu == 'comments' %} class="selected" {% endif %}>
-                <i class="fa fa-comments-o"></i> <span>{% trans _('Комментарии') %}</span>
+                <i class="lnr lnr-bubble"></i> <span>{% trans _('Комментарии') %}</span>
             </a>
 
             <a href="{% exec user.get_uri 'notes' %}" {% if menu == 'notes' %} class="selected" {% endif %}>
-                <i class="fa fa-sticky-note-o"></i> <span>{% trans _('Примечание') %}</span>
+                <i class="lnr lnr-inbox"></i> <span>{% trans _('Примечание') %}</span>
             </a>
 
             <a href="{% exec user.get_uri 'friends' %}" {% if menu == 'relations' %} class="selected" {% endif %}>
-                <i class="fa fa-users"></i> <span>{% trans _('Отношения') %}</span>
+                <i class="lnr lnr-users"></i> <span>{% trans _('Отношения') %}</span>
             </a>
 
             <a href="{% exec user.get_uri 'profile' %}" {% if menu == 'profile' %} class="selected" {% endif %}>

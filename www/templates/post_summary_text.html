@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if self.can_edit %}
-&nbsp; &nbsp;<a href="javascript:post_edit({{ self.id }})" title="{% trans _('editar') %}" class="mini-icon-text"><i class="fa fa-edit edit-link"></i></a>
+&nbsp; &nbsp;<a href="javascript:post_edit({{ self.id }})" title="{% trans _('editar') %}" class="mini-icon-text"><i class="lnr lnr-pencil edit-link"></i></a>
 {% endif %}
 
 {% if self.poll && self.poll.id %}

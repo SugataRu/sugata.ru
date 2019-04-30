@@ -33,15 +33,15 @@
         <p class="text-sponsor">{{ self.content }}</p>
 
         {% if type != 'preview' && self.is_editable %}
-        &nbsp;&nbsp;<a href="{% get_url 'submit?step=2&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('editar noticia') %} #{{ self.id }}" class="mini-icon-text edit-link"><i class="fa fa-edit"></i></a>
+        &nbsp;&nbsp;<a href="{% get_url 'submit?step=2&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('editar noticia') %} #{{ self.id }}" class="mini-icon-text edit-link"><i class="lnr lnr-pencil"></i></a>
         {% endif %}
 
         <div style="clear:both;"></div>
 
         <div class="news-details">
             <div class="news-details-main">
-                <a class="comments" href="{{ self.relative_permalink }}" title="{% trans _('comentarios de') %}: «{{ self.title }}»">
-                    <i class="fa fa-comments"></i>{% if self.comments > 0 %}{{ self.comments }} {% trans _("comentarios") %}{% else %}{% trans _("sin comentarios") %}{% endif %}
+                <a class="comments" href="{{ self.relative_permalink }}" title="{% trans _('комментарии от') %}: «{{ self.title }}»">
+                    <i class="lnr lnr-bubble"></i>{% if self.comments > 0 %}{{ self.comments }} {% trans _("комментрариев") %}{% else %}{% trans _("нет комментариев") %}{% endif %}
                 </a>
 
                 {% if ! self.is_discarded %}
@@ -51,7 +51,7 @@
 
                 {% exec self.get_short_permalink as short_link %}
 
-                <button class="social-share"><i class="fa fa-share-alt"></i>{% trans _('compartir') %}</button>
+                <button class="social-share"><i class="lnr lnr-sync"></i>{% trans _('поделиться') %}</button>
 
                 {% include "share.html" %}
 

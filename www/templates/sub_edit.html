@@ -8,7 +8,7 @@
             {% endif %}
 
             <a href="https://sugata.ru/space" class="help" target="_blank" data-toggle="tooltip" title="{% trans _("Откройте документацию в новой вкладке") %}">
-                <i class="fa fa-question-circle"></i>
+            <i class="lnr lnr-question-circle"></i>
             </a>
         </h1>
 
@@ -53,7 +53,7 @@
                         <input type="checkbox" name="private" value="1" {% if sub.private %}checked{% endif %}/>
                         {% trans _('Частное') %}
 
-                        <i class="fa fa-question-circle help" data-toggle="tooltip" title="{% trans _("Посты, достигая определенного уровень кармы, автоматически отправляются в общую очередь. Выберите эту опцию, если вы предпочитаете, чтобы этого не происходило.") %}"></i>
+                        <i class="lnr lnr-question-circle help" data-toggle="tooltip" title="{% trans _("Посты, достигая определенного уровень кармы, автоматически отправляются в общую очередь. Выберите эту опцию, если вы предпочитаете, чтобы этого не происходило.") %}"></i>
                     </label>
                 </div>
 
@@ -69,7 +69,7 @@
                         <input type="checkbox" name="no_anti_spam" value="1" {% if extended.no_anti_spam %}checked{% endif %}/>
                         {% trans _('Разрешить повторы ссылок') %}
 
-                        <i class="fa fa-question-circle help" data-toggle="tooltip" title="{% trans _("Повторные ссылки, это ссылки которое уже были в этом Пространстве.") %}"></i>
+                        <i class="lnr lnr-question-circle help" data-toggle="tooltip" title="{% trans _("Повторные ссылки, это ссылки которое уже были в этом Пространстве.") %}"></i>
                     </label>
                 </div>
 
@@ -105,7 +105,7 @@
                 <label class="title title-inline">
                     {% trans _('Разрешенные посты') %}
 
-                    <i class="fa fa-question-circle help" data-toggle="tooltip" title="{% trans _("Истории, которые вы отправляете, всегда могут содержать ссылки, или это может быть только текст (микроблоги). Вы также можете сделать это необязательным для пользователя.") %}"></i>
+                    <i class="lnr lnr-question-circle help" data-toggle="tooltip" title="{% trans _("Истории, которые вы отправляете, всегда могут содержать ссылки, или это может быть только текст (микроблоги). Вы также можете сделать это необязательным для пользователя.") %}"></i>
                 </label>
 
                 <div class="radio radio-inline">
@@ -224,7 +224,7 @@
                 <label for="rules" class="title title-inline">
                     {% trans _('Правила доставки') %}
 
-                    <i class="fa fa-question-circle help" data-toggle="tooltip" title="{% trans _("Этот текст показывается пользователям, которые хотят отправить новость. Объясните здесь правила раздела.") %}"></i>
+                    <i class="lnr lnr-question-circle help" data-toggle="tooltip" title="{% trans _("Этот текст показывается пользователям, которые хотят отправить новость. Объясните здесь правила раздела.") %}"></i>
                 </label><br />
 
                 <textarea maxlength="300" name="rules" id="rules" class="form-control block">{{ extended.rules }}</textarea>
@@ -241,7 +241,7 @@
                 <label class="title">
                     {% trans _('Связь с Twitter') %}
                     <a href="https://dev.twitter.com/oauth/overview/application-owner-access-tokens" class="help" target="_blank">
-                        <i class="fa fa-question-circle"></i>
+                        <i class="lnr lnr-question-circle"></i>
                     </a>
                 </label>
             </div>
@@ -304,7 +304,7 @@
                 <label class="title">
                     {% trans _('Связь с Facebook') %}
                     <a href="https://developers.facebook.com/docs/facebook-login/access-tokens" class="help" target="_blank">
-                        <i class="fa fa-question-circle"></i>
+                        <i class="lnr lnr-question-circle"></i>
                     </a>
                 </label>
             </div>

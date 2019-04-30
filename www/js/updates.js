@@ -486,7 +486,7 @@ function showPoll() {
                     $parent.addClass('collapsed');
                 }
 
-                $button.html('<i class="fa fa-chevron-down"></i>');
+                $button.html('<i class="lnr lnr-chevron-down"></i>');
             });
 
             if ($childs.length === 0) {
@@ -504,7 +504,7 @@ function showPoll() {
 
                 $header.append(
                     '<a href="javascript:void(0);" class="comments-closed-counter">'
-                    + count + ' <i class="fa fa-comments"></i>'
+                    + count + ' <i class="lnr lnr-bubble"></i>'
                     + '</a>'
                 );
             });
@@ -513,7 +513,7 @@ function showPoll() {
         function show($button, $parent, $childs, id) {
             $parent.removeClass('collapsed');
 
-            $button.html('<i class="fa fa-chevron-up"></i>');
+            $button.html('<i class="lnr lnr-chevron-up"></i>');
 
             $button.closest('.comment').find('.comment-text, .comment-footer').slideDown('fast');
             $childs.slideDown('fast');

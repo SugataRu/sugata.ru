@@ -16,7 +16,7 @@
 
     {% if self.is_editable %}
     <a href="{% get_url 'submit?step=2&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('editar noticia') %} #{{ self.id }}" class="btn btn-sg btn-sm btn-block">
-        <i class="fa fa-edit"></i> {% trans _('Изменить Статью') %}
+        <i class="lnr lnr-pencil"></i> {% trans _('Изменить Статью') %}
     </a>
 
     {% if ! self.votes %}

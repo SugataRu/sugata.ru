@@ -22,7 +22,7 @@
 
             {% if site.owner > 0 && current_user.user_id > 0 && (current_user.admin OR site.owner == current_user.user_id) %}
             <a href="{{ globals.base_url_sugata }}/s/{{ site.name }}/subedit" class="btn btn-sg" title="{% trans _('Редактировать') %}">
-                <i class="fa fa-cog"></i>
+                <i class="lnr lnr-pencil"></i>
                 <span>{% trans _('Редактировать') %}</span>
             </a>
             {% endif %}

@@ -9,48 +9,48 @@
                     {% if _REQUEST['q'] %}
                     <li>
                         <a href="{{ globals.base_url }}{{ search_rss }}?{{ _SERVER.QUERY_STRING|escape }}">
-                            <i class="fa fa-rss-square"></i>{% trans _('поиск') %}: {{ _REQUEST['q']|escape }}</a>
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('поиск') %}: {{ _REQUEST['q']|escape }}</a>
                     </li>
                     {% endif %}
                     {% if globals.link_id %}
                     {% if globals.link.meta_name %}
                     <li>
                         <a href="{{ globals.base_url }}rss?meta={{ globals.link.meta_id }}&amp;status=all">
-                            <i class="fa fa-rss-square"></i>{% trans _('тема') %}: <em>{{ globals.link.meta_name }}</em></a>
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('тема') %}: <em>{{ globals.link.meta_name }}</em></a>
                     </li>
                     {% endif %}
                     {% if globals.link.category_name %}
                     <li>
                         <a href="{{ globals.base_url }}rss?category={{ globals.link.category }}&amp;status=all">
-                            <i class="fa fa-rss-square"></i>{% trans _('категория') %}: <em>{% trans globals.link.category_name %}</em></a>
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('категория') %}: <em>{% trans globals.link.category_name %}</em></a>
                     </li>
                     {% endif %}
                     {% endif %}
                     <li>
-                        <a href="{{ globals.base_url }}rss"><i class="fa fa-rss-square"></i>{% trans _('публикации') %}</a>
+                        <a href="{{ globals.base_url }}rss"><i class="lnr lnr-frame-contract"></i>{% trans _('публикации') %}</a>
                     </li>
                     <li>
-                        <a href="{{ globals.base_url }}rss?status=queued"><i class="fa fa-rss-square"></i>{% trans _('в очереди') %}</a>
+                        <a href="{{ globals.base_url }}rss?status=queued"><i class="lnr lnr-frame-contract"></i>{% trans _('в очереди') %}</a>
                     </li>
                     {% if globals.link_id %}
                     <li>
                         <a href="{{ globals.base_url }}comments_rss?id={{ globals.link_id }}">
-                            <i class="fa fa-rss-square"></i>{% trans _('комментарии этой новости') %}
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('комментарии этой новости') %}
                         </a>
                     </li>
                     {% endif %}
                     {% if current_user.user_id > 0 %}
                     <li>
                         <a href="{{ globals.base_url }}comments_rss?conversation_id={{ current_user.user_id }}" title="{% trans _('комментарии к новостям, где вы прокомментировали') %}">
-                            <i class="fa fa-rss-square"></i>{% trans _('мои разговоры') %}
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('мои разговоры') %}
                         </a>
                     </li>
                     <li>
-                        <a href="{{ globals.base_url }}comments_rss?author_id={{ current_user.user_id }}"><i class="fa fa-rss-square"></i>{% trans _('комментарии к моим новостям') %}</a>
+                        <a href="{{ globals.base_url }}comments_rss?author_id={{ current_user.user_id }}"><i class="lnr lnr-frame-contract"></i>{% trans _('комментарии к моим новостям') %}</a>
                     </li>
                     {% endif %}
                     <li>
-                        <a href="{{ globals.base_url }}comments_rss"><i class="fa fa-rss-square"></i>{% trans _('все комментарии') %}</a>
+                        <a href="{{ globals.base_url }}comments_rss"><i class="lnr lnr-frame-contract"></i>{% trans _('все комментарии') %}</a>
                     </li>
                 </ul>
             </div>

@@ -503,6 +503,7 @@ a.action-link span {
     display: inline-block;
     margin-left: 4px;
     vertical-align: middle;
+	margin-top: -6px;
 }
 
 .action-links {
@@ -1592,19 +1593,19 @@ ul.slick-dots li button {
 }
 
 .story-blog .share-icons li a.share-twitter {
-    color: #1c9bf6;
+    color: #1c9bf6; fill: #1c9bf6;
 }
 
 .story-blog .share-icons li a.share-facebook {
-    color: #3d539c;
+    color: #3d539c; fill: #3d539c;
 }
 
 .story-blog .share-icons li a.share-gplus {
-    color: #f73200;
+    color: #f73200; fill: #f73200;
 }
 
 .story-blog .share-icons li a.share-mail {
-    color: #7b6663;
+    color: #7b6663; fill: #7b6663;
 }
 
 .story-blog .separator {
