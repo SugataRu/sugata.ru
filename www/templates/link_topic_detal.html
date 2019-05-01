@@ -1,0 +1,467 @@
+
+    <div class="news-summary{% if tag == 'promoted_article' %} promoted-article{% endif %}"> 
+        <div class="news-body">
+            {% if self.show_shakebox %}
+            <div class="news-shakeit {{ self.box_class }}">
+                <div class="votes">
+				
+
+                {% if not globals.bot %}
+                <div class="sugata" id="a-va-{{ self.id }}">
+				
+                    {% if not self.votes_enabled %}
+                    <span class="closed"><i class="lnr lnr-lock"></i></span>  
+                    {% else %} 
+					
+					{% if not self.voted %}
+                    <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
+<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+					</a>
+                    {% else %} 
+					
+					{% if self.voted > 0 %}
+<svg class="i-caret-top plus" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+                    {% else %}
+
+                    <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
+
+                    {% endif %} {% endif %} {% endif %}
+					
+                </div>
+                {% endif %}
+
+
+
+
+                    <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
+ 
+                </div>
+
+
+
+                <div class="clics"> 
+                    {% if self.id >= globals.click_counter AND self.clicks > 0 %}
+
+                    {{ self.clicks }} {{  rus('clic',self.clicks) }}
+
+                    {% else %}
+                    &nbsp;
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if self.status == 'abuse' OR self.has_warning %}
+
+            {% if self.status == 'abuse' %}
+
+            <div class="warn"><strong>{% trans _('Предупреждение') %}</strong>
+                {% trans _('новости отбрасывается за нарушение') %}
+                <a href="{{ globals.legal }}#tos">{% trans _('правила использования') %}</a>
+            </div>
+
+            {% else %} {% if self.has_warning %}
+
+            <div class="warn{% if self.comments > 10 AND globals.now - self.date < 864000 %} tooltip w:{{ self.id }}{% endif %}">
+                {% if self.status == 'published' %}
+                    {% trans _('Неправильная или спорная доставка, пожалуйста, прочитайте комментарии.') %}
+                {% else %} {% if self.author == current_user.user_id AND self.is_editable %}
+                    {% trans _('Это имеет несколько отрицательных голосов.') %} {% trans _('Ваша карма не будет затронута, если вы сбросите ее вручную.') %}
+                {% else %} {% if self.negative_text %}
+                    {% trans  _('Этот груз может быть') %} <strong>{{ self.negative_text }}</strong>
+                {% else %}
+                    {% trans _('Это имеет несколько отрицательных голосов.') %}
+                {% endif %}
+
+                <a href="{{ self.relative_permalink }}">{% trans _('Убедитесь, что') %}</a> {% trans _('перед покачиванием') %}
+
+                {% endif %}
+                {% endif %}
+            </div>
+
+            {% endif %} {# END if self.has_warning #}
+
+            {% endif %} {# END if self.status == 'abuse' #}
+
+            {% endif %} {# END if self.status == 'abuse' OR self.has_warning #}
+
+            {# {% if globals.ads %}<!-- google_ad_section_start -->{% endif %} #}
+
+			
+			{% if self.nsfw == '1' %}  <div class="warn tooltip"> 18 + или спорное содержание...  </div>  {%endif%}
+			
+			
+            {% if self.thumb_uri %}
+            <a href="{{ self.media_url }}" class="fancybox thumbnail-wrapper" title="{{ self.title }}"><img data-2x='s:thumb:thumb_2x:' data-src='{{ self.thumb_uri }}' src="{{ globals.base_static }}img/g.gif" alt="{{ self.title }}" class='thumbnail lazy'/></a>
+            {% endif %}
+
+          
+
+            <div class="center-content{% if not self.thumb_uri %} no-padding{% endif %}">
+                {% if self.url %}
+
+		
+				  
+				
+                {% exec htmlspecialchars self.url as url %}
+
+ 
+				 
+				
+				  <h1{% if self.top %} class="top"{% endif %}>
+                 
+                        {{ self.title }}
+                
+			{% if tag == 'promoted_article' %}
+            <div class="tab-promoted-article">статья</div>
+            {%endif%}
+				
+
+                    {% if self.content_type == 'image' %}
+                    <span class="warn-foto">фото</span>
+                    {% else %} {% if self.content_type == 'video' %}
+                    <span class="warn-video">видео</span>
+                    {% endif %}
+                    {% endif %}
+                </h1>
+				
+			 
+				 
+
+                {% else %}
+
+		
+			
+ 
+				  <h1{% if self.top %} class="top"{% endif %}>  {{ self.title }} 
+
+                    {% if self.poll && self.poll.id %}
+                    <span class="wideonly">&nbsp;<i class="lnr lnr-chart-bars" title="{% trans _('опрос') %}"></i></span>
+                    {% endif %}
+                </h1>
+				 
+ 
+			 
+
+			 
+			 
+                {% endif %} {# END if self.url #}
+
+                {% if ! globals.bot %}
+
+                <div class="news-submitted">
+				
+				  {% if globals.submnm|subid != self.sub_id %}
+                    <span class="tool sub-name">
+                        <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
+                           class="subname"
+                           {% if self.sub_owner > 0 %}
+                            style="
+                                {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
+                                {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
+                            "
+                        {% endif %}
+                        >{{ self.sub_name }}</a>
+                    </span>
+                    {% endif %}
+				
+				
+				
+				
+				
+				
+                    {% if type != 'short' %}
+                        <a href="{{ self.username | useruri }}" class="tooltip u:{{ self.author }}"><img src="{{ globals.base_static }}img/g.gif" data-src="{% exec get_avatar_url self.author, self.avatar, 25, false %}" data-2x="s:-25.:-40." alt="{{ self.username }}" class="lazy"/></a>
+                    {% endif %}
+
+                    {% trans _('') %} <a href="{% exec get_user_uri self.username, 'history' %}">{{ self.username }}</a>
+
+               
+
+                    &nbsp;
+
+                    {% if self.status != 'published' %}
+                    
+					 {% trans _('проект: ') %}     {% else %}  {% trans _('размещено: ') %}
+					
+                    
+					{% endif %}
+
+                    <span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____ {{ self.sent_date }}</span>
+
+                    {% if self.status == 'published' %}
+                   <!-- {% trans _('опубликованно: ') %} 
+                    <span data-ts="{{ self.sub_date }}" class="ts visible" title="{% trans _('опубликованно') %}: ">____</span>
+                    {% endif %} -->
+					
+					{% if self.url %}
+                        {% trans _(' &nbsp;   ') %} 
+						
+		<span class="s-url"><a href="{{ globals.base_url_sugata }}/go?id={{ self.id }}" target="_blank" rel="nofollow">{{ self.url_str }} &nbsp;
+		
+		<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+		
+		</a></span> 
+						 
+                    {% endif %}
+					
+                </div>
+
+                {% endif %}
+
+                {% if type == 'full' OR type == 'preview' %}
+ 
+                <div class="news-content">{{ self.content }}</div>
+				
+{% if self.max_len == '200' OR self.max_len == '600' %} {% else %}
+		{% if self.url_str == 'youtube.com' %} 
+			<br><br>
+			 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ self.id_youtube }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<br>
+		{% endif %}
+{% endif %}
+					
+					
+					
+					
+                {% if type != 'preview' && self.map_editable %}
+                &nbsp;&nbsp;
+                <a href="#" onclick="$('#geoedit').load('{% get_url  "geo/get_form.php?id=" self.id  "&amp;type=link&amp;icon=" self.status %}'); return false;">
+                    <img class="mini-icon-text" src="{{ globals.base_static }}img/common/edit-geo01.png" alt="edit" title="{% trans _('editar geolocalización') %}"/>
+                </a>
+                {% endif %}
+
+                {% if self.is_editable %}
+                &nbsp;&nbsp;<a href="{% get_url 'submit?step=2&amp;id=' self.id '&amp;user=' current_user.user_id %}" title="{% trans _('редактировать новости') %} #{{ self.id }}" class="mini-icon-text edit-link"><i class="lnr lnr-pencil"></i></a>
+                {% endif %}
+
+				
+				
+                {% endif %} {# END if type == 'full' OR type == 'preview' #}
+
+                {% if self.do_inline_friend_votes AND self.friend_votes %}
+                <div style="padding: 3px 0 2px 0;">
+                    {% for vote in self.friend_votes %}
+                    <a href="{{ vote.user_login | useruri }}" title="{{ vote.user_login }}: {% trans _('значение') %} {{ vote.vote_value }}">
+                        <img class="avatar" src="{% exec get_avatar_url vote.user_id vote.user_avatar 25 %}" width="25" height="25" alt="{{ vote.user_login }}"/>
+                    </a>&nbsp;&nbsp;
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if globals.link OR ((self.is_editable OR self.status == 'queued') AND globals.now - self.date < 7200) OR type == 'short' %}
+
+                {% if type == 'short' && globals.submnm|subid != self.sub_id %}
+                <span class="tool sub-name">
+                    <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
+                        class="subname"
+                       {% if self.sub_owner > 0 %}
+                        style="
+                            {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
+                            {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
+                        "
+                        {% endif %}
+                    >{{ self.sub_name | lower }}</a>
+                </span>
+                {% else %}
+                <br />
+                {% endif %}
+
+                {% if self.show_tags AND self.tags %}
+                  <span class="news-tags">
+                 
+
+                    {% exec explode "," self.tags as tags_array %}
+
+                    {% for id, tag in tags_array %}
+
+                    {% if id > 0 %}, {% endif %}
+                    <a class="tag" href='{{ globals.base_url }}search?p=tags&amp;q={{ tag|urlencode }}'>{{ tag }}</a>
+
+                    {% endfor %}
+
+                    {# Show link to analyze the tags #}
+
+                    {% if globals.fancybox_enabled AND globals.sphinx_server AND self.is_editable OR self.author == current_user.user_id %}
+                    &nbsp;<a class="fancybox" href="{{ globals.base_url_general }}backend/tags_analysis?id={{ self.id }}" title="{% trans _('диагностика тега') %}">{% trans _('- диагностика') %}</a>
+                    {% endif %}
+                </span>
+                {% endif %}
+
+                {% endif %}
+
+                {% if self.poll && self.poll.id && !self.poll.simple %}
+                    {% set poll = self.poll %}
+                    {% include 'poll_vote.html' %}
+                {% endif %}
+
+                {# {% if globals.ads %}<!-- google_ad_section_end -->{% endif %} #}
+            </div> {# div.news-body #}
+
+            <div class="news-details">
+                {% if type != 'short' %}
+ 
+                <div class="news-details-data-up">
+                    <span class="votes-up" data-toggle="tooltip" data-placement="top" title="Положительные голоса"><i class="lnr lnr-arrow-up-circle"></i> <span><strong>{{ self.votes }}</strong></span></span>
+                    <span class="wideonly votes-anonymous" data-toggle="tooltip" data-placement="top" title="Анонимные голоса"><i class="lnr lnr-user"></i> <span><strong>{{ self.anonymous }}</strong></span></span>
+                    <span class="votes-down" data-toggle="tooltip" data-placement="top" title="Отрицательные голоса"><i class="lnr lnr-arrow-down-circle"></i> <span><strong>{{ self.negatives }}</strong></span></span>
+
+                    <span class="tool karma" data-toggle="tooltip" data-placement="top" title="Карма">
+                        <span class="karma-letter">К</span>
+                        <span class="karma-value">
+                            {% if self.status == 'published' && self.sub_karma > 0 %}
+                                {{ self.sub_karma|intval }}
+                            {% else %}
+                                {{ self.karma|intval }}
+                            {% endif %}
+                        </span>
+                    </span>
+
+                    {% if globals.submnm|subid != self.sub_id %}
+                    <span class="tool sub-name">
+                            <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
+                               class="subname"
+                               {% if self.sub_owner > 0 %}
+                                style="
+                                    {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
+                                    {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
+                                "
+                                {% endif %}
+                            >{{ self.sub_name }}</a>
+                        </span>
+                    {% endif %}
+
+                    {% if self.can_vote_negative %}
+                    <form action="" id="problem-{{ self.id }}">
+                        <select name="ratings" onchange="report_problem(this.form,{{ current_user.user_id }}, {{ self.id }})">
+                            <option value="0" selected="selected">{% trans _('нарушение') %}</option>
+                            {% for pkey, pvalue in globals.negative_votes_values %}
+                            <option value="{{ pkey }}">{{ pvalue }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    {% endif %}
+                </div> {# div.news-details-data-up #}
+
+                {% endif %} {# END if type != 'short' #}
+
+				
+			 
+				
+                <div class="news-details-main">  <!-- {{ globals.base_url_sugata }}/s/{{ self.sub_name }}/-{{ self.id }} -->
+                    <a class="comments" href="{{ self.relative_permalink }}" title="{% trans _('комментарии от') %}: «{{ self.title }}»">
+						<i class="lnr lnr-bubble"></i>
+
+						{% if self.comments > 0 %}
+						
+						
+						    {{ self.comments }}    {{  rus('comm',self.comments) }} 
+						
+						   
+						
+						
+						{% else %}
+
+						   {% trans _("нет комментариев") %}
+						
+						{% endif %}
+                    </a>
+
+
+                </div>
+
+                {% if type != 'short' %}
+ 
+                <div class="news-details-data-down">
+                    <span class="votes-up" data-toggle="tooltip" data-placement="top" title="Положительные голоса"><i class="lnr lnr-arrow-up-circle"></i>
+<i class="icon icon-up"></i>
+
+					<span><strong>{{ self.votes }}</strong></span></span>
+                    <span class="wideonly votes-anonymous" data-toggle="tooltip" data-placement="top" title="Анонимные голоса"><i class="lnr lnr-user"></i> <span><strong>{{ self.anonymous }}</strong></span></span>
+                    <span class="votes-down" data-toggle="tooltip" data-placement="top" title="Отрицательные голоса"><i class="lnr lnr-arrow-down-circle"></i> <span><strong>{{ self.negatives }}</strong></span></span>
+
+                    <span class="tool karma" data-toggle="tooltip" data-placement="top" title="Карма">
+                        <span class="karma-letter">К</span>
+                        <span class="karma-value">
+                            {% if self.status == 'published' && self.sub_karma > 0 %}
+                                {{ self.sub_karma|intval }}
+                            {% else %}
+                                {{ self.karma|intval }}
+                            {% endif %}
+                        </span>
+                    </span>
+
+              
+
+                    {% if self.can_vote_negative %}
+                    <form action="" id="problem-{{ self.id }}">
+                        <select name="ratings" onchange="report_problem(this.form,{{ current_user.user_id }}, {{ self.id }})">
+                            <option value="0" selected="selected">{% trans _('нарушение') %}</option>
+                            {% for pkey, pvalue in globals.negative_votes_values %}
+                            <option value="{{ pkey }}">{{ pvalue }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    {% endif %}
+					
+					<span class="right-s">
+					
+					{% if current_user.user_id > 0 %}
+
+                    {% if not globals.mobile %}
+                    <button data-toggle="tooltip" data-placement="top" title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite  lnr lnr-bookmark on" {% else %} class="save link favorite lnr lnr-bookmark" {% endif %}></button>
+                    {% else %}
+                    <button title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite lnr lnr-bookmark on" {% else %} class="save link favorite lnr lnr-bookmark" {% endif %}></button>
+                    {% endif %}
+					
+                    {% endif %}
+					
+                    {% if ! self.is_discarded %}
+
+                    {% set link = self.permalink %}
+                    {% set title = self.title %}
+
+                    {% exec self.get_short_permalink as short_link %}
+
+                    <button class="social-share"><i class="lnr lnr-sync"></i>{% trans _('поделиться') %}</button>
+
+                    {% include "share.html" %}
+
+                    {% endif %}
+
+
+					</span>
+					
+                </div> {# div.news-details-data #}
+
+                {% endif %} {# END if type != 'short' #}
+            </div> {# div.news-details #}
+
+            {% if self.best_comment %}
+           <div class="box">
+                <a class="tooltip c:{{ self.best_comment.comment_id }}" href="{{ self.relative_permalink }}/c0{{ self.best_comment.comment_order }}">
+                    <strong>{{ self.best_comment.comment_order }}</strong>
+                </a>:
+                &nbsp;{% exec text_to_summary self.best_comment.content 200 %}
+            </div>
+            {% endif %}
+
+            {% if globals.link %}
+            {% exec do_banner_story as dummy %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if self.map_editable %}
+    <div id="geoedit" class="geoform" style="margin-left:20px">
+        {% if self.add_geo %}
+        {% trans _('определяет источник новостей или события (город, страна)') as geotxt %}
+        {% exec geo_coder_print_form 'link', self.id, globals.latlng, geotxt as dummy %}
+        {% endif %}
+    </div>
+    {% endif %}
+

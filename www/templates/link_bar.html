@@ -7,7 +7,11 @@
     <div class="sugata" id="a-va-{{ self.id }}">
         {% if not self.voted %}
 
-        <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">{% trans _('sugata') %}</a>
+        <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
+<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+            <path d="M30 22 L16 6 2 22 Z"></path>
+</svg>
+        </a>
         {% else %}
             {% if self.voted > 0 %}
             <span id="a-shake-{{ self.id }}">{% trans _('Готово!') %}</span>
@@ -21,7 +25,7 @@
     {% if self.can_vote_negative %}
     <form class="tool" action="" id="problem-{{ self.id }}">
         <select name="ratings"    onchange="report_problem(this.form,{{ current_user.user_id }}, {{ self.id }})">
-            <option value="0" selected="selected">{% trans _('problema') %}</option>
+            <option value="0" selected="selected">{% trans _('Это прохой сайт!') %}</option>
 
             {% for pkey, pvalue in globals.negative_votes_values %}
             <option value="{{ pkey }}">{{ pvalue }}</option>
