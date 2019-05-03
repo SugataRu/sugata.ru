@@ -48,7 +48,7 @@ Link::$original_status = true; // Show status in original sub
 
 foreach ($links as $link_id) {
     $link = Link::from_db($link_id);
-$link->max_len = 200;
+$link->max_len = 800;
     if ($link && $link->votes > 0) {
         $link->print_summary('short');
     }

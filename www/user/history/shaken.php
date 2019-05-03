@@ -49,7 +49,7 @@ Haanga::Load('user/sort_header.html', [
 
 foreach ($links as $linkdb) {
     $link = Link::from_db($linkdb->link_id);
-$link->max_len = 200;
+$link->max_len = 800;
     if ($linkdb->vote_value < 0) {
         echo '<div class="vote-negative-alert" style="display:inline;">';
         echo get_negative_vote($linkdb->vote_value);

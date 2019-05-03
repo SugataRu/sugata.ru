@@ -222,7 +222,8 @@ if ($links) {
 
     foreach ($links as $link) {
         $link->poll = $pollCollection->get($link->id);
-        $link->max_len = 200;
+		
+        $link->max_len = 800;
 
         if ($globals['show_promoted_articles'] ) {
             Haanga::Safe_Load('private/promoted_articles.html', compact('counter', 'promoted_articles'));

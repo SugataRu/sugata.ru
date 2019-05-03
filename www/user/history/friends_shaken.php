@@ -64,7 +64,7 @@ Haanga::Load('user/sort_header.html', [
 
 foreach ($links as $dblink) {
     $link = Link::from_db($dblink->link_id);
-$link->max_len = 200;
+$link->max_len = 800;
     $link->do_inline_friend_votes = true;
     $link->print_summary();
 }

@@ -134,7 +134,7 @@ echo '<div id="newswrap">'."\n";
             }
 
             $link->poll = $pollCollection->get($link->id);
-            $link->max_len = 200;
+            $link->max_len = 800;
 
             Haanga::Safe_Load('private/ad-interlinks.html', [
                 'counter' => $counter,
