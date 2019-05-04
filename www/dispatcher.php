@@ -49,15 +49,16 @@ $routes = array(
     'api'                    => 'api/dispatcher.php',
     'notame'                 => 'sneakme/dispatcher.php',
     'captcha'                => 'info/captcha.php',
- //   'news-sugata'   => 'changelog.php',
-	'legal'   => 'info/legal.php',
-	'between'                => 'info/between.php',
-	'trends'                 => 'info/trends.php',
-	'faq-ru'                 => 'info/faq-ru.php',
-	'space'                 => 'info/space.php',
-	'karma'                 => 'info/karma.php',
-	'rules'                 => 'info/rules.php',
-	'help'                 => 'info/help.php'
+//  'news-sugata'   => 'changelog.php',
+    'legal'                 => 'info/legal.php',
+    'between'               => 'info/between.php',
+    'trends'                => 'info/trends.php',
+    'faq-ru'                => 'info/faq-ru.php',
+    'space'                 => 'info/space.php',
+    'karma'                 => 'info/karma.php',
+    'rules'                 => 'info/rules.php', 
+    'badges'                => 'info/badges.php',
+    'help'                 => 'info/help.php'
 );
 
 $globals['path'] = $path = preg_split('/\/+/', $_SERVER['PATH_INFO'], 10, PREG_SPLIT_NO_EMPTY) ?: array('');

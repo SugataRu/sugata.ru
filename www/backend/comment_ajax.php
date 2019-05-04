@@ -173,8 +173,8 @@ function check_and_save($comment, $link)
         }
 
         if ($current_user->user_id == $comment->author && $comment->banned && $current_user->Date() > $globals['now'] - 86400) {
-            syslog(LOG_NOTICE, "Meneame: editcomment not stored, banned link ($current_user->user_login)");
-            return _('comentario no insertado, enlace a sitio deshabilitado (y usuario reciente)');
+            syslog(LOG_NOTICE, "Sugata: editcomment not stored, banned link ($current_user->user_login)");
+            return _('комментарий не вставлен, ссылка на сайт запрещена');
         }
 
         $comment->content = User::removeReferencesToIgnores($comment->content);
@@ -194,5 +194,5 @@ function check_and_save($comment, $link)
         return $comment;
     }
 
-    return _('error actualizando, probablemente tiempo de edición excedido');
+    return _('превышено время редактирования');
 }
