@@ -34,6 +34,14 @@ $globals['site_shortname'] = 'sugata'; //Пространство по умол�
 $globals['base_url_sugata'] = 'http://rrr.ru';
 
 
+//Официальные пространства
+//$globals['official_subs']['Sugata'] = (object)Array('image_name'=>'astronomia-big.png','show_name'=>'Сугата');
+//$globals['official_subs']['Max'] = (object)Array('image_name'=>'astronomia-big.png','show_name'=>'Max');
+
+//Рекомендованные пространства
+//$globals['recommended_subs']['Buddhism'] = (object)Array('image_name'=>'Buddhism.jpg','show_name'=>'Буддизм');
+
+
 // If you user version, be careful to rewrite the directory for img, css and js
 // Example for nginx:
 // rewrite /v_\d+/(.+)$ /$1 last;

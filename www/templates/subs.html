@@ -10,7 +10,7 @@
 
     <p class="intro intro-large">{% trans _('Пространства - это тематические разделы, которые позволяют группировать новости. ') %}</p>
 
-    <!--h2>{% trans _('Официальные пространства') %}</h2-->
+    <h2>{% trans _('Официальные пространства') %}</h2>
 
     {% if official_subs %}
         <div class="container-fluid slider-wrapper" id="official-subs-slider">
@@ -18,7 +18,7 @@
                 {% for sub in official_subs %}
                 <div class="sub col-xs-2">
                     <a href="{{ globals.base_url_general }}s/{{ sub.name }}">
-                        <img src="{{ globals.base_url_static }}/img/subs/{{ sub.extra_info.image_name }}" class="img-responsive" alt="{{ sub.name }}" />
+                        <img src="{{ globals.base_url_static }}/img/space/{{ sub.extra_info.image_name }}" class="img-responsive" alt="{{ sub.name }}" />
                     </a>
                     <div class="sub-info">
                         <a href="{{ globals.base_url_general }}s/{{ sub.name }}" class="sub-name">{{ sub.extra_info.show_name }}</a>
@@ -42,7 +42,7 @@
         </div>
     {% endif %}
 
-    <!--h2>{% trans _('Рекомендуемые пространства') %}</h2-->
+    <h2>{% trans _('Рекомендуемые пространства') %}</h2>
 
     {% if recommended_subs %}
     <div class="container-fluid slider-wrapper" id="recommended-subs-slider">
@@ -50,7 +50,7 @@
             {% for sub in recommended_subs %}
             <div class="sub col-xs-2">
                 <a href="{{ globals.base_url_general }}s/{{ sub.name }}">
-                    <img src="{{ globals.base_url_static }}img/subs/{{ sub.extra_info.image_name }}" class="img-responsive" alt="{{ sub.name }}" />
+                    <img src="{{ globals.base_url_static }}img/space/{{ sub.extra_info.image_name }}" class="img-responsive" alt="{{ sub.name }}" />
                 </a>
                 <div class="sub-info">
                     <a href="{{ globals.base_url_general }}s/{{ sub.name }}" class="sub-name">{{ sub.extra_info.show_name }}</a>
