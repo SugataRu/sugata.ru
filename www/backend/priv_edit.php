@@ -94,7 +94,7 @@ function save_post($message_id)
     if (intval($db->get_var("select count(*) from privates where user= $current_user->user_id and date > date_sub(now(), interval 15 second)"))> 0) {
         $db->rollback();
 
-        die('ERROR: ' . _('debe esperar 15 segundos entre mensajes'));
+        die('ERROR: ' . _('вы должны ждать 15 секунд между сообщениями'));
     }
 
     // Verify that there less than X messages from the same user in a day
@@ -136,8 +136,8 @@ function notify_user($from, $to, $text)
     require_once(mnminclude.'mail.php');
 
     $url = $globals['scheme'].'//'.get_server_name().$user->get_uri('notes_privates');
-    $subject = "Notificación de mensaje privado de $sender->username";
-    $message = "$sender->username " . _('escribió') . ":\n$url\n\n$text";
+    $subject = "Уведомление о личном сообщении от $sender->username";
+    $message = "$sender->username " . _('написала') . ":\n$url\n\n$text";
 
     send_mail($user->email, $subject, $message);
 }

@@ -1,0 +1,1 @@
+ALTER TABLE `subs` ADD `vip_subs` TINYINT(1) NOT NULL DEFAULT '0' AFTER `page_mode`;
