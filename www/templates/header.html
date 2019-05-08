@@ -58,8 +58,8 @@
 
    
         <link rel="search" type="application/opensearchdescription+xml" title="{% trans _('поиск') %}" href="{{ globals.scheme }}//{{ globals.server_name }}{{ globals.base_url_general }}opensearch" />
-        <link rel="alternate" type="application/rss+xml" title="{% trans _('опубликованный') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss" />
-        <link rel="alternate" type="application/rss+xml" title="{% trans _('в ожидании') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss?status=queued" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('publicadas') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss" />
+        <link rel="alternate" type="application/rss+xml" title="{% trans _('pendientes') %}" href="//{{ globals.server_name }}{{ globals.base_url }}rss?status=queued" />
 
         {% endif %}
 		
@@ -117,6 +117,12 @@
         {# <script src="{{ globals.base_url_general }}js/{{ globals.js_basic }}" charset="utf-8"></script> #}
 
 		
+		
+
+		
+		
+		
+		
         {% if globals.extra_head %}
             {{ globals.extra_head }}
         {% endif %}
@@ -155,7 +161,11 @@
             {% include '../js/basic.js' %}
         </script>
 
-        <div id="header">
+{% if this_site.vip_subs == '1' %}
+<div id="vip-header"><div class="t-header"><a href="{{ globals.base_url_sugata }}/{{this_site.url}}" class="url">{{this_site.url}}</a></div></div> 
+{% else %}{% endif %}
+		
+        <div id="header" class="norm{% if this_site.vip_subs == '1' %} vip{% else %}{% endif %}">
             <div class="header-menu-wrapper"  style="{% if this_site.color1 %}color:{{ this_site.color1 }};{% endif %}{% if this_site.color2 %}background-color:{{ this_site.color2 }};{% endif %}">
                 <div id="header-menu" class="s-center-in-wrap">
                     <div class="header-menu01"{% if globals.mobile %} style="display:none;"{% endif %}>
@@ -190,6 +200,8 @@
                 </div> 
             </div> 
 
+			
+			
             {% if globals.mobile AND this_site.sub %}
             <div class="header-sub-wrapper">
                 <div class="header-sub"><a href="{{ globals.base_url_sugata }}/{{ this_site.url }}">{{ this_site.name_long }}</a></div>
@@ -221,7 +233,7 @@
                                     <td>
                                         {% if ! s.site_info.logo_url %}
                                         <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
-                                            <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{% trans _('или') %}">
+                                            <img src="{{ globals.base_url_sugata }}/img/h9_eli.png" alt="{% trans _('Eli') %}">
                                         </a>
                                         {% else %}
                                         <a href="{{ globals.base_url_sugata }}/s/{{ s.name }}" title="{{ s.name_long|escape }}" class="sub-image">
@@ -294,7 +306,6 @@
 
                 <div id="container">
                     {% if globals.mobile %}
-
                     <div id="searchform" class="searchform" style="display:block;">
                         <form action="{{ globals.base_url_sugata }}/search" method="get" name="top_search">
                             {% if globals.search_options %}
@@ -308,6 +319,3 @@
                     </div>
 
                     {% endif %}
-
-					
-

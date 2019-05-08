@@ -162,26 +162,26 @@ function check_chat()
     if ($current_user->user_id > 0 && mb_strlen(strip_tags($comment)) > 2) {
         // Sends a message back if the user has a very low karma
         if ($globals['min_karma_for_sneaker'] > 0 && $current_user->user_karma < $globals['min_karma_for_sneaker']) {
-            $comment = _('no tienes suficiente karma para comentar en la fisgona').' ('.$current_user->user_karma.' < '.$globals['min_karma_for_sneaker'].')';
+            $comment = _('вам не хватает кармы, чтобы комментировать ').' ('.$current_user->user_karma.' < '.$globals['min_karma_for_sneaker'].')';
             send_chat_warn($comment);
             return;
         }
         $period = $now - 4;
         $counter = intval($db->get_var("select count(*) from chats where chat_time > $period and chat_uid = $current_user->user_id"));
         if ($counter > 0) {
-            $comment = _('tranquilo charlatán').' ;-)';
+            $comment = _('тихий шарлатан').' ;-)';
             send_chat_warn($comment);
             return;
         }
         if (check_ban_proxy()) {
-            send_chat_warn(_('proxy abierto no permitido'));
+            send_chat_warn(_('открытый прокси не разрешен'));
             return;
         }
 
         if (preg_match('/^!/', $comment)) {
             require_once('sneaker-stats.php');
             if (!($comment = check_stats($comment))) {
-                send_chat_warn(_('comando no reconocido'));
+                send_chat_warn(_('нераспознанная команда'));
             } else {
                 send_string($comment);
             }
@@ -221,7 +221,7 @@ function send_string($mess)
     $json['who'] = $current_user->user_login;
     $json['uid'] = $current_user->user_id;
     $json['ts'] = $now;
-    $json['status'] =  _('chat');
+    $json['status'] =  _('чат');
     $json['type'] =  'chat';
     $json['votes'] = 0;
     $json['com'] = 0;
@@ -231,7 +231,7 @@ function send_string($mess)
 
 function send_chat_warn($mess)
 {
-    $mess = '<strong>'._('Aviso').'</strong>: '.$mess;
+    $mess = '<strong>'._('Предупреждение').'</strong>: '.$mess;
     send_string($mess);
 }
 
@@ -284,20 +284,20 @@ function get_chat()
                     if ($friendship <= 0 || $reverse_friendship <= 0) {
                         continue;
                     }
-                    $json['status'] = _('amigo');
+                    $json['status'] = _('друг');
                 }
             }
         }
 
         switch ($event->chat_room) {
             case 'friends':
-                $json['status'] = _('amigo');
+                $json['status'] = _('друг');
                 break;
             case 'admin':
                 $json['status'] = 'admin';
                 break;
             default:
-                $json['status'] = _('chat');
+                $json['status'] = _('чат');
                 break;
         }
 
@@ -541,7 +541,7 @@ function get_post($time, $type, $postid, $userid)
     $json['ts'] = $time;
     $json['type'] = $type;
     $json['who'] = $event->user_login;
-    $json['status'] = _('nótame');
+    $json['status'] = _('заметка');
     $json['title'] = put_smileys(text_to_summary(preg_replace('/(@[\S.-]+)(,\d+)/', '$1', $event->post_content), 130));
     if (mb_strlen(trim($json['title'])) == 0) {
         $json['title'] = '...';

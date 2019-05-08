@@ -12,7 +12,7 @@
         <div>
             
             <div id="searchform" class="searchform" {% if not globals.q %}style="display:block;"{% endif %}>
-                <form action="{{ globals.base_url }}search" method="get" name="top_search">
+                <form action="{{ globals.base_url_sugata }}/search" method="get" name="top_search">
                     {% if globals.search_options %}
                     {% for name, value in globals.search_options %}
                     <input type="hidden" name="{{ name }}" value="{{ value }}" />
