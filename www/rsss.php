@@ -1,11 +1,4 @@
 <?php
-// The source code packaged with this file is Free Software, Copyright (C) 2010 by
-// Ricardo Galli <gallir at uib dot es>.
-// It's licensed under the AFFERO GENERAL PUBLIC LICENSE unless stated otherwise.
-// You can get copies of the licenses here:
-//        http://www.affero.org/oagpl.html
-// AFFERO GENERAL PUBLIC LICENSE is also included in the file called "COPYING".
-// Modification of sugata.ru, 2019
 
 require_once __DIR__.'/config.php';
 require_once mnminclude.'html1.php';
@@ -17,8 +10,8 @@ $page_size = $globals['page_size'];
 $page = get_current_page();
 $offset=($page-1)*$page_size;
 
-$globals['extra_head'] .= '<link rel="alternate" type="application/rss+xml" title="'._('Блоги BigTor').'" href="http://'.get_server_name().$globals['base_url_general'].'blogs_rss2.php" />'."\n";
-do_header(_('Сообщения в блогах') . ' | ' . _('BigTor'));
+$globals['extra_head'] .= '<link rel="alternate" type="application/rss+xml" title="'._('Блоги Sugata').'" href="http://'.get_server_name().$globals['base_url_general'].'blogs_rss2.php" />'."\n";
+do_header(_('Сообщения в блогах') . ' | ' . _('Sugata'));
 do_tabs('main', _('apuntes'), true);
 
 /*** SIDEBAR
@@ -54,9 +47,9 @@ if ($entries) {
 }
 echo '</table>';
 echo '<fieldset id="nota"><legend>'._('примечание').'</legend>';
-echo _('Ссылки - это заметки блогов, указанные в профиле активных пользователей BigTor.');
+echo _('Ссылки - это заметки блогов, указанные в профиле активных пользователей Sugata.');
 echo ' ';
-echo _('Они не имеют отношения к BigTor и не были выбраны их сообществом пользователей.');
+echo _('Они не имеют отношения к Sugata и не были выбраны их сообществом пользователей.');
 echo '</fieldset>';
 
 do_pages($rows, $page_size);

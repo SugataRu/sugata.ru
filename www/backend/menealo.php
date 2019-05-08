@@ -97,7 +97,7 @@ if ($votes_freq > $freq) {
         $user = new User($current_user->user_id);
         $user->add_karma(-0.2, _('voto cowboy'));
 
-        error(_('¡tranquilo cowboy!') . ', ' . _('tu karma ha bajado: ') . $user->karma);
+        error(_('Тише!') . ', ' . _('ваша карма упала ') . $user->karma);
     }
 
     error(_('полегче, ковбой!'));
