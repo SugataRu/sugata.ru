@@ -20,8 +20,8 @@
         <span style="white-space:nowrap;">
             <label>
                 <input type="radio" name="sub_id" value="{{ sub.id }}" {% if selected == sub.id %} checked {% endif %} />
-                {{ sub.name }}
-            </label>
+                 {{ sub.name_long }}
+            </label> <sup style="font-weight: normal;">{{ sub.name }}</sup>
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
         {% endfor %}
