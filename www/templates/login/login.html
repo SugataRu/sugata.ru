@@ -8,7 +8,7 @@
 
             <div class="separator"><b></b><span>O</span><b></b></div>
 
-            <form method="post" class="form">
+            <form method="post" id="form-login" class="form">
                 <div class="legend">{% trans _('Введите логин или e-mail') %}</div>
 
                 {% if error %}
@@ -21,10 +21,14 @@
                     <input type="text" name="username" tabindex="1" id="name" value="{% exec htmlspecialchars _POST.username %}" class="form-control" placeholder="{% trans _('Пользователь или e-mail') %}" required />
                 </div>
 
-                <div class="form-group">
+            <div class="form-group input-validate">
+                <span class="input-status fa"></span>
+                <a href="#" class="input-password-show"><i class="lnr lnr-eye"></i></a>
                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="{% trans _('Пароль') %}" required />
                 </div>
 
+ 
+				
                 {% if captcha_form %}
                     {{ captcha_form }}
                 {% endif %}

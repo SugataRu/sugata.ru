@@ -341,14 +341,14 @@ function showPoll() {
         $('.input-password-show').on('click', function(e) {
             e.preventDefault();
 
-            var $icon = $(this).find('.fa');
+            var $icon = $(this).find('.lnr');
 
             if ($password.attr('type') === 'text') {
                 $password.attr('type', 'password');
-                $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                $icon.removeClass('lnr-eye').addClass('lnr-eye');
             } else {
                 $password.attr('type', 'text');
-                $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                $icon.removeClass('lnr-eye').addClass('lnr-eye');
             }
         });
 
@@ -372,8 +372,53 @@ function showPoll() {
         if ($email.val()) {
             $email.trigger('change');
         }
+		
+	 
+		
+		
     };
 
+	
+	
+	
+    INIT.formLogin = function() {
+        var $form = $('#form-login');
+
+
+        if (!$form.length) {
+            return;
+        }
+
+        var $password = $form.find('#password');
+
+        $password.on('keyup', function() {
+            setStatus($password, securePasswordCheck($password.val()) ? 'OK' : 'KO', true);
+        });
+
+        $password.on('change', function() {
+            setStatus($password, securePasswordCheck($password.val()) ? 'OK' : 'KO');
+        });
+
+        $('.input-password-show').on('click', function(e) {
+            e.preventDefault();
+
+            var $icon = $(this).find('.lnr');
+
+            if ($password.attr('type') === 'text') {
+                $password.attr('type', 'password');
+                $icon.removeClass('lnr-eye').addClass('lnr-eye');
+            } else {
+                $password.attr('type', 'text');
+                $icon.removeClass('lnr-eye').addClass('lnr-eye');
+            }
+        });
+
+    };
+	
+	
+	
+	
+	
     INIT.showSubDescription = function() {
         $('.show-sub-description').on('click', function(e) {
             e.preventDefault();
@@ -769,6 +814,7 @@ function showPoll() {
 
     INIT.linkWithAnchor();
     INIT.formRegister();
+    INIT.formLogin();
     INIT.showSubDescription();
     INIT.formSubsSearch();
     INIT.formPostEdit();
