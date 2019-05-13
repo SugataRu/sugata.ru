@@ -12,24 +12,24 @@ require_once mnminclude.'favorites.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 if (!($id=intval($_REQUEST['id']))) {
-    error(_('falta el ID'). " $id");
+    error(_('пропустить ID'). " $id");
 }
 
 if (empty($_REQUEST['type'])) {
-    error(_('falta el tipo'));
+    error(_('тип отсутствует'));
 }
 $type = $_REQUEST['type'];
 
 if (!($user = intval($_REQUEST['user']))) {
-    error(_('falta el código de usuario'));
+    error(_('код пользователя отсутствует'));
 }
 
 if ($user != $current_user->user_id) {
-    error(_('usuario incorrecto'));
+    error(_('неправильный пользователь'));
 }
 
 if (! check_security_key($_REQUEST['key'])) {
-    error(_('clave de control incorrecta'));
+    error(_(' неверный контрольный ключ'));
 }
 
 $dict['value'] = favorite_change_read($user, $id, $type);

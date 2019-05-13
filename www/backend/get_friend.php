@@ -11,15 +11,15 @@ require_once __DIR__ . '/../config.php';
 header('Content-Type: text/plain; charset=UTF-8');
 
 if (!$current_user->user_id) {
-    die('ERROR: '._('usuario incorrecto'));
+    die('ERROR: '._('неправильный пользователь'));
 }
 
 if (!($to = (int)$_REQUEST['id'])) {
-    die('ERROR: '._('falta el código de usuario'));
+    die('ERROR: '._('код пользователя отсутствует'));
 }
 
 if (!check_security_key($_REQUEST['key'])) {
-    die('ERROR: '._('clave de control incorrecta'));
+    die('ERROR: '._(' неверный контрольный ключ'));
 }
 
 switch ($_REQUEST['value']) {

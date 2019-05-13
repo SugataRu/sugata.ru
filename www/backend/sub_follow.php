@@ -11,16 +11,16 @@ require_once __DIR__.'/../config.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 if (!($id=intval($_POST['id']))) {
-    error(_('falta el ID'). " $id");
+    error(_('пропустить ID'). " $id");
 }
 
 if (! $current_user->user_id) {
-    error(_('usuario incorrecto'));
+    error(_('неправильный пользователь'));
 }
 $user = $current_user->user_id;
 
 if (! check_security_key($_POST['key'])) {
-    error(_('clave de control incorrecta'));
+    error(_(' неверный контрольный ключ'));
 }
 
 $db->transaction();

@@ -12,19 +12,19 @@ require_once mnminclude.'favorites.php';
 header('Content-Type: text/plain; charset=UTF-8');
 
 if (!($link=intval($_REQUEST['id']))) {
-    error(_('falta el ID de la nota'). " $link");
+    error(_('пропустить ID из записи'). " $link");
 }
 
 if (!($user = intval($_REQUEST['type']))) {
-    error(_('falta el código de usuario'));
+    error(_('код пользователя отсутствует'));
 }
 
 if ($user != $current_user->user_id) {
-    error(_('usuario incorrecto'));
+    error(_('неправильный пользователь'));
 }
 
 if (! check_security_key($_REQUEST['key'])) {
-    error(_('clave de control incorrecta'));
+    error(_(' неверный контрольный ключ'));
 }
 
 
