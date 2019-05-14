@@ -29,7 +29,7 @@ if (!$media->read()) {
 }
 
 if (!$globals['media_public'] && ($media->access === 'restricted') && !$current_user->user_id > 0) {
-    error_image(_('Debe estar autentificado'));
+    error_image(_('Это должно быть аутентифицировано'));
     die;
 } elseif (
     ($media->type == 'private')
@@ -41,7 +41,7 @@ if (!$globals['media_public'] && ($media->access === 'restricted') && !$current_
         )
     )
 ) {
-    error_image(_('No está autorizado'));
+    error_image(_('Нет необходимости в авторизации'));
     die;
 }
 
@@ -54,7 +54,7 @@ if (!empty($media->mime)) {
     $ext = $ext[count($ext) - 1];
 }
 
-header("Content-Disposition: filename=meneame-media-$type-$id.".$ext);
+header("Content-Disposition: filename=sugata-media-$type-$id.".$ext);
 
 if ($media->file_exists() && !empty($globals['xsendfile'])) {
     /*
@@ -92,14 +92,14 @@ function delete_image($media)
 
     if (!$media->read()) {
         $r['ok'] = 0;
-        $r['text'] = _('imagen no existente');
+        $r['text'] = _('несуществующее изображение');
     } elseif (!$current_user->user_id > 0 || $media->user != $current_user->user_id) {
         $r['ok'] = 0;
-        $r['text'] = _('no autorizado');
+        $r['text'] = _('не авторизован');
     } else {
         $media->delete();
         $r['ok'] = 1;
-        $r['text'] = _('imagen eliminada');
+        $r['text'] = _('удаленное изображение');
     }
 
     header('Content-Type: application/json; charset=UTF-8');
