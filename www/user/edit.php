@@ -103,9 +103,22 @@ $form->bio_max = $bio_max;
 
 $prefs = $user->get_prefs();
 
+ 
+
+//редактировать username через 3 дня запретить
+    if (time() - $current_user->user_date > 86400 * 3) { 
+        $form->user_edit = '0';
+    } else {
+        $form->user_edit = '1';
+    }
+
+
+
 Haanga::Load('user/edit.html', compact('user', 'success', 'error', 'form', 'prefs'));
 
 do_footer();
+
+
 
 function save_profile()
 {
@@ -121,7 +134,7 @@ function save_profile()
 
         Log::insert('user_delete', $old_user_id, $old_user_id);
 
-        syslog(LOG_NOTICE, "Meneame, disabling $old_user_id ($old_user_login) by $current_user->user_login -> $user->username ");
+        syslog(LOG_NOTICE, "Sugata, disabling $old_user_id ($old_user_login) by $current_user->user_login -> $user->username ");
 
         $current_user->Logout(get_user_uri($user->username));
     }
@@ -131,7 +144,7 @@ function save_profile()
     }
 
     if (empty($_POST['form_hash']) || $_POST['form_hash'] != $form_hash) {
-        throw new Exception(_('Falta la clave de control'));
+        throw new Exception(_('Управляющий ключ отсутствует'));
     }
 
     if (!empty($_POST['username']) && trim($_POST['username']) != $user->username) {

@@ -23,9 +23,11 @@
             {% endif %}
 
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="username" class="title">{% trans _('Пользователь') %}</label>
+                <div class="col-sm-6"> 
+                    <div class="form-group">   
+
+                    {% if form.user_edit %}
+                       <label for="public_info" class="title">Профиль</label>
                         <input type="text" id="username" name="username" value="{{ user.username }}" class="form-control" required />
 
                         <button type="button" id="check-username" class="btn btn-default btn-inline">
@@ -37,6 +39,11 @@
                             checkInput($('#username'));
                         });
                         </script>
+                    {% else %}  
+                        <label for="public_info" class="title">Профиль</label>
+                        <h2>{{ user.username }}</h2>
+                    {% endif %}
+
                     </div>
                 </div>
 
