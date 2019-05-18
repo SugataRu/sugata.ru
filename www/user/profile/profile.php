@@ -21,6 +21,9 @@ if ($user->total_links > 0 && $user->published_links > 0) {
 
 $addresses = array();
 
+
+
+
 if ($current_user->user_id == $user->id || ($current_user->user_level === 'god' && !$user->admin)) {
     // gods and admins know each other for sure, keep privacy
     $dbaddresses = $db->get_results('

@@ -46,9 +46,9 @@ foreach ($posts as $post) {
 
     if ($view === 'notes_votes') {
         if ($post->value > 0){
-            echo '<i class="fa fa-arrow-circle-up" style="color:green;position:relative;top: -29px;"></i>';
+            echo '<i class="lnr lnr-arrow-up-circle" style="color:green;position:relative;top: -29px;"></i>';
         } else {
-            echo '<i class="fa fa-arrow-circle-down" style="color:red;position:relative;top: -29px;"></i>';
+            echo '<i class="lnr lnr-arrow-down-circle" style="color:red;position:relative;top: -29px;"></i>';
         }
     }
 
