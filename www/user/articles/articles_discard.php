@@ -1,9 +1,6 @@
 <?php
 defined('mnminclude') or die();
 
-print_r('<br>1<br>2<br>');
-print_r('eee');
-
 $query = '
     FROM links
     WHERE (

@@ -10,7 +10,7 @@ var base_url = "{{ globals.base_url_general }}",
     do_partial = {% if globals.allow_partial %}true{% else %}false{% endif %},
     lastScrollTop = 0;
 
-if ((typeof window.history === 'object') && (do_partial || navigator.userAgent.match(/meneame/i))) {
+if ((typeof window.history === 'object') && (do_partial || navigator.userAgent.match(/sugata/i))) {
     do_partial = true;
 }
 
@@ -372,9 +372,33 @@ function add_design_img(element, type, id) {
         }
     }, "json");
     reportAjaxStats('html', "get_design");
-
 }
 
+
+function add_design_color(element, type, id) {
+    var url = base_url + 'backend/get_color';
+
+    $.post(url, {
+        id: id,
+        user: user_id,
+        key: base_key,
+        type: type
+    }, function(data) {
+        if (data.error) {
+            mDialog.notify("{% trans _('Ошибка:') %} " + data.error, 5);
+            return;
+        }
+
+        if (data.value) {
+            $('#' + element).addClass("on");
+			window.location.reload();
+        } else {
+            $('#' + element).removeClass("on");
+			window.location.reload();
+        }
+    }, "json");
+    reportAjaxStats('html', "get_color");
+}
 
 function add_remove_fav(element, type, id) {
     var url = base_url + 'backend/get_favorite';
@@ -1670,7 +1694,7 @@ function share_tw(e) {
         traverse: function(files, area) {
             var form = area.parents('form');
 
-            form.find('input[name="tmp_filename"], input[name="tmp_filetype"]').remove();
+            form.find('input[name="tmp_filename"], input[name="tmp_filetype"], input[name="tmp_post"]').remove();
 
             if (typeof files !== 'undefined') {
                 if (m.check_files(files, area)) {
@@ -1720,10 +1744,10 @@ function share_tw(e) {
                 if (typeof r.error === 'undefined') {
                     thumb.attr('src', r.thumb).show();
 
-                    form.find('input[name="tmp_filename"], input[name="tmp_filetype"]').remove();
+                    form.find('input[name="tmp_filename"], input[name="tmp_filetype"], input[name="tmp_post"]').remove();
                     form.append('<input type="hidden" name="tmp_filename" value="' + r.name + '"/>');
                     form.append('<input type="hidden" name="tmp_filetype" value="' + r.type + '"/>');
-
+                    form.append('<input type="hidden" name="tmp_post" value="post"/>');
                     s.complete(r);
                 } else {
                     thumb.hide();
@@ -1764,8 +1788,8 @@ function share_tw(e) {
             'show_thumb': true,
             'hide_delay': 2000,
             'backgroundColor': '#AFFBBB',
-            'backgroundImage': base_static + version_id + '/img/common/upload-2x.png',
-            'loaderImage': base_static + version_id + '/img/common/uploading.gif'
+            'backgroundImage': base_static  + '/img/common/upload-2x.png',
+            'loaderImage': base_static + '/img/common/uploading.gif'
         };
 
         this.each(function() {
@@ -2475,7 +2499,7 @@ function analyze_hash(force) {
     if (link_id > 0 && (m2 = m[1].match(/^c-(\d+)$/)) && m2[1] > 0) {
         /* it's a comment */
         if (target.length) {
-            $("#" + m[1]).find(".comment-body").css("border-style", "solid").css("border-width", "1px");
+            $("#" + m[1]).find(".comment-body").css("border-style", "solid").css("border-width", "1px").css("border-color", "#ddd");
             /* If there is an anchor in the url, displace 80 pixels down due to the fixed header */
         } else {
             /* It's a link to a comment, check it exists, otherwise redirect to the right page */
@@ -2938,7 +2962,7 @@ $(document).ready(function() {
                         'Этот сайт использует куки',
                         'согласен',
                         'больше информации',
-                        base_url + "./faq-ru"
+                        base_url + "./legal"
                     );
                 }
             });
