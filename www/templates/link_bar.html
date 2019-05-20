@@ -40,14 +40,14 @@
     <span id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="favorite on" {% else %} class="favorite" {% endif %} ></span>
     {% endif %}
 
-    <a class="close" href="{{ self.url }}" title="{% trans _('cerrar barra') %}">X</a>
+    <a class="close" href="{{ self.url }}" title="{% trans _('закрыть бар') %}">X</a>
 </div>
 
 <script>
 addPostCode(function () {
     $("#header-logo").attr('href', '{{ self.permalink }}')
         .attr('href', '{{ self.permalink }}')
-        .attr('title', "{% trans _('ir a') %} «{{ self.title }}» {% trans _('en menéame') %}")
+        .attr('title', "{% trans _('перейти') %} «{{ self.title }}» {% trans _('к sugata') %}")
         .click(function () { location.href='{{ self.permalink }}' })
         .after($('#bar'));
 });

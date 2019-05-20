@@ -28,11 +28,11 @@
                 </div>
 
                 <div class="text-center m-20">
-                    <input type="button" class="button" onclick="window.location = '{% get_url 'submit/?step=2&amp;id=' link.id %}';" value="&#171; {% trans _('Вернуться к изданию') %}"/>
+                    <input type="button" class="button" onclick="window.location = '{% get_url 'submit/?step=2&amp;id=' link.id %}';" value="&#171; {% trans _('Вернуться к редактированию') %}"/>
 
                     {% if !error %}
                     &nbsp;&nbsp;
-                    <input type="submit" class="button" value="{% trans _('Отправить в очередь') %} &#187;"/>
+                    <input type="submit" class="button" value="{% trans _('Разместить') %} &#187;"/>
                     {% endif %}
                 </div>
             </fieldset>
