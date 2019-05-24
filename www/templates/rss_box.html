@@ -35,7 +35,7 @@
                     {% if globals.link_id %}
                     <li>
                         <a href="{{ globals.base_url }}comments_rss?id={{ globals.link_id }}">
-                            <i class="lnr lnr-frame-contract"></i>{% trans _('комментарии этой новости') %}
+                            <i class="lnr lnr-frame-contract"></i>{% trans _('комментарии к новости') %}
                         </a>
                     </li>
                     {% endif %}
@@ -46,7 +46,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ globals.base_url }}comments_rss?author_id={{ current_user.user_id }}"><i class="lnr lnr-frame-contract"></i>{% trans _('комментарии к моим новостям') %}</a>
+                        <a href="{{ globals.base_url }}comments_rss?author_id={{ current_user.user_id }}"><i class="lnr lnr-frame-contract"></i>{% trans _('к моим новостям') %}</a>
                     </li>
                     {% endif %}
                     <li>

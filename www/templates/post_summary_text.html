@@ -1,21 +1,22 @@
-
 {{ self.content }}
 
 {% if self.media_size > 0 %}
 &nbsp;
 {# PixeloPhilia icon from omercetin.deviantart.com #}
 
-<a class="fancybox" title="{% trans _('subida por') %} {{ self.username }} ({{ self.media_size }} bytes)" href="{{ self.media_url }}">
+<a class="fancybox" title="{% trans _('разместил') %} {{ self.username }} ({{ self.media_size }} байт)" href="{{ self.media_url }}">
     <img src="{{ globals.base_static }}img/g.gif"
         {% if globals.cache_redirector %}
         class="thumb ok lazy"
-        data-src="{{ self.media_thumb_dir }}/media_thumb-post-{{ self.id }}.{{ self.media_extension }}?{{ self.media_date }}"
+        data-src="{{ self.media_url }}"
         data-2x="s:thumb:thumb_2x"
         {% else %}
         class="thumb lazy"
         data-src="img/common/picture01.png" width="30" height="24"
         {% endif %}
         alt="media" />
+		
+	 
 </a>
 {% endif %}
 
