@@ -52,7 +52,7 @@ function check_ban($ban_text, $ban_type, $check_valid = true, $first_level = fal
             if ($check_valid && !preg_match('/^([\w_\-\.]+\.[\w]{2,4}(\/[a-z\.]+\/*){0,1}|[\w]{2,5})$/', $ban_text)) {
                 $ban = array();
                 $ban['match'] = $ban_text;
-                $ban['comment'] = _('No es un dominio correcto');
+                $ban['comment'] = _('Это не правильный домен');
 
                 return $ban;
             }
@@ -66,9 +66,9 @@ function check_ban($ban_text, $ban_type, $check_valid = true, $first_level = fal
                 // TODO: check regexp
                 $ban = array();
                 $ban['match'] = $ban_text;
-                $ban['comment'] = _('No es una IP válida');
+                $ban['comment'] = _('Это не действительный IP');
 
-                syslog(LOG_INFO, "IP inválida: $ban_text");
+                syslog(LOG_INFO, "IP недействительный: $ban_text");
 
                 return $ban;
             }
@@ -184,7 +184,7 @@ function insert_ban($ban_type, $ban_text, $ban_comment = "", $ban_expire = 'UNDE
 
     if (strlen($ban_text) < 2) {
         echo '<div class="form-error">';
-        echo '<p>' . _('Texto del ban muy corto') . '</p>';
+        echo '<p>' . _('Очень короткий текст запрета') . '</p>';
         echo "</div>\n";
         return;
     }

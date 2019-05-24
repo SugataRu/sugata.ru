@@ -149,19 +149,14 @@
             {% trans _('') %} <a href="{% exec get_user_uri self.username, 'history' %}">{{ self.username }}</a>
 
            
+ &nbsp;<span class="data">
 
-            &nbsp;
+                    {% if self.status != 'published' %}
+                    {% trans _('проект: ') %}     {% else %}   
+                    {% endif %}
 
-            {% if self.status != 'published' %}
-            {% trans _('проект: ') %}
-            {% endif %}
-
-            <!--span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____</span-->
-
-            {% if self.status == 'published' %}
-            {% trans _(' ') %}
-            <span data-ts="{{ self.sub_date }}" class="ts visible" title="{% trans _('опубликованно') %}: ">____</span>
-            {% endif %}
+                    <span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____ {{ self.sent_date }}</span>
+</span>
 
 {% if self.url %}
 {% trans _(' &nbsp;   ') %} 
