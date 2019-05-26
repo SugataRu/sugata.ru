@@ -1,31 +1,27 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <STYLE TYPE="text/css" MEDIA=screen>
 <!--
-body,h1,h2,h3,h4,p,a{color:#e0e2f4}
-body,p{font:normal 20px/1.25rem VT323,monospace}
-h1{font:normal 2.75rem/1.05em VT323,monospace}
-h2{font:normal 2.25rem/1.25em VT323,monospace}
-h3{font:lighter 1.5rem/1.25em VT323,monospace}
-h4{font:lighter 1.125rem/1.2222222em VT323,monospace}
-body{background:#0414a7}
-.container{width:90%;margin:auto;max-width:640px}
-.bsod{padding-top:10%}
-.bsod .neg{text-align:center;color:#0414a7}
-.bsod .neg .bg{background:#aaa;padding:0 15px 2px 13px}
-.bsod .title{margin-bottom:50px}
-.bsod .nav{margin-top:35px;text-align:center}
-.bsod .nav .link{text-decoration:none;padding:0 9px 2px 8px}
-.bsod .nav .link:hover,.bsod .nav .link:focus{background:#aaa;color:#0414a7}
+body,h1{color:#333}
+body {font-size: 20px;font-family: Verdana, Arial, sans-serif;}
+h1{font-size: 2.75rem;color:#86ba4b;}
+body{background:#eee;background: url(https://sugata.ru/img/bg_sugata.jpg);z-index: -2;}
+.container{margin:0 auto;max-width:640px;background-color: #fff;padding: 20px;border-radius: 5px;margin-top: 40px;}
+a.link {background:#ffa980; color:#fff;font-size: 1.55rem;padding: 6px 16px;}
+a.link:hover {background:#86ba4b;}
+@media (max-width: 920px) { 
+body, .container {font-size: 16px}
+}
 -->
 </STYLE>
 </head>
 
-<body>
+<body> 
 
-<main class="bsod container">
+<div class="container">
  
-  <h1 class="neg title"><span class="bg">
+<h1 class="title">
   
   {% if mess %}
      
@@ -37,21 +33,19 @@ body{background:#0414a7}
     {% trans _("Опс... %s"), error %}
 {% endif %}
   
-  </span></h1>
+</h1>
   
-  <p>Произошла ошибка, чтобы продолжить:</p>
-  <p>* Вернитесь на нашу домашнюю страницу;<br>
-  * Нажав что-то внизу.</p>
-  <nav class="nav">
-    <a title="На главную страницу" href="{{ globals.base_url_sugata }}" class="link">index</a> 
- 
-  <br><br>
-    <a title="На главную страницу" href="{{ globals.base_url_sugata }}"><img src="{{ globals.base_static }}img/error.png" width="362" height="100" alt="оопс ошибка" /></a>
+ Произошла ошибка, чтобы продолжить:</br> <br>
+  &#183; Вернитесь на шаг назад;<br>
+  &#183; Нажмите на кнопку внизу.<br><br><br>
+ <center>
+    <a title="На главную страницу" href="{{ globals.base_url_sugata }}" class="link">на главную...</a> 
+
 	<br><br>
  
 	
- </nav>
+ </center>
  
-</main>
+</div> 
 </body>
 </html>
