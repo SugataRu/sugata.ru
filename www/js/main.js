@@ -599,7 +599,7 @@ function fancybox_gallery(type, user, link) {
     var is_public = parseInt({{ globals.media_public }}) > 0;
 
     if (!is_public && !user_id > 0) {
-        mDialog.notify('{% trans _('Debe estar autentificado para visualizar imágenes ') %}', 5);
+        mDialog.notify('{% trans _('Для просмотра изображений необходимо авторизироваться ') %}', 5);
         return;
     }
 
@@ -1394,7 +1394,7 @@ function show_report_dialog(comment_id) {
                 dataType: 'json',
                 success: function(data) {
                     if (!data.error) {
-                        mDialog.notify("{% trans _('Gracias por tu colaboración. Evaluaremos el comentario.') %}", 5);
+                        mDialog.notify("{% trans _('Спасибо за вашу помощь. Мы оценим комментарий.') %}", 5);
                         $.colorbox.close();
                     } else {
                         mDialog.notify("error: " + data.error, 5);
@@ -1703,7 +1703,7 @@ function share_tw(e) {
                     }
                 }
             } else {
-                mDialog.notify("{% trans _('formato no reconocido') %}", 5);
+                mDialog.notify("{% trans _('нераспознанный формат') %}", 5);
             }
         },
 
@@ -1715,12 +1715,12 @@ function share_tw(e) {
             for (var i = 0; i < files.length; i++) {
                 /* File type control */
                 if (files[i].type.length > 0 && !files[i].type.match('image.*')) {
-                    mDialog.notify("{% trans _('sólo se admiten imágenes') %}", 5);
+                    mDialog.notify("{% trans _('разрешены только изображения') %}", 5);
                     return false;
                 }
 
                 if (files[i].fileSize > s.maxsize) {
-                    mDialog.notify("{% trans _('tamaño máximo excedido') %}" + ":<br/>" + files[i].fileSize + " > " + s.maxsize + " bytes", 5);
+                    mDialog.notify("{% trans _('превышен максимальный размер') %}" + ":<br/>" + files[i].fileSize + " > " + s.maxsize + " bytes", 5);
                     return false;
                 }
             }
@@ -2012,7 +2012,7 @@ var fancyBox = new function() {
             maxHeight = false;
             ajaxName = "youtube";
         } else if ((v = myHref.match(/twitter\.com\/.+?\/(?:status|statuses)\/(\d+)/))) {
-            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('en Twitter') %}</a>';
+            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('на Twitter') %}</a>';
             html = " ";
 
             if (is_mobile) {
@@ -2035,12 +2035,12 @@ var fancyBox = new function() {
                     if (typeof data.html !== "undefined" && data.html.length) {
                         $('#cboxLoadedContent').html(data.html);
                     } else {
-                        $('#cboxLoadedContent').html('<a target="_blank" href="' + myHref + '">Not found</a>');
+                        $('#cboxLoadedContent').html('<a target="_blank" href="' + myHref + '">Нет файлов</a>');
                     }
                 });
             };
         } else if ((v = myHref.match(/(?:vimeo\.com\/(\d+))/))) {
-            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('vídeo en Vimeo') %}</a>';
+            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('видео на Vimeo') %}</a>';
 
             if (is_mobile) {
                 width = '100%';
@@ -2056,7 +2056,7 @@ var fancyBox = new function() {
             href = '//player.vimeo.com/video/' + v[1];
             iframe = true;
         } else if ((v = myHref.match(/(?:vine\.co\/v\/(\w+))/))) {
-            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('vídeo en Vine') %}</a>';
+            title = '<a rel="nofollow" target="_blank" href="' + myHref + '"' + target + '>{% trans _('видео на Vine') %}</a>';
 
             if (is_mobile) {
                 innerWidth = 320;
@@ -2340,9 +2340,9 @@ var fancyBox = new function() {
     }
 
     var translations = {
-        privates: "{% trans _('новый частный') %}",
+        privates: "{% trans _('новых писем') %}",
         posts: "{% trans _('ответы на заметки') %}",
-        comments: "{% trans _('ответы на комментарии') %}",
+        comments: "{% trans _('комментарии') %}",
         friends: "{% trans _('новые друзья') %}",
         favorites: "{% trans _('сохраненные новости') %}"
     };
@@ -3022,223 +3022,6 @@ $(document).ready(function() {
             $(this).find('.sub-info').animate({ 'bottom': '20px' }, 200).find('.sub-follow').hide();
         }
     });
-
- /*    var $subsSlider = $('.official-subs-slider');
-
-   $subsSlider.slick({
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        prevArrow: $subsSlider.find('.slick-prev'),
-        nextArrow: $subsSlider.find('.slick-next'),
-        appendDots: $subsSlider.find('.dots'),
-        responsive: [{
-            breakpoint: 2000,
-            settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: true,
-                dots: true
-            }
-        }, {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true,
-                dots: true
-            }
-        }, {
-            breakpoint: 700,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }, {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true
-            }
-        }]
-    });
-
-    var $widgetSubsSlider = $('.widget-official-subs-slider');
-
-    $widgetSubsSlider.slick({
-        rtl: true,
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        prevArrow: $subsSlider.find('.slick-prev'),
-        nextArrow: $subsSlider.find('.slick-next'),
-        appendDots: $subsSlider.find('.dots'),
-        responsive: [{
-            breakpoint: 2000,
-            settings: {
-                rtl: true,
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: false,
-                dots: true
-            }
-        }, {
-            breakpoint: 1280,
-            settings: {
-                rtl: true,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true,
-                dots: false
-            }
-        },{
-            breakpoint: 1024,
-            settings: {
-                rtl: true,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: false
-            }
-        }, {
-            breakpoint: 700,
-            settings: {
-                rtl: true,
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }, {
-            breakpoint: 480,
-            settings: {
-                rtl: true,
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }]
-    });
-
-
-    $widgetSubsSlider.on('setPosition', function(slick){
-        var $wrapper = $('.widget-official-subs-slider div.widget-title-wrapper');
-        $wrapper.css({height: $wrapper.parent().width()});
-    });
-
-    var $subsSlider = $('.recommended-subs-slider');
-
-    $subsSlider.slick({
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        prevArrow: $subsSlider.find('.slick-prev'),
-        nextArrow: $subsSlider.find('.slick-next'),
-        appendDots: $subsSlider.find('.dots'),
-        responsive: [{
-            breakpoint: 2000,
-            settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: true,
-                dots: true
-            }
-        }, {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true,
-                dots: true
-            }
-        }, {
-            breakpoint: 700,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }, {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true
-            }
-        }]
-    });
-
-    var $widgetPopularLinksSlider = $('.widget-popular-links-slider');
-    $widgetPopularLinksSlider.slick({
-        rtl: true,
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        prevArrow: $widgetPopularLinksSlider.find('.slick-prev'),
-        nextArrow: $widgetPopularLinksSlider.find('.slick-next'),
-        appendDots: $widgetPopularLinksSlider.find('.dots'),
-        responsive: [{
-            breakpoint: 2000,
-            settings: {
-                rtl: true,
-                slidesToShow: 5,
-                slidesToScroll: 5,
-                infinite: false,
-                dots: true
-            }
-        }, {
-            breakpoint: 1280,
-            settings: {
-                rtl: true,
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                infinite: true,
-                dots: false
-            }
-        },{
-            breakpoint: 1024,
-            settings: {
-                rtl: true,
-                slidesToShow: 3,
-                slidesToScroll: 3,
-                infinite: true,
-                dots: false
-            }
-        }, {
-            breakpoint: 700,
-            settings: {
-                rtl: true,
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }, {
-            breakpoint: 480,
-            settings: {
-                rtl: true,
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }]
-    });
-
-    $widgetPopularLinksSlider.on('setPosition', function () {
-        $(this).find('.slick-slide').height('auto');
-        var slickTrack = $(this).find('.slick-track');
-        var slickTrackHeight = $(slickTrack).height();
-        $(this).find('.slick-slide').css('height', slickTrackHeight + 'px');
-    });
-*/
     if (current_user > 0) {
         addPostCode(function() {
             pref_input_check('subs_default_header');
