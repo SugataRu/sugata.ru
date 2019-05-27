@@ -199,30 +199,22 @@ function do_header($title, $id = 'home', $options = false, $tab_options = false,
 	//	print_r($this_site->enabled);
 	//	print_r('<br>');
 	//	print_r($this_site_properties['new_disabled']);
-		
-
-
-        if ($this_site->id == SitesMgr::getMainSiteId() && in_array($globals['script'], ['index.php', 'shakeit.php'])) {
-            $left_options[] = new MenuOption(_('Очередь'), $globals['base_url'] . 'queue', $id, _('новости в ожидании перевода в статус публикация'));
+ 
+    if ($this_site->id == '4') {
+          if ($globals['mobile']) {  } else{    $left_options[] = new MenuOption(_('Главная'), $globals['base_url'], $id, _('Главная страница'));}
+            $left_options[] = new MenuOption(_('Новое'), $globals['base_url'] . 'queue', $id, _('новости в ожидании перевода в статус публикация'));
             $left_options[] = new MenuOption(_('статьи'), $globals['base_url'] . 'articles', $id, _('статьи'));
             $left_options[] = new MenuOption(_('Пространства'), $globals['base_url'] . 'subs', $id, _('Пространства'));
-			
-			$left_options[] = new MenuOption(_('S/+'), $globals['base_url'] . '?meta=_*', $id, _('С пространств'));
-		 
-			
+            $left_options[] = new MenuOption(_('S/+'), $globals['base_url'] . '?meta=_*', $id, _('С пространств'));
             $left_options[] = new MenuOption(_('Популярные'), $globals['base_url'] . 'popular', $id, _('новости в ожидании перевода в статус публикация'));
-          //  $left_options[] = new MenuOption(_('самые посещаемые'), $globals['base_url'] . 'top_visited', $id, _('самые посещаемые / читаемые истории'));
-        } else {
-            $left_options[] = new MenuOption(_('Главная'), $globals['base_url'], $id, _('Главная страница'));
-            $left_options[] = new MenuOption(_('Очередь'), $globals['base_url'] . 'queue', $id, _('новости в ожидании'));
+         //   $left_options[] = new MenuOption(_('Поиск'), $globals['base_url'] . 'search', $id, _('поиск по сайту'));
+    } else {
+        if ($globals['mobile']) {  } else{     $left_options[] = new MenuOption(_('Главная'), $globals['base_url'], $id, _('Главная страница'));}
+            $left_options[] = new MenuOption(_('Новое'), $globals['base_url'] . 'queue', $id, _('новости в ожидании'));
             $left_options[] = new MenuOption(_('статьи'), $globals['base_url'] . 'articles', $id, _('статьи'));
-            $left_options[] = new MenuOption(_('Пространства'), $globals['base_url_general'] . 'subs', $id, _('Пространства'));
-			
-			$left_options[] = new MenuOption(_('S/+'), $globals['base_url'] . '?meta=_*', $id, _('С пространств'));
-			
             $left_options[] = new MenuOption(_('Популярные'), $globals['base_url'] . 'popular', $id, _('истории с наибольшим количеством голосов'));
         //    $left_options[] = new MenuOption(_('самые посещаемые'), $globals['base_url'] . 'top_visited', $id, _('самые посещаемые / читаемые истории'));
-        }
+    }
 
         $right_options = array();
         $right_options[] = new MenuOption(_('Разговор'), $globals['base_url'] . 'sneak', $id, _('Разговор в реальном времени'));
@@ -232,7 +224,29 @@ function do_header($title, $id = 'home', $options = false, $tab_options = false,
 		
 		
 		if ($this_site->enabled && empty($this_site_properties['new_disabled'])) {
-            $submit_new_post_text = boolval($globals['mobile']) ? _('разместить') : _('разместить');
+            $submit_new_post_text = boolval($globals['mobile']) ? _(' разместить') : _('<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg class="add" version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="14px" height="14px" viewBox="0 0 1280.000000 1280.000000"
+ preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+ stroke="none">
+<path d="M5150 12613 c-45 -7 -134 -57 -176 -98 -43 -41 -84 -102 -100 -145
+-5 -14 -11 -952 -14 -2225 l-5 -2200 -2200 -5 c-1256 -3 -2211 -9 -2225 -14
+-80 -29 -171 -114 -215 -200 l-30 -59 0 -1271 0 -1271 28 -56 c16 -31 39 -67
+51 -80 38 -40 85 -79 96 -79 5 0 10 -4 10 -8 0 -4 26 -17 58 -27 56 -20 103
+-20 2245 -23 l2187 -2 0 -2188 c0 -2306 -2 -2206 44 -2291 23 -44 105 -131
+122 -131 8 0 14 -4 14 -10 0 -5 5 -10 11 -10 6 0 25 -6 42 -13 86 -37 82 -37
+1307 -37 880 0 1213 3 1239 12 73 23 121 43 121 51 0 4 6 7 13 7 20 0 102 90
+127 140 12 25 28 54 34 65 8 15 12 612 14 2212 l2 2193 2188 3 c2049 2 2190 3
+2230 20 54 22 120 65 149 97 39 43 43 49 43 60 0 5 5 10 10 10 6 0 10 6 10 13
+0 6 8 26 18 42 16 28 17 111 17 1305 0 1194 -1 1277 -17 1305 -10 17 -18 36
+-18 43 0 6 -4 12 -10 12 -5 0 -10 5 -10 11 0 29 -127 132 -190 155 -14 5 -967
+11 -2220 14 l-2195 5 -5 2190 c-5 1927 -7 2194 -21 2225 -46 106 -105 174
+-194 222 l-60 33 -1250 1 c-687 1 -1261 0 -1275 -3z"/>
+</g>
+</svg> разместить');
             $right_options[] = new MenuOption($submit_new_post_text, $globals['base_url'] . 'submit', $id, _('отправить новую историю'), "submit_new_post");
            // $left_options[] = new MenuOption(_('Создать статью'), $globals['base_url'] . 'submit?type=article&write=true', $id, _('отправить новую статью'), 'submit_new_article');
         }
@@ -242,7 +256,7 @@ function do_header($title, $id = 'home', $options = false, $tab_options = false,
         $left_options = $options;
         $right_options = array();
 
-        $right_options[] = new MenuOption(_('очередь'), $globals['base_url'] . 'queue', '', _('новости в ожидании утверждения'));
+        $right_options[] = new MenuOption(_('Новое'), $globals['base_url'] . 'queue', '', _('новости в ожидании утверждения'));
         $right_options[] = new MenuOption(_('Разговор'), $globals['base_url'] . 'sneak', $id, _('Разговор в реальном времени'));
         $right_options[] = new MenuOption(_('Заметки'), post_get_base_url(), $id, _('читать или писать заметки и личные сообщения'));
         $right_options[] = new MenuOption(_('галерея'), 'javascript:fancybox_gallery(\'all\');', false, _('изображения, загруженные пользователями'));
@@ -967,6 +981,23 @@ function do_best_story_comments($link)
     }
 }
 
+function do_my_menu()
+{
+    global $db, $globals, $current_user;
+    if ($globals['mobile']) {
+        return;
+    }
+    $my_id = $current_user->user_id;
+    $count = (int) $db->get_var('SELECT SQL_CACHE COUNT(*) FROM friends, users WHERE ( friend_type = "manual" AND friend_from = "'.$my_id.'" AND user_id = friend_to AND friend_value > 0 );');
+    echo $output = Haanga::Load('my_menu.html', compact('count'), true);
+
+     if ($do_cache) {
+        memcache_madd($key, $count, 300);
+    }
+
+}
+
+
 function do_active_stories()
 {
     global $db, $globals, $dblang;
@@ -1012,7 +1043,7 @@ function do_active_stories()
         $links[] = $link;
     }
 
-    $title = _('выдающийся');
+    $title = _('выпадающийся');
     $url = $globals['base_url'] . 'top_active';
     $subclass = 'red';
 
@@ -1070,7 +1101,7 @@ function do_best_stories()
     $url = $globals['base_url'] . 'popular';
     $subclass = 'red';
 
-    echo $output = Haanga::Load('best_stories.html', compact('links', 'title', 'url', 'subclass'), true);
+    echo $output = Haanga::Load('best_stories_top.html', compact('links', 'title', 'url', 'subclass'), true);
 
     memcache_madd($key, $output, 180);
 }
@@ -1315,7 +1346,7 @@ function do_last_subs($status = 'published', $count = 10, $order = 'date')
     $where_not_banned = '';
 
     if (isset($globals['subs_banned']) and is_array($globals['subs_banned']) and count($globals['subs_banned']) > 0) {
-        $where_not_banned = " and subs.name not in ('" . implode(",", $globals['subs_banned']) . "')";
+        $where_not_banned = " and subs.name  not in ('" . implode(",", $globals['subs_banned']) . "')";
     }
 
     $ids = $db->get_col("select link from sub_statuses, subs, links where date > date_sub(now(), interval 48 hour) and status = '$status' and sub_statuses.id = origen and subs.id = sub_statuses.id and owner > 0 and not nsfw and link_id = link $where_not_banned order by $order desc limit $count");
@@ -1336,13 +1367,21 @@ function do_last_subs($status = 'published', $count = 10, $order = 'date')
 
         $link->print_subname = true;
         $link->url = $link->get_permalink();
-        $link->thumb = $link->has_thumb();
+        //$link->thumb = $link->has_thumb();
         $link->total_votes = $link->votes + $link->anonymous;
 
-        if ($link->thumb) {
-            $link->thumb_x = round($link->thumb_x / 2);
-            $link->thumb_y = round($link->thumb_y / 2);
-        }
+         $sub_id = SitesMgr::get_info($link->sub_id);
+         // Check if the sub has a logo and calculate the width
+            if ($sub_id->media_id > 0 && $sub_id->media_dim1 > 0 && $sub_id->media_dim2 > 0) {
+                $r = $sub_id->media_dim1 / $sub_id->media_dim2;
+                $link->logo_width = round($r * $sub_id->logo_height);
+                $link->logo_url = Upload::get_cache_relative_dir($sub_id->id) . '/media_thumb-sub_logo-' . $sub_id->id . '.' . $sub_id->media_extension . '?' . $sub_id->media_date;
+            }
+
+//        if ($link->thumb) {
+  //          $link->thumb_x = round($link->thumb_x / 2);
+    //        $link->thumb_y = round($link->thumb_y / 2);
+      //  }
 
         $links[] = $link;
     }
@@ -1394,6 +1433,48 @@ function do_sub_message_right()
     ));
 }
 
+
+
+// Добавил показ пространства для поста
+function do_sub_message_right_to()
+{
+    global $globals, $current_user;
+
+    if ($globals['mobile']) {
+        return;
+    }
+
+    $properties = SitesMgr::get_extended_properties();
+    $properties['message_html'] = LCPBase::html($properties['message']);
+
+    $site = SitesMgr::get_info();
+
+    // Check if the sub has a logo and calculate the width
+    if ($site->media_id > 0 && $site->media_dim1 > 0 && $site->media_dim2 > 0) {
+        $r = $site->media_dim1 / $site->media_dim2;
+
+        if ($globals['mobile']) {
+            $site->logo_height = $globals['media_sublogo_height_mobile'] * 2;
+        } else {
+            $site->logo_height = $globals['media_sublogo_height'] * 2;
+        }
+
+        $site->logo_width = round($r * $site->logo_height);
+        $site->logo_url = Upload::get_cache_relative_dir($site->id) . '/media_thumb-sub_logo-' . $site->id . '.' . $site->media_extension . '?' . $site->media_date;
+    }
+
+    $site->followers = SitesMgr::get_followers();
+
+    Haanga::Load('message_right.html', array(
+        'site' => $site,
+        'owner' => SitesMgr::get_owner(),
+        'properties' => $properties,
+        'user' => $current_user,
+    ));
+}
+
+
+
 // Print the "message" of the sub, if it exists
 function do_sub_description()
 {
@@ -1431,6 +1512,46 @@ function do_sub_description()
         'user' => $current_user,
     ));
 }
+
+
+//evg
+function do_my_subs()
+{
+	
+    global $db, $globals, $current_user;
+    $subs = SitesMgr::get_subscriptions($current_user->user_id);
+
+	foreach ($subs as $sub) {
+            if (!$sub->enabled) {
+                continue;
+            }
+
+            $sub->site_info = SitesMgr::get_info($sub->id);
+			
+			
+	            // Check if the sub has a logo and calculate the width
+            if ($sub->site_info->media_id > 0 && $sub->site_info->media_dim1 > 0 && $sub->site_info->media_dim2 > 0) {
+                $r = $sub->site_info->media_dim1 / $sub->site_info->media_dim2;
+
+                if ($globals['mobile']) {
+                    $sub->site_info->logo_height = $globals['media_sublogo_height_mobile'];
+                } else {
+                    $sub->site_info->logo_height = $globals['media_sublogo_height'];
+                }
+
+                $sub->site_info->logo_width = round($r * $sub->site_info->logo_height);
+                $sub->site_info->logo_url = Upload::get_cache_relative_dir($sub->site_info->id) . '/media_thumb-sub_logo-' . $sub->site_info->id . '.' . $sub->site_info->media_extension . '?' . $sub->site_info->media_date;
+            }
+
+            $followed_subs[] = $sub;
+			
+
+ }
+ 
+
+ Haanga::Load('my_subs.html', compact('subs'));
+}
+
 
 function do_sidebar_block($name = 'default')
 {

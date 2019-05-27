@@ -14,19 +14,18 @@ function design_exists($user, $type = 'user')
 }
 
 function design_add($user, $type = 'user')
-{   
+{
     global $db, $globals;
     $type = $db->escape($type);
     return $db->query("UPDATE users set user_img_feed='1' where user_id=$user");
- 
 }
 
 function design_delete($user, $type = 'user')
-{   
+{
     global $db;
     $type = $db->escape($type);
     return $db->query("UPDATE users set user_img_feed='0' where user_id=$user");
- 
+	
 }
 
 function design_add_delete($user, $type = 'user')

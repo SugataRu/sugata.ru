@@ -417,7 +417,7 @@ final class Tabs
                 'link' => $user->get_uri('articles'),
             ),
             'articles_private' => array(
-                'title' => _('Черновик'),
+                'title' => _('Частные'),
                 'link' => $user->get_uri('articles_private'),
             ),
             'articles_shaken' => array(

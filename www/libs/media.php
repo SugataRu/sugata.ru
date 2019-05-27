@@ -38,11 +38,11 @@ class Media
             "Expires" => gmdate("D, d M Y H:i:s T", time() + 864000) ));
 
         if ($response) {
-            // syslog(LOG_NOTICE, "Meneame, uploaded $uri to S3");
+            // syslog(LOG_NOTICE, "Sugata, uploaded $uri to S3");
             $lastHTTPCode = 200;
             return true;
         }
-        syslog(LOG_NOTICE, "Meneame, failed to upload $uri to S3");
+        syslog(LOG_NOTICE, "Sugata, failed to upload $uri to S3");
         $lastHTTPCode = 0;
         return false;
     }
@@ -58,7 +58,7 @@ class Media
         if ($object) {
             return $object;
         }
-        // syslog(LOG_NOTICE, "Meneame, failed to get $uri from S3 to $output code: " . S3::$lastHTTPCode);
+        // syslog(LOG_NOTICE, "Sugata, failed to get $uri from S3 to $output code: " . S3::$lastHTTPCode);
         @unlink($output);
         return false;
     }

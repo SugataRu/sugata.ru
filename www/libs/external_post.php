@@ -15,13 +15,13 @@ function twitter_post($auth, $text, $short_url, $image = false)
     }
 
     if (!class_exists("OAuth")) {
-        syslog(LOG_NOTICE, "Meneame: pecl/oauth is not installed");
+        syslog(LOG_NOTICE, "Sugata: pecl/oauth is not installed");
         return;
     }
 
     if (! $auth['twitter_consumer_key'] || ! $auth['twitter_consumer_secret']
         || ! $auth['twitter_token'] || ! $auth['twitter_token_secret']) {
-        syslog(LOG_NOTICE, "Meneame: consumer_key, consumer_secret, token, or token_secret not defined");
+        syslog(LOG_NOTICE, "Sugata: consumer_key, consumer_secret, token, or token_secret not defined");
         return;
     }
 
@@ -90,9 +90,9 @@ function pubsub_post()
     $rss = 'http://'.get_server_name().$globals['base_url'].'rss';
     $p = new Publisher($globals['pubsub']);
     if ($p->publish_update($rss)) {
-        syslog(LOG_NOTICE, "Meneame: posted to pubsub ($rss)");
+        syslog(LOG_NOTICE, "Sugata: posted to pubsub ($rss)");
     } else {
-        syslog(LOG_NOTICE, "Meneame: failed to post to pubsub ($rss)");
+        syslog(LOG_NOTICE, "Sugata: failed to post to pubsub ($rss)");
     }
 }
 
@@ -125,7 +125,7 @@ function facebook_post($auth, $link, $text = '')
     }
 
     $permalink = $link->get_permalink();
-    syslog(LOG_INFO, "Meneame, $permalink picture sent to FB: $thumb");
+    syslog(LOG_INFO, "Sugata, $permalink picture sent to FB: $thumb");
 
     $data = array(
                 'link' => $permalink,
@@ -137,7 +137,7 @@ function facebook_post($auth, $link, $text = '')
     try {
         $r = $facebook->api('/me/links', 'POST', $data);
     } catch (Exception $e) {
-        syslog(LOG_INFO, 'Menéame, Facebook caught exception: '.  $e->getMessage(). " in ".basename(__FILE__)."\n");
+        syslog(LOG_INFO, 'Sugata, Facebook caught exception: '.  $e->getMessage(). " in ".basename(__FILE__)."\n");
         return false;
     }
     return true;

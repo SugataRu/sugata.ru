@@ -90,7 +90,7 @@ class UserAuth
         $user = $db->get_row(DbHelper::queryPlain('
             SELECT SQL_CACHE user_id, user_login, SUBSTRING(user_pass, 8, 10) AS pass_frag,
                 user_level, UNIX_TIMESTAMP(user_validated_date) AS user_date, user_karma,
-                user_email, user_avatar, user_img_feed, user_comment_pref, prefs.pref_value AS subs_default
+                user_email, user_avatar, user_img_feed, user_color, user_comment_pref, prefs.pref_value AS subs_default
             FROM users
             LEFT JOIN prefs ON (
                 pref_user_id = user_id
@@ -238,7 +238,7 @@ class UserAuth
         foreach (get_object_vars($user) as $var => $value) {
             $this->$var = $value;
         }
-          $this->user_img_feed = '111';
+        //$this->user_img_feed = '111';
         $this->authenticated = true;
         $this->SetIDCookie(1, $remember);
 
@@ -422,7 +422,7 @@ class UserAuth
         $c = (int)$db->get_var("select count(*) from votes, clones where vote_type='$type' and vote_link_id = $id and clon_from = $from and clon_to = vote_user_id and clon_date > date_sub(now(), interval $days day) and clon_ip like 'COOK:%'");
 
         if ($c > 0) {
-            syslog(LOG_INFO, "Meneame: clon vote $type, id: $id, user: $from ");
+            syslog(LOG_INFO, "Sugata: clon vote $type, id: $id, user: $from ");
         }
 
         return $c;

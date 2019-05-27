@@ -1124,7 +1124,7 @@ function memcache_minit()
         return true;
     }
 
-    syslog(LOG_INFO, "Meneame: memcache init failed ".$globals['memcache_host']);
+    syslog(LOG_INFO, "Sugata: memcache init failed ".$globals['memcache_host']);
 
     $memcache = false;
 
@@ -1236,7 +1236,7 @@ function get_url($url, $referer = false, $max = 500000, $log = true)
     $response = @curl_exec($session);
 
     if (!$response && $log) {
-        syslog(LOG_INFO, "Meneame: CURL error ".curl_getinfo($session, CURLINFO_EFFECTIVE_URL).": ".curl_error($session));
+        syslog(LOG_INFO, "Sugata: CURL error ".curl_getinfo($session, CURLINFO_EFFECTIVE_URL).": ".curl_error($session));
         return false;
     }
 

@@ -188,7 +188,6 @@ class Comment extends LCPBase
             $db->rollback();
             return false;
         }
-		
         if ($full) {
             $this->update_conversation();
         }
@@ -200,10 +199,6 @@ class Comment extends LCPBase
         $db->commit();
         return true;
     }
-	
-	
-	
-	
     public function update_order()
     {
         global $db;
@@ -264,8 +259,6 @@ class Comment extends LCPBase
             $this->truncate($length);
         }
         $this->txt_content = $this->to_html($this->content);
-		
-		
         if ($this->media_size > 0) {
             $this->media_thumb_dir = Upload::get_cache_relative_dir($this->id);
             $this->media_url = Upload::get_url('comment', $this->id, 0, $this->media_date, $this->media_mime);
@@ -691,34 +684,20 @@ class Comment extends LCPBase
         if (!$this->date) {
             $this->date = time();
         }
-		
- 
- 
-		//evg
-		// $this = Comment Object ( [id] => 1176 [prefix_id] => [mobile] => 0 [randkey] => 56104401 [author] => 1 [link] => 830 [date] => 1558887295 [order] => 16 [votes] => 0 [voted] => [karma] => 18 [content] => sdfsdfsdfsdf [read] => [ip] => 127.0.0.1 [link_object] => [strike] => [ip_int] => 2130706433 ) 
-		$tos = $db->get_row("select 0 as id, link_author as user_id from links where link_id = $this->link");
-		if ($current_user->user_id != $tos->user_id) { 
-		User::add_notification($tos->user_id, 'comment');
-		$db->query("insert into conversations (conversation_user_to, conversation_type, conversation_time, conversation_from, conversation_to) values ($tos->user_id, 'comment', from_unixtime($this->date), $this->id, $tos->id)");
-		}
-		//print_r($order);
-		//exit;
-		
         foreach ($orders as $order => $val) {
             if ($refs > 10) {
                 // Limit the number of references to avoid abuses/spam
                 syslog(LOG_NOTICE, "Sugata: too many references in comment: $this->id ($current_user->user_login)");
                 break;
             }
-           if (!preg_match('/^\d+/', $order)) {
+            if (!preg_match('/^\d+/', $order)) {
                 $username_to = $db->escape($order);
                 $to = $db->get_row("select 0 as id, user_id from users where user_login = '$username_to'");
             } elseif ($order == 0) {
                 $to = $db->get_row("select 0 as id, link_author as user_id from links where link_id = $this->link");
             } else {
                 $to = $db->get_row("select comment_id as id, comment_user_id as user_id from comments where comment_link_id = $this->link and comment_order=$order and comment_type != 'admin'");
-            } 
- 
+            }
             if (!$to) {
                 continue;
             }
@@ -740,12 +719,7 @@ class Comment extends LCPBase
             if (!in_array($to, $seen_users)) {
                 $seen_users[] = $to->user_id;
             }
-        }  
-			
-
-
- 
-		
+        }
         $to_delete = array_diff($previous_ids, $seen_ids);
         if ($to_delete) {
             $to_delete = implode(',', $to_delete);

@@ -190,7 +190,7 @@ function avatar_get_from_db($user, $size=0)
 
         if ($globals['Amazon_S3_delete_allowed'] && ! $original && $http_code == 404 && Media::$lastHTTPCode == 404) { // The images were not found in S3
             if (is_writable(mnmpath.'/'.$globals['cache_dir'])) { // Double check
-                syslog(LOG_INFO, "Meneame, removing avatars not found in S3 user $user time $time");
+                syslog(LOG_INFO, "Sugata, removing avatars not found in S3 user $user time $time");
                 avatars_remove($user);
             }
             return false;

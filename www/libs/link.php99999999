@@ -1294,9 +1294,7 @@ class Link extends LCPBase
                 $this->content = text_to_summary($this->content, $this->max_len);
             }
         }
-		//evg +
-		//$this->link_post = $link_post; убивает линк пост...
-		
+
         $this->content = $this->to_html($this->content);
 
         $this->show_tags = $show_tags;
@@ -2380,18 +2378,12 @@ class Link extends LCPBase
 
 		//if (! empty($this->thumb_url)) return $this->thumb_url;
 
-		if ($this->link_post =='1') {
-			$this->link_post = '1';
-		} else {
-			$this->link_post = '0';
-		}
-	
 
 		if ($this->media_size > 0) { // New format
 			$base = $globals['base_static_noversion'];
 			$this->thumb_uri = Upload::get_cache_relative_dir($this->id)."/media_thumb-link-$this->id.$this->media_extension?$this->media_date";
 			$this->thumb_url = $base.$this->thumb_uri;
-			$this->media_url = Upload::get_url('link', $this->id, 0, $this->media_date, $this->media_mime,$this->link_post);
+			$this->media_url = Upload::get_url('link', $this->id, 0, $this->media_date, $this->media_mime);
 			$this->thumb_x = $globals['media_front_wide'];
 			$this->thumb_y = $globals['media_front_height'];
 			return $this->thumb_url;

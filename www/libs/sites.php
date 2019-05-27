@@ -18,7 +18,7 @@ class SitesMgr
         'по умолчанию' => '',
         'упорядоченный' => 'standard',
         'лучшим комментам' => 'best-comments',
-        'темы' => 'threads',
+        'древовидные' => 'threads',
 		'лучшие темы' => 'best-threads',
         'умные темы' => 'interview',
     );
