@@ -1,0 +1,1 @@
+ALTER TABLE `links` ADD `link_post` TINYINT(1) NOT NULL DEFAULT '0' AFTER `link_randkey`;
