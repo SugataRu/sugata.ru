@@ -7,6 +7,7 @@ require_once mnminclude.'ban.php';
 $events = array();
 $data = array();
 
+
 // The client requests version number
 if (!empty($_REQUEST['getv'])) {
     header('Content-Type: text/plain; charset=UTF-8');
@@ -195,7 +196,7 @@ function check_chat()
             }
         }
 
-        $from = $now - 1500;
+        $from = $now - 10800;//1500;
         $db->query("delete from chats where chat_time < $from");
         if ((!empty($_REQUEST['admin']) || preg_match('/^#/', $comment)) && $current_user->admin) {
             $room = 'admin';
@@ -568,7 +569,7 @@ function get_status($status)
 {
     switch ($status) {
         case 'published':
-            $status = _('опубликован');
+            $status = _('размещен');
             break;
         case 'queued':
             $status = _('в ожидании');
@@ -588,8 +589,13 @@ function update_sneakers(&$data)
     global $db, $globals, $current_user;
     $key = $globals['user_ip'] . '-' . intval($_REQUEST['k']);
     $db->query("replace into sneakers (sneaker_id, sneaker_time, sneaker_user) values ('$key', unix_timestamp(now()), $current_user->user_id)");
+	
+
+	
     if ($_REQUEST['r'] % 100 == 0) {
-        $from = $globals['now']-120;
+        $from = $globals['now']-10800;//120;
+
+		
         $db->query("delete from sneakers where sneaker_time < $from");
     }
     $ccntu = $db->get_var("select count(*) from sneakers where sneaker_user > 0 and sneaker_id not like 'jabber/%'");

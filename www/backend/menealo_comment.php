@@ -42,7 +42,7 @@ if ($value != -1 && $value != 1) {
 }
 
 if ($value < 0 && $current_user->user_id == (int) $db->get_var("select link_author from links, comments where comment_id = $id and link_id = comment_link_id")) {
-    error(_('Не голосуйте отрицательно за комментарии к вашими данными'));
+    error(_('Вы минусуете себя'));
 }
 
 $comment = new Comment();
@@ -83,7 +83,7 @@ if ($votes_freq > $freq) {
     $user = new User($current_user->user_id);
     $user->add_karma(-0.2, _('Голосуйте за комментарии'));
 
-    error(_('Спокойный ковбой, твоя карма сошла: ') . $user->karma);
+    error(_('Спокойстие, карма упала: ') . $user->karma);
 }
 
 // EXPERIMENTAL: the negative karma to comments depends upon the number of comments and posts
@@ -105,7 +105,7 @@ if (!$current_user->admin && !$current_user->special) {
 }
 
 if (!$comment->insert_vote($value)) {
-    error(_('вы уже проголосовали ранее с этого IP'));
+    error(_('вы уже проголосовали ранее...'));
 }
 
 $comment->votes++;
