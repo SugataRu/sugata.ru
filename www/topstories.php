@@ -85,8 +85,8 @@ if ($links) {
     $counter = 0;
     foreach ($links as $dblink) {
         $link = Link::from_db($dblink->link_id);
-        $link->show_clicks = true;
 		$link->max_len = 800;
+        $link->show_clicks = true;
         $link->print_summary();
         $counter++;
         Haanga::Safe_Load('private/ad-interlinks.html', compact('counter', 'page_size'));

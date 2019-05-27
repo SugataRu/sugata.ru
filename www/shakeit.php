@@ -84,13 +84,13 @@ switch ($globals['meta']) {
         break;
 }
 
-$pagetitle = _('Новости, проекты на Sugata');
+$pagetitle = _('Новое, проекты на Sugata');
 $active[$option] = 'queue';
 if ($page > 1) {
     $pagetitle .= " ($page)";
 }
 
-do_header($pagetitle, _('Очередь'), false, $tab);
+do_header($pagetitle, _('Новое'), false, $tab);
 
 /*** SIDEBAR ****/
 echo '<div id="sidebar">';

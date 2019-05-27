@@ -1,11 +1,4 @@
 <?php
-// The source code packaged with this file is Free Software, Copyright (C) 2010 by
-// Ricardo Galli <gallir at uib dot es>.
-// It's licensed under the AFFERO GENERAL PUBLIC LICENSE unless stated otherwise.
-// You can get copies of the licenses here:
-//        http://www.affero.org/oagpl.html
-// AFFERO GENERAL PUBLIC LICENSE is also included in the file called "COPYING".
-// Modification of sugata.ru, 2019
 
 require_once __DIR__.'/config.php';
 require_once mnminclude.'html1.php';
@@ -85,6 +78,7 @@ if ($links) {
     foreach ($links as $dblink) {
         $link = Link::from_db($dblink->link_id);
         $link->show_clicks = true;
+		$link->max_len = 800;
         $link->print_summary();
         $counter++;
         Haanga::Safe_Load('private/ad-interlinks.html', compact('counter', 'page_size'));

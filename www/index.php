@@ -71,7 +71,16 @@ switch ($globals['meta']) {
     default:
         $tab_option = 0; // All
         $rows = Link::count('published');
-        $where = "sub_statuses.id = " . SitesMgr::my_id() . " AND status = 'published' ";
+    $where = "sub_statuses.id = " . SitesMgr::my_id() . " AND status = 'published' ";
+	  //1 - Интернет, 2 - наука, 4- сугата, 13 - ошибки
+//$where = "id IN (1,2,4) AND status='published' AND id = origen ";
+
+
+if ($globals['uri'] == '/' || $globals['uri'] == '/?page=2'  || $globals['uri'] == '/?page=3'  || $globals['uri'] == '/?page=4') {
+    $where = "id IN (1,2,4,10,13,14) AND status='published' AND id = origen ";
+} else{
+    $where = "sub_statuses.id = " . SitesMgr::my_id() . " AND status = 'published' ";
+}
 
 }
 
@@ -92,6 +101,7 @@ if ($this_space->name_long != null) {
 	if ($globals['uri'] == '/') {
 		$pagetitle = 'Sugata — лучшее в сети ';
 		$globals['description'] = 'На Sugata можно поделиться историями, ссылками. Размещать комментраии, публиковать статьи, зарабатывать карму и голосовать за лучшие посты.';
+		$globals['home'] = '1';
 	} else{
 		$pagetitle = $this_space->name_long . ' — Sugata ';
 		$globals['description'] = $this_space->name_long . ' | поделитесь этой тематикой на Sugata. Пишите комментраии, веди блоги, зарабатывайте карму.';
@@ -119,10 +129,12 @@ if ($tab_option == 0) {
 
 /*** SIDEBAR ****/
 echo '<div id="sidebar">';
-
+do_my_menu();
 do_sub_message_right();
 do_banner_right();
 do_last_subs('published');
+
+do_my_subs();
 
 if ($globals['preguntame_home_sidebar']) {
     do_sidebar_preguntame();
@@ -135,7 +147,7 @@ if ($globals['show_popular_published']) {
 // do_banner_promotions();
 
 if ($globals['show_popular_published']) {
-    do_most_clicked_stories();
+//    do_most_clicked_stories();
     do_best_stories();
 }
 
@@ -143,7 +155,7 @@ do_banner_promotions();
 
 // do_best_sites();
 
-do_most_clicked_sites();
+//do_most_clicked_sites();
 
 if ($page < 2) {
     do_best_comments();
@@ -151,7 +163,7 @@ if ($page < 2) {
 
 // do_categories_cloud('published');
 
-do_vertical_tags('published');
+//do_vertical_tags('published');
 
 do_footer_menu();
 
@@ -194,6 +206,8 @@ $sql = '
     ) AS ids ON (ids.link = link_id);
 ';
 
+//print_r($sql);
+
 $links = $db->get_results($sql, 'Link');
 
 if ($links) {
@@ -223,7 +237,7 @@ if ($links) {
     foreach ($links as $link) {
         $link->poll = $pollCollection->get($link->id);
 		
-        $link->max_len = 800;
+        $link->max_len = 300;
 
         if ($globals['show_promoted_articles'] ) {
             Haanga::Safe_Load('private/promoted_articles.html', compact('counter', 'promoted_articles'));
@@ -232,7 +246,7 @@ if ($links) {
         Haanga::Safe_Load('private/ad-interlinks.html', [
             'counter' => $counter++,
             'page_size' => $page_size,
-            'sponsored_link' => $sponsored_link,
+            'self' => $sponsored_link,
             'official_subs' => $official_subs,
             'widget_popular_articles' => $widget_popular_articles
         ]);

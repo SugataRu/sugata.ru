@@ -17,7 +17,6 @@
 // You can get copies of the licenses here:
 //      http://www.affero.org/oagpl.html
 // AFFERO GENERAL PUBLIC LICENSE is also included in the file called "COPYING".
-
 require_once __DIR__.'/config.php';
 require_once mnminclude.'html1.php';
 $globals['cache-control'][] = 'max-age=3';
@@ -292,13 +291,14 @@ if (
 } else {
     /*** SIDEBAR ****/
     echo '<div id="sidebar">';
-    do_sub_message_right();
+    do_sub_message_right_to();
     do_banner_right();
     // GEO
     if ($link->latlng) {
         echo '<div id="map" style="width:300px;height:200px;margin-bottom:25px;">&nbsp;</div>';
     }
-    do_most_clicked_stories();
+  //  do_most_clicked_stories();
+  
     do_banner_promotions();
     do_best_stories();
     do_rss_box();
