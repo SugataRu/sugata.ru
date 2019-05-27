@@ -1,12 +1,34 @@
 <ul id="userinfo">
  
 {% if current_user.user_id > 0 %}
+<li class="diz-color"><button title="Ночной режим" id="dez-{{ current_user.user_id }}" onclick="add_design_color('dez-{{ current_user.user_id }}', 'user', {{ current_user.user_id }})" {% if current_user.user_color %} class="save link lnr lnr-sun on" {% else %} class="save link lnr lnr-sun" {% endif %}></button>
+</li>
+
 <li class="diz-img"><button title="Управление фото в посте" id="dez-{{ current_user.user_id }}" onclick="add_design_img('dez-{{ current_user.user_id }}', 'user', {{ current_user.user_id }})" {% if current_user.user_img_feed %} class="save link lnr lnr-frame-expand on" {% else %} class="save link lnr lnr-frame-expand" {% endif %}></button>
 </li>
 {% endif %}
-{% if current_user.user_img_feed > 0 %}
-<style>.news-body .thumbnail-wrapper {display: none;}</style>
+
+{% if current_user.user_img_feed > 0 %}<style>.news-body .fancybox {display: none !important;}</style>{% endif %}
+
+{% if current_user.user_color > 0 %}
+<style>
+body, .footer-s, #singlewrap, .genericform {background: #222;}
+.header-top-wrapper {background-color: #000;}
+#header-top a.sub-name, #header-top ul#userinfo li.usertext a {color: #7a7a7a;}
+tr:hover td, table.keyvalue tr:hover th, #sidebar.left .sidebox .rss, .story-blog-aside, fieldset {background: #444;}
+.news-summary, #side-bar, .sidebox .header, #side-bar .header, .story-blog, .sidebox .body, .sidebox-sub {background: #313131;}
+.sidebox-sub .footer {background-color: #666;border-top: 1px solid #000;}
+.sidebox-sub {border: 1px solid #000;}
+.news-summary h1 a, .news-summary h2 a, .news-summary h3 a, .news-content, .news-summary h1, .story-blog .main-content h1, .story-blog .main-content .text, #side-bar a, 
+.sidebox h4 a, .sidebox h4 span, #side-bar h4, .sidebox .rss li a, h1, h2, h3, h4, .note, label, fieldset, .sub-description .name a, 
+span.s-vote a, .sugata span.ver a,  .news-details, span.data, .sidebox h5 a, .sidebox-sub .name a h1, .sidebox-sub .name a h4, #newswrap {color: #fff;}
+.sidebox .subname, .sidebox .subname a:visited, .sidebox .subname a:link, .sidebox .header a, .telo-d, a.user  {color: #fff !important;}
+.comment-footer a, .comment-footer .separator-vertical, .comment-footer .votes-counter, .icon-karma, .comment-footer .vote {color: #667d99;}
+ .comment-footer .separator-vertical {background-color: #667d99;}
+</style>
 {% endif %}
+
+
     {% if not globals.mobile %}
     <li class="search">
         <div>

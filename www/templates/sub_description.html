@@ -42,7 +42,12 @@
             <a href="javascript:add_remove_sub('{{ site.id }}', 1)" class="btn btn-sg follow_b_{{ site.id }}" title="{% trans _('suscripción al sub') %}">
                 <span>{% trans _('Следовать') %}</span>
             </a>
-
+  <script>
+            addPostCode(function () {
+                add_remove_sub('{{ site.id }}', 0);
+            });
+  </script>
+			
             {% else %}
 
             <a href="{{ globals.base_url_sugata }}/login" class="btn btn-sg" title="{% trans _('suscripción al sub') %}">

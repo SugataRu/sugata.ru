@@ -27,7 +27,7 @@
             {% set modified = self.modified - self.date %}
 
             {% if modified > 10 %}
-            <span data-ts="{{ self.modified }}" class="ts novisible showmytitle" title="{% trans _('отредактированный') %}: "><strong>*</strong></span>
+            <span data-ts="{{ self.modified }}" class="ts novisible showmytitle" title="{% trans _('отредактированный') %}: "><sup>*</sup></span>
             {% endif %}
 			
 			
@@ -42,7 +42,7 @@
             <span class="comment-order">#{{ self.order }}</span>
             {% endif %} {% endif %}
 			
-			{% if self.mobile > 0 %} <i class="lnr lnr-tablet"></i>{% endif %} 
+			{% if self.mobile > 0 %} <sup><i class="lnr lnr-tablet"></i></sup>{% endif %} 
 			 
 			
         </div>
@@ -74,7 +74,7 @@
                 {% else %}
                     {% if self.voted > 0 %}
                     <span id="vc-p-{{ self.id }}" class="vote up voted" title="{% trans _('проголосовал за позитив') %}">
-                        <i class="lnr lnr-arrow-up-circle"></i>
+                      &nbsp;   <i class="lnr lnr-arrow-up-circle"></i>
                     </span>
                     {% else %}{% if self.voted < 0 %}
                     <span id="vc-n-{{ self.id }}" class="vote down voted" title="{% trans _('проголосовал негативно') %}">
@@ -93,9 +93,9 @@
             <span class="separator-vertical"></span>
         {% endif %}
 
-        <a href="{% exec self.get_relative_individual_permalink %}" title="{% trans _('Permalink') %}">
+         {% if not globals.mobile %} <a href="{% exec self.get_relative_individual_permalink %}" title="{% trans _('Ссылка') %}">
             <i class="lnr lnr-link"></i>
-        </a>
+        </a>{% endif %}
 
         {% if self.can_report %}
         <a href="javascript:void(0)" onclick="report_comment({{ self.id }})" title="{% trans _('Пожаловаться на комментарий') %}">

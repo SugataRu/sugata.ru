@@ -16,13 +16,13 @@
 
                 <div class="guest-name">{{ row.title }}</div>
                 <div class="guest-description">{{ row.subtitle }}</div>
-                <div class="datetime">
+                <!--div class="datetime">
                     {% exec Time::dayMonthSortHour row.start_at %}
 
                     {% if row.sponsored %}
                     <span class="sponsored">{% trans _('Перейти') %}</span>
                     {% endif %}
-                </div>
+                </div-->
             </a>
 
             {% else %}
@@ -31,13 +31,13 @@
 
             <div class="guest-name">{{ row.title }}</div>
             <div class="guest-description">{{ row.subtitle }}</div>
-            <div class="datetime">
+            <!--div class="datetime">
                 {% exec Time::dayMonthSortHour row.start_at %}
 
                 {% if row.sponsored %}
                 <span class="sponsored">{% trans _('Перейти') %}</span>
                 {% endif %}
-            </div>
+            </div-->
 
             {% endif %}
         </div>

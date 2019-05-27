@@ -1,59 +1,43 @@
 
     <div class="news-summary{% if tag == 'promoted_article' %} promoted-article{% endif %}"> 
-        <div class="news-body">
-            {% if self.show_shakebox %}
-            <div class="news-shakeit {{ self.box_class }}">
-                <div class="votes">
-				
+	
+{% if self.nsfw == '1' %}  <div class="warn tooltip"> <i class="lnr lnr-warning"></i> 18 + или спорное содержание...  </div>  {%endif%}
+				{% if self.url %}
+                {% exec htmlspecialchars self.url as url %}
 
-                {% if not globals.bot %}
-                <div class="sugata" id="a-va-{{ self.id }}">
-				
-                    {% if not self.votes_enabled %}
-                    <span class="closed"><i class="lnr lnr-lock"></i></span>  
-                    {% else %} 
-					
-					{% if not self.voted %}
-                    <a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
-<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-            <path d="M30 22 L16 6 2 22 Z"></path>
-</svg>
-					</a>
-                    {% else %} 
-					
-					{% if self.voted > 0 %}
-<svg class="i-caret-top plus" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-            <path d="M30 22 L16 6 2 22 Z"></path>
-</svg>
-                    {% else %}
+                <h3{% if self.top %} class="top"{% endif %}>
+                   <a href="{{ self.relative_permalink }}"> 
+                        {{ self.title }}
+                    </a>
 
-                    <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
-
-                    {% endif %} {% endif %} {% endif %}
-					
-                </div>
-                {% endif %}
-
-
-
-
-                    <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a>
- 
-                </div>
-
-
-
-                <div class="clics"> 
-                    {% if self.id >= globals.click_counter AND self.clicks > 0 %}
-
-                    {{ self.clicks }} {{  rus('clic',self.clicks) }}
-
-                    {% else %}
-                    &nbsp;
+                    {% if self.content_type == 'image' %}
+                    <span class="warn-foto">фото</span>
+                    {% else %} {% if self.content_type == 'video' %}
+                    <span class="warn-video">видео</span>
                     {% endif %}
-                </div>
-            </div>
-            {% endif %}
+                    {% endif %}
+                </h3>
+				
+                {% else %}
+ 
+                <h3{% if self.top %} class="top"{% endif %}> 
+                   <a href="{{ self.permalink }}" class="l:{{ self.id }}">{{ self.title }}</a>  
+
+                    {% if self.poll && self.poll.id %}
+                    <span class="wideonly">&nbsp;<i class="lnr lnr-chart-bars" title="{% trans _('опрос') %}"></i></span>
+                    {% endif %}
+					
+				{% if self.content_type != 'article' %}
+					<span class="warn-forum">пост</span>  
+				 {% else %} 
+					<span class="warn-article">статья</span> 
+				 {% endif %}
+				 
+				 {% if self.content_type == 'original' %}<sup>*</sup>{% endif %}
+                </h3>
+                {% endif %}  
+
+        <div class="news-body">
 
             {% if self.status == 'abuse' OR self.has_warning %}
 
@@ -91,65 +75,18 @@
 
             {# {% if globals.ads %}<!-- google_ad_section_start -->{% endif %} #}
 
-			
-			{% if self.nsfw == '1' %}  <div class="warn tooltip"> 18 + или спорное содержание...  </div>  {%endif%}
-			
-			
-            {% if self.thumb_uri %}
-            <a href="{{ self.media_url }}" class="fancybox thumbnail-wrapper" title="{{ self.title }}"><img data-2x='s:thumb:thumb_2x:' data-src='{{ self.thumb_uri }}' src="{{ globals.base_static }}img/g.gif" alt="{{ self.title }}" class='thumbnail lazy'/></a>
+
+            {% if self.thumb_uri %} 
+            <a href="{{ self.media_url }}" class="fancybox thumbnail-wrapper {% if self.content_type == 'article' %}art{% endif %}" title="{{ self.title }}"><img data-2x='s:thumb:thumb_2x:' data-src='{{ self.thumb_uri }}' src="{{ globals.base_static }}img/g.gif" alt="{{ self.title }}" class='thumbnail lazy'/></a>
             {% endif %}
 
           
 
             <div class="center-content{% if not self.thumb_uri %} no-padding{% endif %}">
-                {% if self.url %}
 
-		
-				  
-				
-                {% exec htmlspecialchars self.url as url %}
-
-				 
-				 
-	 
-                <h3{% if self.top %} class="top"{% endif %}>
-                   <a href="{{ self.relative_permalink }}"> 
-                        {{ self.title }}
-                    </a>
-
-                    {% if self.content_type == 'image' %}
-                    <span class="warn-foto">фото</span>
-                    {% else %} {% if self.content_type == 'video' %}
-                    <span class="warn-video">видео</span>
-                    {% endif %}
-                    {% endif %}
-                </h3>
-				
-                {% else %}
-
- 
-                <h3{% if self.top %} class="top"{% endif %}> 
-                   <a href="{{ self.permalink }}" class="l:{{ self.id }}">{{ self.title }}</a>  
-
-                    {% if self.poll && self.poll.id %}
-                    <span class="wideonly">&nbsp;<i class="lnr lnr-chart-bars" title="{% trans _('опрос') %}"></i></span>
-                    {% endif %}
-					
-					
-				{% if self.content_type != 'article' %}
-					<span class="warn-forum">форум</span>  
-				 {% else %} 
-					<span class="warn-article">статья</span> 
-				 {% endif %}
-                </h3>
-				
-                {% endif %} {# END if self.url #}
-
-                {% if ! globals.bot %}
-
-                <div class="news-submitted">
-				
-				  {% if globals.submnm|subid != self.sub_id %}
+    {% if ! globals.bot %}
+    <div class="news-submitted">
+        {% if globals.submnm|subid != self.sub_id %}
                     <span class="tool sub-name">
                         <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
                            class="subname"
@@ -162,61 +99,43 @@
                         >{{ self.sub_name }}</a>
                     </span>
                     {% endif %}
-				
 
                     {% if type != 'short' %}
                         <a href="{{ self.username | useruri }}" class="tooltip u:{{ self.author }}"><img src="{{ globals.base_static }}img/g.gif" data-src="{% exec get_avatar_url self.author, self.avatar, 25, false %}" data-2x="s:-25.:-40." alt="{{ self.username }}" class="lazy"/></a>
                     {% endif %}
 
-                    {% trans _('') %} <a href="{% exec get_user_uri self.username, 'history' %}">{{ self.username }}</a>
+                    {% trans _('') %} <a class="user" href="{% exec get_user_uri self.username, 'history' %}">{{ self.username }}</a>
 
-               
-
-                    &nbsp;
+&nbsp;<span class="data">
 
                     {% if self.status != 'published' %}
-                    
-					 {% trans _('проект: ') %}     {% else %}  {% trans _('размещено: ') %}
-					
-                    
-					{% endif %}
+                    {% trans _('проект: ') %}     {% else %} 
+                    {% endif %}
 
                     <span data-ts="{{ self.sent_date }}" class="ts visible" title="{% trans _('проект') %}: ">____ {{ self.sent_date }}</span>
-
+</span>
                     {% if self.status == 'published' %}
                    <!-- {% trans _('опубликованно: ') %} 
                     <span data-ts="{{ self.sub_date }}" class="ts visible" title="{% trans _('опубликованно') %}: ">____</span>
                     {% endif %} -->
 					
-					{% if self.url %}
-                        {% trans _(' &nbsp;   ') %} 
+			{% if self.url %}
+            {% trans _(' &nbsp;   ') %} 
 						
 		<span class="s-url"><a href="{{ globals.base_url_sugata }}/go?id={{ self.id }}" target="_blank" rel="nofollow">{{ self.url_str }} &nbsp;
-		
-		<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-		
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
 		</a></span> 
-						 
-                    {% endif %}
-					
-                </div>
+			
+        {% endif %}
+    </div>
+    {% endif %} 
 
-                {% endif %}
 
                 {% if type == 'full' OR type == 'preview' %}
  
-                <div class="news-content">{{ self.content }}</div>
+                <div class="news-content home">{{ self.content }}</div>
 				
-{% if self.max_len == '200' OR self.max_len == '600' %} {% else %}
-		{% if self.url_str == 'youtube.com' %} 
-			<br><br>
-			 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ self.id_youtube }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			<br>
-		{% endif %}
-{% endif %}
-					
-					
-					
+ 
 					
                 {% if type != 'preview' && self.map_editable %}
                 &nbsp;&nbsp;
@@ -269,7 +188,7 @@
 
                     {% for id, tag in tags_array %}
 
-                    {% if id > 0 %}, {% endif %}
+                    {% if id > 0 %} &nbsp; {% endif %}
                     <a class="tag" href='{{ globals.base_url }}search?p=tags&amp;q={{ tag|urlencode }}'>{{ tag }}</a>
 
                     {% endfor %}
@@ -293,11 +212,48 @@
             </div> {# div.news-body #}
 
             <div class="news-details">
-                {% if type != 'short' %}
- 
+			
+			
+			
+            {% if self.show_shakebox %}
+            <!--div class="news-shakeit {{ self.box_class }}" --> <div class="news-vote">
+
+                {% if not globals.bot %}
+                <span class="sugata" id="a-va-{{ self.id }}">
+				
+                    {% if not self.votes_enabled %}
+                    <span class="closed"><i class="lnr lnr-lock"></i></span>  
+                    {% else %} 
+					
+	{% if not self.voted %}<span class="ver">
+<a href="javascript:menealo({{ current_user.user_id }}, {{ self.id }})" id="a-shake-{{ self.id }}">
+<svg class="i-caret-top" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+<path d="M30 22 L16 6 2 22 Z"></path></svg></a></span>
+	{% else %} 
+					
+	{% if self.voted > 0 %}<span class="ver-e">
+<svg class="i-caret-top plus" viewBox="0 0 32 32" fill-rule="nonzero" width="21" height="21" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+<path d="M30 22 L16 6 2 22 Z"></path></svg></span>
+	{% else %}
+
+                    <span id="a-shake-{{ self.id }}" class="negative">{{ globals.negative_votes_values[self.voted] }}</span>
+
+                    {% endif %} {% endif %} {% endif %}
+					
+                </span>
+                {% endif %}
+				
+                     <span class="s-vote"><a id="a-votes-{{ self.id }}" class="n-vote{% if self.voted > 0 %} my{% endif %}" href="{{ self.relative_permalink }}">{{ self.total_votes }}</a> </span>
+
+            </div>
+            {% endif %}
+			
+			
+			
+{% if type != 'short' %} 
                 <div class="news-details-data-up">
-                    <span class="votes-up" data-toggle="tooltip" data-placement="top" title="Положительные голоса"><i class="lnr lnr-arrow-up-circle"></i> <span><strong>{{ self.votes }}</strong></span></span>
-                    <span class="wideonly votes-anonymous" data-toggle="tooltip" data-placement="top" title="Анонимные голоса"><i class="lnr lnr-user"></i> <span><strong>{{ self.anonymous }}</strong></span></span>
+                  
+                  
                     <span class="votes-down" data-toggle="tooltip" data-placement="top" title="Отрицательные голоса"><i class="lnr lnr-arrow-down-circle"></i> <span><strong>{{ self.negatives }}</strong></span></span>
 
                     <span class="tool karma" data-toggle="tooltip" data-placement="top" title="Карма">
@@ -337,7 +293,7 @@
                     {% endif %}
                 </div> {# div.news-details-data-up #}
 
-                {% endif %} {# END if type != 'short' #}
+{% endif %} {# END if type != 'short' #}
 
 				
 			 
@@ -345,34 +301,22 @@
                 <div class="news-details-main">  <!-- {{ globals.base_url_sugata }}/s/{{ self.sub_name }}/-{{ self.id }} -->
                     <a class="comments" href="{{ self.relative_permalink }}" title="{% trans _('комментарии от') %}: «{{ self.title }}»">
 						<i class="lnr lnr-bubble"></i>
-
 						{% if self.comments > 0 %}
-						
-						
-						    {{ self.comments }}    {{  rus('comm',self.comments) }} 
-						
-						   
-						
-						
+						   <span class="comm"> {{ self.comments }}</span> <span class="yes-comm"> {{  rus('comm',self.comments) }}</span> 
 						{% else %}
-
-						   {% trans _("нет комментариев") %}
+						   <span class="no-comm">{% trans _("нет комментариев") %}</span>
 						
 						{% endif %}
                     </a>
-
-
                 </div>
+				
+				
 
                 {% if type != 'short' %}
  
                 <div class="news-details-data-down">
-                    <span class="votes-up" data-toggle="tooltip" data-placement="top" title="Положительные голоса"><i class="lnr lnr-arrow-up-circle"></i>
-<i class="icon icon-up"></i>
 
-					<span><strong>{{ self.votes }}</strong></span></span>
-                    <span class="wideonly votes-anonymous" data-toggle="tooltip" data-placement="top" title="Анонимные голоса"><i class="lnr lnr-user"></i> <span><strong>{{ self.anonymous }}</strong></span></span>
-                    <span class="votes-down" data-toggle="tooltip" data-placement="top" title="Отрицательные голоса"><i class="lnr lnr-arrow-down-circle"></i> <span><strong>{{ self.negatives }}</strong></span></span>
+                    <span class="votes-down" data-toggle="tooltip" data-placement="top" title="Отрицательные голоса"><i class="lnr lnr-arrow-down-circle"></i> <span>{{ self.negatives }}</span></span>
 
                     <span class="tool karma" data-toggle="tooltip" data-placement="top" title="Карма">
                         <span class="karma-letter">К</span>
@@ -386,6 +330,13 @@
                     </span>
 
               
+			   <span class="tool clicks"title="Клики">
+                    {% if self.id >= globals.click_counter AND self.clicks > 0 %}
+                   <span class="clicks"><span class="clicks-letter">{{ self.clicks }}</span> {{  rus('clic',self.clicks) }}</span>
+                    {% else %}
+                   <span class="clicks">&nbsp;</span>
+                    {% endif %}
+			   </span>
 
                     {% if self.can_vote_negative %}
                     <form action="" id="problem-{{ self.id }}">
@@ -417,7 +368,7 @@
 
                     {% exec self.get_short_permalink as short_link %}
 
-                    <button class="social-share"><i class="lnr lnr-sync"></i>{% trans _('поделиться') %}</button>
+                      <button class="social-share"><i class="lnr lnr-sync"></i></button>
 
                     {% include "share.html" %}
 

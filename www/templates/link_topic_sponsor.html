@@ -1,0 +1,151 @@
+<div class="news-summary sponsored"> 
+
+                <h3 class="sponsor"> 
+                   <a href="./story/{{ self.uri }}">{{ self.title }}</a>  
+                    {% if self.poll && self.poll.id %}
+                    <span class="wideonly">&nbsp;<i class="lnr lnr-chart-bars" title="{% trans _('опрос') %}"></i></span>
+                    {% endif %}
+                </h3>
+                
+<span class="" style="position: absolute;right: 12px;top: 12px;font-size: 26px;color: #ffa980;"> <i class="lnr lnr-pushpin"></i></span>
+        <div class="news-body">
+
+		
+            {% if self.thumb_uri %} 
+            <a href="{{ self.media_url }}" class="fancybox thumbnail-wrapper {% if self.content_type == 'article' %}art{% endif %}" title="{{ self.title }}"><img data-2x='s:thumb:thumb_2x:' data-src='{{ self.thumb_uri }}' src="{{ globals.base_static }}img/g.gif" alt="{{ self.title }}" class='thumbnail lazy'/></a>
+            {% endif %}
+
+
+            <div class="center-content{% if not self.thumb_uri %} no-padding{% endif %}">
+
+    {% if ! globals.bot %}
+    <div class="news-submitted">
+	
+        {% if globals.submnm|subid != self.sub_id %} 
+                    <span class="tool sub-name">
+                        <a href="{{ globals.base_url_general }}s/{{ self.sub_name }}{% if self.status != 'published' %}/queue{% endif %}"
+                           class="subname"
+                           {% if self.sub_owner > 0 %}  
+                            style="
+                                {% if self.sub_color1 %}color:{{ self.sub_color1 }} !important;{% endif %}
+                                {% if self.sub_color2 %}background-color:{{ self.sub_color2 }} !important;{% endif %}
+                            "
+                        {% endif %}
+                        >{{ self.sub_name }}</a>
+                    </span>
+        {% endif %}
+
+                    {% if type != 'short' %}
+                        <a href="{{ self.username | useruri }}" class="tooltip u:{{ self.author }}"><img src="{{ globals.base_static }}img/g.gif" data-src="{% exec get_avatar_url self.author, self.avatar, 25, false %}" data-2x="s:-25.:-40." alt="{{ self.username }}" class="lazy"/></a>
+                    {% endif %}
+
+                    {% trans _('') %} <a class="user" href="{% exec get_user_uri self.username, 'history' %}">{{ self.username }}</a>
+
+                    {% if self.status == 'published' %}
+                   <!-- {% trans _('опубликованно: ') %} 
+                    <span data-ts="{{ self.sub_date }}" class="ts visible" title="{% trans _('опубликованно') %}: ">____</span>
+                    {% endif %} -->
+ 
+    </div>
+    {% endif %} 
+
+	
+	  <div class="news-content"> <a class="telo-d" href="./story/{{ self.uri }}"> {{ self.content }}</a></div>
+
+
+     </div> 
+
+            <div class="news-details">
+			
+
+                {% if type != 'short' %}
+ 
+                <div class="news-details-data-down">
+
+				
+				                    <a class="comments" href="./story/{{ self.uri }}" title="{% trans _('комментарии от') %}: «{{ self.title }}»">
+						<i class="lnr lnr-bubble"></i>
+						{% if self.comments > 0 %}
+						   <span class="comm"> {{ self.comments }}</span> {% if not globals.mobile %} <span class="yes-comm"> {{  rus('comm',self.comments) }}</span> {% endif %}
+						{% else %}
+						   <span class="no-comm">{% trans _("нет комментариев") %}</span>
+						
+						{% endif %}
+                    </a>
+
+
+                    <!--span class="tool karma" data-toggle="tooltip" data-placement="top" title="Карма">
+                        <span class="karma-letter">К</span>
+                        <span class="karma-value">
+                            {% if self.status == 'published' && self.sub_karma > 0 %}
+                                {{ self.sub_karma|intval }}
+                            {% else %}
+                                {{ self.karma|intval }}
+                            {% endif %}
+                        </span>
+                    </span>
+
+              
+			   <span class="tool clicks"title="Клики">
+                    {% if self.id >= globals.click_counter AND self.clicks > 0 %}
+                   <span class="clicks"><span class="clicks-letter">{{ self.clicks }}</span> {{  rus('clic',self.clicks) }}</span>
+                    {% else %}
+                   <span class="clicks">&nbsp;</span>
+                    {% endif %}
+			   </span-->
+
+
+					<span class="right-s">
+					
+					{% if current_user.user_id > 0 %}
+
+                    {% if not globals.mobile %}  
+                    <button data-toggle="tooltip" data-placement="top" title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite  lnr lnr-bookmark on" {% else %} class="save link favorite lnr lnr-bookmark" {% endif %}></button>
+                    {% else %}  
+                    <button title="{% trans _("Сохранить на потом") %}" id="favl-{{ self.id }}" onclick="add_remove_fav('favl-{{ self.id }}', 'link', {{ self.id }})" {% if self.favorite %} class="save link favorite lnr lnr-bookmark on" {% else %} class="save link favorite lnr lnr-bookmark" {% endif %}></button>
+                    {% endif %}
+					
+                    {% endif %}
+					
+                    {% if ! self.is_discarded %}
+
+                    {% set link = self.permalink %}
+                    {% set title = self.title %}
+
+ 
+
+                    {% endif %}
+					</span>
+
+                </div> 
+
+
+					
+				
+{% endif %} 
+            </div> {# div.news-details #}
+
+            {% if self.best_comment %}
+           <div class="box">
+                <a class="tooltip c:{{ self.best_comment.comment_id }}" href="{{ self.relative_permalink }}/c0{{ self.best_comment.comment_order }}">
+                    <strong>{{ self.best_comment.comment_order }}</strong>
+                </a>:
+                &nbsp;{% exec text_to_summary self.best_comment.content 200 %}
+            </div>
+            {% endif %}
+
+            {% if globals.link %}
+            {% exec do_banner_story as dummy %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if self.map_editable %}
+    <div id="geoedit" class="geoform" style="margin-left:20px">
+        {% if self.add_geo %}
+        {% trans _('определяет источник новостей или события (город, страна)') as geotxt %}
+        {% exec geo_coder_print_form 'link', self.id, globals.latlng, geotxt as dummy %}
+        {% endif %}
+    </div>
+    {% endif %}
+

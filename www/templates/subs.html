@@ -8,9 +8,9 @@
 
     <h1>{% trans _('Пространства') %}</h1>
 
-    <p class="intro intro-large">{% trans _('Пространства - это тематические разделы, которые позволяют группировать новости. ') %}</p>
+    <p class="intro intro-large no_mobile">{% trans _('Пространства - это тематические разделы, которые позволяют группировать новости. ') %}</p>
 
-    <h2>{% trans _('Официальные пространства') %}</h2>
+    <h2 class="no_mobile">{% trans _('Официальные пространства') %}</h2>
 
     {% if official_subs %}
         <div class="container-fluid slider-wrapper" id="official-subs-slider">
@@ -42,7 +42,7 @@
         </div>
     {% endif %}
 
-    <h2>{% trans _('Рекомендуемые пространства') %}</h2>
+    <h2 class="no_mobile">{% trans _('Рекомендуемые пространства') %}</h2>
 
     {% if recommended_subs %}
     <div class="container-fluid slider-wrapper" id="recommended-subs-slider">

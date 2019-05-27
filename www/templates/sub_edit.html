@@ -217,10 +217,10 @@
             <hr />
 
             <div class="form-group mb-20">
-                <label class="title">{% trans _('Сообщений') %}</label>
+                <label class="title">{% trans _('Текст сбоку') %}</label>
             </div>
 
-            <div class="form-group">
+            <!--div class="form-group">
                 <label for="rules" class="title title-inline">
                     {% trans _('Правила доставки') %}
 
@@ -228,15 +228,26 @@
                 </label><br />
 
                 <textarea maxlength="300" name="rules" id="rules" class="form-control block">{{ extended.rules }}</textarea>
-            </div>
+            </div-->
 
             <div class="form-group">
-                <label for="message" class="title title-inline">{% trans _('Сообщение на боковой панели') %}</label><br />
+                <label for="message" class="title title-inline">{% trans _('Подробное описание') %}</label><br />
                 <textarea maxlength="3000" name="message" id="message" class="form-control block">{{ extended.message }}</textarea>
             </div>
 
-            <hr />
+ 
 
+			            <div class="form-group">
+                <label class="title title-inline">{% trans _('Текст (HTML) сбоку страницы (под описанием Пространства)') %}</label>
+            </div>
+
+            <div class="form-group">
+                <textarea maxlength="2000" name="post_html" rows="4" id="post_html" class="form-control block">{{ extended.post_html | escape }}</textarea>
+            </div>
+			
+			
+            {% if current_user.admin %}
+<br>
             <div class="form-group mb-20">
                 <label class="title">
                     {% trans _('Связь с Twitter') %}
@@ -298,8 +309,6 @@
                 </div>
             </div>
 
-            {# Enabled facebook only to admins, for the time being, until Twitter is tested end perhaps improved #}
-            {% if current_user.admin %}
             <div class="form-group mb-20">
                 <label class="title">
                     {% trans _('Связь с Facebook') %}
@@ -353,14 +362,8 @@
 
             <hr />
 
-            <div class="form-group">
-                <label class="title">{% trans _('HTML сбоку страницы (под описание Пространства)') %}</label>
-            </div>
 
-            <div class="form-group">
-                <textarea maxlength="2000" name="post_html" rows="4" id="post_html" class="form-control block">{{ extended.post_html | escape }}</textarea>
-            </div>
-            {% endif %} {# if current_user.admin #}
+            {% endif %}  
 
             {% endif %} {# sub.id #}
 

@@ -48,7 +48,7 @@
 
         {% endif %}
 		
-		
+
 {% if globals.uri == '/'%}
 <meta property="og:url" content="{{ globals.base_url_sugata }}">
 <meta property="og:title" content="Sugata - лучшее в сети">
@@ -69,8 +69,6 @@
 
 		<meta name="description" content="{{ globals.description }}" />
 		
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
         {% for css in globals.extra_css %}
 
         {% if css|substr:"0, 4" == 'http' OR css|substr:"0, 2" == '//' %}
@@ -135,11 +133,16 @@
         <div class="header-top-wrapper pinned">
             <div id="header-top" class="s-center-in-wrap">
                 <a href="{{ globals.base_url_sugata }}" title="{% trans _('sugata - сообщество') %}" id="header-logo" class="logo-s">
-                    <img src="{{ globals.base_url_general }}img/logo-sugata.png" alt="{% trans _('sugata - сообщество') %}" height="30" onerror="this.onerror = null; this.src = '{{ globals.base_url_general }}img/logo-sugata.png'" />
+                    <img src="{{ globals.base_url_general }}img/logo-sugata-2.png" alt="{% trans _('sugata - сообщество') %}" height="30" onerror="this.onerror = null; this.src = '{{ globals.base_url_general }}img/logo-sugata.png'" />
                 </a>
 
                 {% if not globals.mobile %}
-                <a href="{{ globals.base_url_sugata }}/s/{{ this_site.name }}" class="sub-name wideonly">{% if this_site.name_long %}{{ this_site.name_long|upper }}{% else %}{% trans _('meta') %}{% endif %}</a>
+                <a href="{{ globals.base_url_sugata }}/s/{{ this_site.name }}" class="sub-name wideonly{% if globals.home %} home{% endif %}">{% if this_site.name_long %}
+
+<img src="{{ globals.base_url_sugata }}/{{ this_site.logo_url }}" class="h-img-logo" alt="sugata" style="margin-right:5px;border-radius:50%;width:22px;height:22px;margin-top: -3px;">
+<span style="margin-left:5px;margin-top: -1px;position:absolute;">{{ this_site.name_long|upper }}</span> 
+				
+				{% else %}{% trans _('мета') %}{% endif %}</a>
                 {% else %}
                                <div id="nav-menu"><i class="lnr lnr-menu"></i></div>
                 {% endif %}
@@ -200,13 +203,11 @@
                 </div> 
             </div> 
 
-			
-			
-            {% if globals.mobile AND this_site.sub %}
+        {% if globals.mobile AND this_site.sub %}
             <div class="header-sub-wrapper">
-                <div class="header-sub"><a href="{{ globals.base_url_sugata }}/{{ this_site.url }}">{{ this_site.name_long }}</a></div>
+                <div class="header-sub" style="{% if this_site.color1 %}color:{{ this_site.color1 }};{% endif %}{% if this_site.color2 %}background-color:{{ this_site.color2 }};{% endif %}"><a href="{{ globals.base_url_sugata }}/{{ this_site.url }}">{{ this_site.name_long }}</a></div>
             </div>
-            {% endif %} 
+        {% endif %} 
 
             {% if globals.mobile %}
             <div class="subs-main-menu" style="display:none;">
@@ -269,32 +270,32 @@
 	 
 {% if current_user.user_id > 0 %} {% else %} 
 {% if globals.uri == '/'%}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr  lnr-earth"></i></div><div class="col-lg-7"> 
+    <div id="banner-op"><div id="header-top"><div class="col-icon"> <i class="lnr  lnr-earth"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — лучшее в сети. Поделись историей!</h1>
 	Присоединяйтесь к сообществу: делитесь ссылками, комментируйте, ведите блоги, зарабатывайте карму...
-	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div></div>
 {% endif %}
 
 {% if globals.uri == '/articles' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-book"></i></div><div class="col-lg-7"> 
+    <div id="banner-op"><div id="header-top"><div class="col-icon"> <i class="lnr lnr-book"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — статьи</h1>
 	Вы можете размещать статьи в веренных вам пространствах. И публиковать интересные материалы...
-	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div></div>
 {% endif %} 
 
 {% if globals.uri == '/queue' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-history"></i></div><div class="col-lg-7"> 
+    <div id="banner-op"><div id="header-top"><div class="col-icon"> <i class="lnr lnr-history"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — новости в очереди (проекты)</h1>
 	Истории, статьи, новости находящие в очереди для поднятия на центральную страницу...
-	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div></div> 
 {% endif %}  
 
 
 {% if globals.uri == '/popular' %}
-	<div id="wrap-reg"><div id="banner-op"><div class="col-icon"> <i class="lnr lnr-sun"></i></div><div class="col-lg-7"> 
+     <div id="banner-op"><div id="header-top"><div class="col-icon"> <i class="lnr lnr-sun"></i></div><div class="col-lg-7"> 
 	<h1>Sugata — популярное</h1>
 	Истории, статьи, новости, которые стали популярными на сайте...
-	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div> </div>
+	</div><a class="reg col-lg-4" href="/register">Присоединиться к обсуждению</a></div></div>
 {% endif %}
 
 {% endif %}

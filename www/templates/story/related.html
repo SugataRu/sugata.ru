@@ -10,16 +10,23 @@
     <div class="news-summary" style="margin-bottom: 15px">
         <div class="news-body">
 
-        <div class="news-shakeit {{ l.box_class }}" style="height: auto">
+        <div class="sidebox news-shakeit {{ l.box_class }}" style="height: auto">
             <div class="votes">
-                <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}">{{ l.total_votes }}</a>
-                {% trans _('голосов') %}
+                <a id="a-votes-{{ self.id }}" href="{{ self.relative_permalink }}"><span>{{ l.total_votes }}</span></a>
+
             </div>
-            <div class="clics">{{ l.clicks }} {{  rus('clic',l.clicks) }}</div>
+
         </div>
 
-            <h3 style="font-size: 120%"><a href="{{ l.permalink }}"{% if l.status != 'published' %} rel="nofollow"{% endif %}>{{ l.title }}</a></h3>
+            <h3 style="font-size: 120%;margin-left: 60px;"><a href="{{ l.permalink }}"{% if l.status != 'published' %} rel="nofollow"{% endif %}>{{ l.title }}</a></h3>
+			<div class="clics"  style="margin-left: 60px;margin-top: -5px;color: #666;">{{ l.clicks }} - {{  rus('clic',l.clicks) }}</div>
         </div>
-    </div><br/>
+    </div>
 {% endfor %}
 </div>
+
+
+
+
+            
+

@@ -1,0 +1,9 @@
+{% if not globals.mobile %}{% if current_user.user_id %}{% if current_user.subs_default %}{% else %}
+<div class="sidebox brown"  id="side-bar"><div class="side-bar-p"><a href="/user/{{current_user.user_login}}"> <font color=red><i class="lnr lnr-warning"></i> В</font>ключить просмотр только того, на что подписан (в ред. профиль).</a></div></div>{% endif %}{% endif %}{% endif %}
+
+
+{% if count =='0' %} 
+<div class="sidebox brown" id="side-bar"><div class="side-bar-p"><a href="/top_users"> <font color=red><i class="lnr lnr-users"></i> В</font>ы еще никого не читаете...</a></div></div>
+
+{% else %}{% endif %}
+ 

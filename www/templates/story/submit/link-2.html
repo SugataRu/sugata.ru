@@ -5,7 +5,7 @@
         <input type="hidden" name="timestamp" value="{{ globals.now }}" />
         <input type="hidden" name="id" value="{{ link.id }}" />
         <input type="hidden" name="step" value="2" />
-
+ 
         {% if link.url %}
         <fieldset>
             <legend><span class="sign">{% trans _('Информация о ссылке') %}</span></legend>
@@ -42,19 +42,26 @@
 
             <p>
                 <span class="note">{% trans _('Максимум: 120 символов') %}</span>
+  
+  
 
-                {% if link.url %}
+
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     {% include 'story/submit/content_type_buttons.html' %}
-                {% endif %}
+                 {% if link.url %} {% endif %}
 
+		
+				 
                 {% if link.change_status %}
-
+  
+  
+ 
+  
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <select name="status">
+                <select name="status"> 
                     <option value="{{ link.status }}" selected="selected">{{ link.status_text }}</option>
-
-                    {% if link.status == 'queued' %}
+ 
+     {% if link.status == 'queued' %}
                     <option value="autodiscard">{% exec link.get_status_text 'autodiscard' %}</option>
 
                     {% if current_user.user_id != link.author %}
@@ -65,7 +72,12 @@
                     <option value="published">{% exec link.get_status_text 'published' %}</option>
                     {% endif %}
 
-                    {% else %} {% if link.discarded %}
+     {% else %} 
+	 		 
+					
+				
+					
+					{% if link.discarded %}
 
                     {% if current_user.admin OR link.is_sub_owner %}
                     <option value="queued">{% exec link.get_status_text 'queued' %}</option>
@@ -84,7 +96,7 @@
 
                 </select>
 
-                {% endif %}
+       {% endif %}
 
                 <br/>
  
@@ -128,7 +140,7 @@
                 <input readonly type="text" name="bodycounter" size="3" maxlength="3" value="{{ link.chars_left }}" />
 
                 {% if ! globals.mobile %}
-                <span class="note">{% trans _('свободные персонажи') %}</span>
+                <span class="note">{% trans _('осталось') %}</span>
                 {% endif %}
             </div>
 
@@ -138,33 +150,39 @@
 
             {% if link.trackback %}
             <p>
-                <label for="trackback">{% trans _('Trackback') %}:</label><br />
+                <label for="trackback">{% trans _('Ccskrf') %}:</label><br />
                 <span class="note">{{ link.trackback }}</span>
                 <input type="hidden" name="trackback" id="trackback" value="{{ link.trackback }}"/>
             </p>
             {% endif %}
 
-            {% if not link.is_new && (current_user.admin > 0 OR current_user.user_level == "blogger") %}
-
             <label>{% trans _('Пометить как 18+ (небезопасно)') %}: <input type="checkbox" name="nsfw"{% if link.nsfw == 1 %} checked="checked"{% endif %}/></label>
             <span class="note">({% trans _('предотвращение штрафов в рекламе') %})</span>
             <br/>
  
+ 
+{% if current_user.admin > 0 %}
 			<label>{% trans _('Выделить пост от админ-а') %}: <input type="checkbox" name="top"{% if link.top == 1 %} checked="checked"{% endif %}/></label>
 			 <br/>
+{% endif %}
+
+{% if link.url %}<input type="hidden" name="link_post" value="0" /> {% else %}<input type="hidden" name="link_post" value="1" />{% endif %}
+
+		   {% if link.thumb_url OR link.media_size > 0 %}
+
+            <label>{% trans _('Удалить изображение') %}: <input type="checkbox" name="thumb_delete" value="1"/></label><br/>   
 			
-            {% if link.thumb_url OR link.media_size > 0 %}
-
-            <label>{% trans _('Удалить изображение') %}: <input type="checkbox" name="thumb_delete" value="1"/></label><br/>
-
-            {% else %}
+			<img width="100px"  src="{{ link.media_url }}" alt="{{ link.title }}" class='lazy'/>
+  
+          {% else %}
 
             {% if link.url %}
             <label>{% trans _('Получить изображение (может занять несколько секунд)') %}: <input type="checkbox" name="thumb_get" value="1"/></label><br/>
             {% endif %}
 
-            {% if current_user.admin > 0 OR site_properties.allow_images %}
 
+
+			{% if link.url %}{% else %} {% if site_properties.allow_images %} 
             <input type="hidden" name="MAX_FILE_SIZE" value="{{ globals.media_max_size }}" />
             &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -181,14 +199,12 @@
                 $("#fileInput").nicefileinput({ title: 'Добавить изображение' });
             });
             </script>
-
-            {% endif %}
-
             <input type="url" name="thumb_url" style="width:60%" />  
+			{% endif %} {% endif %}
 
-            {% endif %}
-
+{% if current_user.admin > 0 OR current_user.user_level == "blogger" %}
            <br> <label>{% trans _('Обновить URL') %}: <input type="checkbox" name="uri_update" value="1"/></label><br/>
+{% endif %}
 
             {% endif %}
 
