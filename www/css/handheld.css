@@ -1,8 +1,3 @@
-body {
-    background: #fff;
-    font-size: 15px;
-}
-
 .s-center-in-wrap {
     min-width: 0px;
     max-width: 100%;
@@ -13,7 +8,10 @@ body {
 }
 
 
-/* Avoid auto zoom */
+.news-vote svg {
+    margin-top: 5px;
+    margin-left: 5px;
+}
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="email"], input[type="url"], input[type="search"] {
     font-size: 16px;
@@ -23,16 +21,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     width: 150px;
 }
 
-#nav-panel .searchform form:before {
-    font-family: FontAwesome;
-    content: "\f002";
-    position: absolute;
-    padding-left: 5px;
-    color: #303030;
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-}
 
 .select-wrapper-more-options {
     position: relative;
@@ -40,16 +28,6 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-top: -20px;
 }
 
-.select-wrapper-more-options:after {
-    content: '\f0d7';
-    font-family: FontAwesome;
-    color: #FE6117;
-    display: inline-block;
-    position: absolute;
-    pointer-events: none;
-    top: 2px;
-    right: 15px;
-}
 
 select.select-menu-more-options {
     width: auto;
@@ -317,7 +295,6 @@ select.select-menu-more-options {
     width: 100%;
     border-top: none;
     border-bottom: none;
-    background-color: #fbfbfb;
 }
 #newswrap {
     margin: 0px !important;
@@ -333,18 +310,6 @@ div.tab-promoted-article {
 
 .news-details .news-details-data {
     text-align: center;
-}
-
-.news-details .news-details-main {
-    border-top: 1px solid #FEE7DB;
-    border-bottom: 1px solid #FEE7DB;
-    width: 100%;
-}
-
-.news-details .news-details-main a.comments {
-    text-align: center;
-    width: 50%;
-    padding: 0;
 }
 
 .news-details .news-details-main button {}
@@ -380,7 +345,9 @@ div.tab-promoted-article {
 .news-details form select {
     width: auto;
 }
-
+.news-summary h2 {
+    padding: 0;
+}
 .news-shakeit {
     position: relative;
     top: 10px;
@@ -400,9 +367,7 @@ div.tab-promoted-article {
 #singlewrap {
     margin: 0;
 }
-.title-t{
-    margin-left: 60px;
-}
+
 .news-summary .warn {
     margin: 0px 0 5px 95px;
     display: block;
@@ -524,28 +489,12 @@ div.subs-main-menu .checkbox-slider--b-flat input:checked+span:after {
     animation: none;
 }
 
-div.subs-main-menu a.chevron-right:after {
-    font-family: FontAwesome;
-    content: "\f054";
-    display: inline-block;
-    color: #4A4A4A;
-    -webkit-text-stroke: 2px #fff;
-    font-size: 20px;
-    float: right;
-    margin-right: 30px;
-    margin-top: 2px;
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-}
 
 div.subs-main-menu a.chevron-right.open {
     border-bottom: none;
 }
 
-div.subs-main-menu a.chevron-right.open:after {
-    content: "\f077";
-}
+
 
 div.subs-main-menu a.follow-subs {
     clear: right;
@@ -573,3 +522,44 @@ div.subs-listing-wrapper {
     float: none;
     width: auto;
 }
+
+.section {margin-top: 0px;}
+ #sidebar, body.mobile .header-menu-wrapper, body.mobile .section-story-submit-step1-separator, 
+.container-fluid.slider-wrapper, body.mobile .searchform, #backTop {display: none !important;}
+.no_mobile {display: none;}
+#newswrap{width:100%;margin: 0px;padding: 0 0px 0px 0px;}
+#newswrap.right.faq{width:100%;margin: 0px;padding: 0 10px 0px 5px;}
+#header-top, body.mobile .s-center-in-wrap, body.mobile  #variable, body.mobile  #wrap {min-width: 100% !important;}
+#nav-menu {margin-top: 8px;font-size: 24px;}
+.news-details a i, body.mobile .news-details button i {font-size: 18px;}
+button.link.favorite {border-right: transparent;font-size: 16px;}
+.s-vote{margin-left: 2px;}
+.section-story-submit-step1-layout {display: block;padding: 0 5px;}
+.sub-description .name {padding: 0;}
+.t-header { min-width: 205px;}
+#vip-header {
+    height: 102px;
+    background-size: cover; 
+    background: url(https://sugata.ru/img/space/vip-m.png) center top / cover no-repeat rgb(255, 250, 232);
+}
+body.mobile .t-header a.url{
+    color: #390;
+    padding-top: 64px;
+    display: block;
+    font-size: 18px;
+    color: #339900;
+    margin-left: 10px;
+}
+#nav-panel .searchform{display: block !important;}
+.header-menu01 ul.menu01-itemsl {
+    margin: 0;
+}
+body.mobile  .header-menu01 ul li.selected, .header-menu01 ul li.selected {
+    border-bottom: 1px solid #f16334;
+}
+.news-summary h3 {
+    margin: 0;
+    padding: 0 0 0px 0;
+}
+.col-md-8, .col-sm-6 {width:100%;}
+.col-md-offset-1 {margin-left: 0;}

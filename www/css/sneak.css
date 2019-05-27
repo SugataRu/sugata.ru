@@ -1,0 +1,53 @@
+.sneaker {
+font-size: small;
+margin-top: -1px;
+background: url(../../img/elmnm-sneak-reverse02.png) 97% 95% no-repeat;
+}
+
+.sneaker-title strong {
+color: #FF9400;
+}
+
+.sneaker-story .thumb {
+float: left;
+margin: 0 4px 0 0;
+}
+
+.sneaker-legend {
+color: #FF6400;
+background: #FFEDC6;
+border-bottom-color: #FFEDC6;
+}
+
+.sneaker-item {
+border-bottom-color: #FFE2C5;
+}
+
+.sneaker-chat, .sneaker-chat a {
+color: #9B0000;
+}
+
+.sneaker-chat-friends, .sneaker-chat-friends a {
+color: #255c25;
+}
+
+.sneaker-chat-admin, .sneaker-chat-admin a {
+color: #f00000;
+}
+
+.sneaker-who img {
+border-color: #FFE2C5;
+}
+
+.sneaker-problem {
+color: #F00;
+}
+
+.sneaker-published {
+color: #FF6400;
+}
+
+.sneaker-discarded {
+color: #D9AA95;
+}
+
