@@ -4,7 +4,7 @@
 
 # Screenshots
 
-<img src="https://toxu.ru/uploads/default/original/2X/9/98564752027057e133fe9f27838ca2430b075d0d.gif" alt="sugata">
+<img src="https://toxu.ru/uploads/default/original/2X/4/43de0de695e26338f1ada2bfb1b7d7c54d64ade7.jpeg" alt="sugata">
 
 ## Установка
 
