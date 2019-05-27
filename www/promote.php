@@ -9,8 +9,15 @@ $globals['description'] = 'Открытые отчеты о карме пост�
 promote_style();
 do_header(_('Продвижение и статитиска постов, кармы в Sugata') . ' | ' . _('sugata'));
 
+/*** SIDEBAR ****/
+echo '<div id="sidebar">';
 
-echo '<div id="singlewrap">'."\n";
+do_footer_menu();
+
+echo '</div>';
+
+
+echo '<div id="newswrap">'."\n";
 
 $site_id = SitesMgr::my_id();
 
@@ -22,7 +29,10 @@ if ($annotation->read()) {
 
 echo '</div>'."\n";
 
-do_footer_menu();
+
+
+
+
 do_footer();
 
 
@@ -31,6 +41,12 @@ function promote_style()
     global $globals;
     $globals['extra_head'] = '
 <style type="text/css">
+#newswrap {
+	box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 12px 0px;
+	background: rgb(255, 255, 255);
+	padding: 10px 22px 0 32px;
+	margin-top: 20px;
+}
 p {
 	font-family: Bitstream Vera Sans, Arial, Helvetica, sans-serif;
 	font-size: 90%;
