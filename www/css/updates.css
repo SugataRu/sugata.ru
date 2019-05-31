@@ -2302,18 +2302,7 @@ background-color: rgb(252, 71, 30);
     padding-left: 65px;
 }
 
-.sidebox-rounded .sponsored {
-    font-size: 12px;
-    font-weight: bold;
-    color: #e35614;
-    border: 1px solid #e35614;
-    padding: 2px 4px;
-    background-color: #fff;
-    margin-left: 5px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-}
+
 
 .sidebox-rounded .show-responses {
     color: #ff6300;
@@ -2322,9 +2311,7 @@ background-color: rgb(252, 71, 30);
     margin-left: 66px;
 }
 
-.sidebox-rounded .show-responses .sponsored {
-    font-size: 10px;
-}
+
 
 /** PREGUNTAME **/
 
@@ -2341,81 +2328,7 @@ div.article-container div#editor {
     order: 3;
 }
 
-.news-summary.sponsored  .news-details a.comments {
-    margin-top: 0px;
-    padding: 0px 15px 0px 0px;
-	width: fit-content !important;
-}
-.news-summary.sponsored  .news-details-data-down {
-   display: block !important;
-}
 
-.news-summary.sponsored  a.telo-d {color: #333;}
-
-body.mobile .news-summary h3.sponsor {
-
-    margin-left: 5px;
-}
-
-.news-summary.sponsored .news-body .votes {
-    height: 15px;
-}
-
-.news-summary.sponsored .news-body .menealo span {
-    color: #fff;
-    font-size: 10px;
-    padding-top: 6px;
-}
-
-.news-summary.sponsored .news-body .clics {
-    height: 30px;
-}
-
-.news-summary.sponsored .news-body .news-submitted div {
-    padding-top: 5px;
-}
-
-.news-summary.sponsored .news-body .news-submitted a.houser {
-    color: #ff6400
-}
-
-.news-summary.sponsored .news-body span.sponsor {
-    background-color: #ff6300;
-    color: #fff;
-    padding: 2px 4px;
-    position: absolute;
-    top: 28px;
-    right: 0px;
-}
-
-.news-summary.sponsored .news-body .news-submitted a.showmytitle {
-    color: #000;
-    font-weight: bold;
-}
-
- 
-
-.news-summary.sponsored .news-body .icon-sponsor {
-    text-align: right;
-    margin-top: -10px;
-}
-
-.news-summary.sponsored .news-body .icon-sponsor a {
-    text-decoration: none;
-    position: relative;
-}
- 
-   
- 
-.news-summary.sponsored .news-shakeit {
-    top: 20px;
-}
-
-.news-summary.sponsored .icon-sponsor img.sponsor-logo {
-    position: relative;
-    right: 25px;
-    top: 28px;
-}
 
 @media only screen and (max-device-width: 480px) {
     .news-body.ads .text-sponsor {
