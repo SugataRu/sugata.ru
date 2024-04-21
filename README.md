@@ -8,4 +8,4 @@ https://github.com/SugataRu/sugata.ru/wiki
 
 Клонирование Menéame: https://github.com/Meneame/meneame.net
 
-Проект закрыт. На данный момент работы идут тут: https://libarea.com
+Проект закрыт. На данный момент работы идут тут: https://github.com/LibArea/libarea
